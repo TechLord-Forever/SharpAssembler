@@ -1,0 +1,17 @@
+*.suo
+*.user
+.vs/*
+bin/*
+Debug/*
+*/Debug/*
+*/bin/*
+*/obj/*
+obj/*
+*.orig
+*.rej
+*.patch
+*.log
+*.opensdf
+*.sdf
+*.rar
+*.bak

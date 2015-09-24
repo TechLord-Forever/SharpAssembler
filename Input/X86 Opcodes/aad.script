@@ -1,0 +1,8 @@
+include "amdsyntax";
+
+[ShortDescription = "ASCII Adjust Before Division"]
+opcode x86 aad
+{
+	[SupportedModes = ProtectedReal]
+	var `D5` (imm8 base);
+}

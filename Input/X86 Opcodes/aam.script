@@ -1,0 +1,8 @@
+include "amdsyntax";
+
+[ShortDescription = "ASCII Adjust After Multiply"]
+opcode x86 aam
+{
+	[SupportedModes = ProtectedReal]
+	var `D4` (imm8 base);
+}

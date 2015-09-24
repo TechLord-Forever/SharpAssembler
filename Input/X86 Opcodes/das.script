@@ -1,0 +1,8 @@
+include "amdsyntax";
+
+[ShortDescription = "Decimal Adjust after Subtraction"]
+opcode x86 das
+{
+	[SupportedModes = ProtectedReal]
+	var `2F` ();
+}

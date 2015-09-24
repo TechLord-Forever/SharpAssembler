@@ -1,0 +1,8 @@
+include "amdsyntax";
+
+[ShortDescription = "ASCII Adjust After Addition"]
+opcode x86 aaa
+{
+	[SupportedModes = ProtectedReal]
+	var `37` ();
+}
