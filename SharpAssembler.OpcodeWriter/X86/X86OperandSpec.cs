@@ -4,7 +4,7 @@
     /// Describes an x86-64 opcode variant.
     /// </summary>
     public class X86OperandSpec : OperandSpec
-	{
+    {
         /// <summary>
         /// Gets or sets the size of the operand.
         /// </summary>
