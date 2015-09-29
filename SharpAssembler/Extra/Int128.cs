@@ -231,7 +231,7 @@ namespace SharpAssembler
             if (obj is Int128)
                 return CompareTo((Int128)obj);
             else
-                throw new ArgumentException("The specified object is not the same type as this instance.", "obj");
+                throw new ArgumentException("The specified object is not the same type as this instance.", nameof(obj));
         }
 
         /// <summary>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpAssembler", "SharpAsse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcodeWriter", "OpcodeWriter\OpcodeWriter.csproj", "{25A0ADE9-766B-4216-BF89-B1A5F78BA0F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpcodeGenerator", "OpcodeGenerator\OpcodeGenerator.csproj", "{B28F886D-97F4-482B-A38A-EA7EE99B8899}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,18 @@ Global
 		{25A0ADE9-766B-4216-BF89-B1A5F78BA0F3}.Release|Mixed Platforms.Build.0 = Release|x86
 		{25A0ADE9-766B-4216-BF89-B1A5F78BA0F3}.Release|x86.ActiveCfg = Release|x86
 		{25A0ADE9-766B-4216-BF89-B1A5F78BA0F3}.Release|x86.Build.0 = Release|x86
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Debug|x86.Build.0 = Debug|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Release|x86.ActiveCfg = Release|Any CPU
+		{B28F886D-97F4-482B-A38A-EA7EE99B8899}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

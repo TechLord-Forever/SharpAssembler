@@ -47,11 +47,11 @@ namespace SharpAssembler.Architectures.X86
         public ModRMByte(byte rm, byte reg, byte mod)
         {
             if (rm > 0x0F)
-                throw new ArgumentOutOfRangeException("rm",  "Only the first 4 bits may be set.");
+                throw new ArgumentOutOfRangeException(nameof(rm),  "Only the first 4 bits may be set.");
             if (reg > 0x0F)
-                throw new ArgumentOutOfRangeException("reg", "Only the first 4 bits may be set.");
+                throw new ArgumentOutOfRangeException(nameof(reg), "Only the first 4 bits may be set.");
             if (mod > 0x03)
-                throw new ArgumentOutOfRangeException("mod", "Only the first 2 bits may be set.");
+                throw new ArgumentOutOfRangeException(nameof(mod), "Only the first 2 bits may be set.");
 
             this.rm  = rm;
             this.reg = reg;

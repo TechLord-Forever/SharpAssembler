@@ -1,0 +1,2509 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OpcodeList>
+  <Opcode Name="AAA" Desc="ASCII Adjust After Addition">
+    <Variant Opcode="37" Operand1="AL" Operand2="AH" />
+  </Opcode>
+  <Opcode Name="AAD" Desc="ASCII Adjust AX Before Division">
+    <Variant Opcode="D5 0A" Operand1="AL" Operand2="AH" />
+  </Opcode>
+  <Opcode Name="AAM" Desc="ASCII Adjust AX After Multiply">
+    <Variant Opcode="D4 0A" Operand1="AL" Operand2="AH" />
+  </Opcode>
+  <Opcode Name="AAS" Desc="ASCII Adjust AL After Subtraction">
+    <Variant Opcode="3F" Operand1="AL" Operand2="AH" />
+  </Opcode>
+  <Opcode Name="ADC" Desc="Add with Carry">
+    <Variant Opcode="10" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="11" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="12" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="13" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="14" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="15" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="2" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="2" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="2" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="2" Lock="Lock" />
+  </Opcode>
+  <Opcode Name="ADD" Desc="Add">
+    <Variant Opcode="00" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="01" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="02" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="03" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="04" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="05" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="0" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="0" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="0" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="0" Lock="Lock" />
+  </Opcode>
+  <Opcode Name="ADDPD" Desc="Add Packed Double-FP Values">
+    <Variant Opcode="58" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="ADDPS" Desc="Add Packed Single-FP Values">
+    <Variant Opcode="58" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="ADDSD" Desc="Add Scalar Double-FP Values">
+    <Variant Opcode="58" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="ADDSS" Desc="Add Scalar Single-FP Values">
+    <Variant Opcode="58" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="ADDSUBPD" Desc="Packed Double-FP Add/Subtract">
+    <Variant Opcode="D0" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="ADDSUBPS" Desc="Packed Single-FP Add/Subtract">
+    <Variant Opcode="D0" Operand1="xmm" Operand2="xmm/m128" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="ADX" Desc="Adjust AX Before Division">
+    <Variant Opcode="D5" Operand1="AL" Operand2="AH" Operand3="imm8" />
+  </Opcode>
+  <Opcode Name="AMX" Desc="Adjust AX After Multiply">
+    <Variant Opcode="D4" Operand1="AL" Operand2="AH" Operand3="imm8" />
+  </Opcode>
+  <Opcode Name="AND" Desc="Logical AND">
+    <Variant Opcode="20" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="21" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="22" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="23" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="24" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="25" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="4" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="4" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="4" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="4" Lock="Lock" Proc="03+" />
+  </Opcode>
+  <Opcode Name="ANDNPD" Desc="Bitwise Logical AND NOT of Packed Double-FP Values">
+    <Variant Opcode="55" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="ANDNPS" Desc="Bitwise Logical AND NOT of Packed Single-FP Values">
+    <Variant Opcode="55" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="ANDPD" Desc="Bitwise Logical AND of Packed Double-FP Values">
+    <Variant Opcode="54" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="ANDPS" Desc="Bitwise Logical AND of Packed Single-FP Values">
+    <Variant Opcode="54" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="ARPL" Desc="Adjust RPL Field of Segment Selector">
+    <Variant Opcode="63" Operand1="r/m16" Operand2="r16" FixedReg="r" Proc="02+" />
+  </Opcode>
+  <Opcode Name="BLENDPD" Desc="Blend Packed Double-FP Values">
+    <Variant Opcode="3A 0D" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="BLENDPS" Desc="Blend Packed Single-FP Values">
+    <Variant Opcode="3A 0C" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="BLENDVPD" Desc="Variable Blend Packed Double-FP Values">
+    <Variant Opcode="38 15" Operand1="xmm" Operand2="xmm/m128" Operand3="XMM0" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="BLENDVPS" Desc="Variable Blend Packed Single-FP Values">
+    <Variant Opcode="38 14" Operand1="xmm" Operand2="xmm/m128" Operand3="XMM0" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="BOUND" Desc="Check Array Index Against Bounds">
+    <Variant Opcode="62" Operand1="r16/32" Operand2="m16/32|16/32" Operand3="eFlags" FixedReg="r" Proc="01+" Ring="f" />
+  </Opcode>
+  <Opcode Name="BSF" Desc="Bit Scan Forward">
+    <Variant Opcode="BC" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="BSR" Desc="Bit Scan Reverse">
+    <Variant Opcode="BD" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="BSWAP" Desc="Byte Swap">
+    <Variant Opcode="C8" Operand1="r16/32/64" Prefix0F="0F" Add="01" Proc="04+" />
+  </Opcode>
+  <Opcode Name="BT" Desc="Bit Test">
+    <Variant Opcode="A3" Operand1="r/m16/32/64" Operand2="r16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+    <Variant Opcode="BA" Operand1="r/m16/32/64" Operand2="imm8" Prefix0F="0F" FixedReg="4" Proc="03+" />
+  </Opcode>
+  <Opcode Name="BTC" Desc="Bit Test and Complement">
+    <Variant Opcode="BA" Operand1="r/m16/32/64" Operand2="imm8" Prefix0F="0F" FixedReg="7" Lock="Lock" Proc="03+" />
+    <Variant Opcode="BB" Operand1="r/m16/32/64" Operand2="r16/32/64" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="03+" />
+  </Opcode>
+  <Opcode Name="BTR" Desc="Bit Test and Reset">
+    <Variant Opcode="B3" Operand1="r/m16/32/64" Operand2="r16/32/64" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="03+" />
+    <Variant Opcode="BA" Operand1="r/m16/32/64" Operand2="imm8" Prefix0F="0F" FixedReg="6" Lock="Lock" Proc="03+" />
+  </Opcode>
+  <Opcode Name="BTS" Desc="Bit Test and Set">
+    <Variant Opcode="AB" Operand1="r/m16/32/64" Operand2="r16/32/64" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="03+" />
+    <Variant Opcode="BA" Operand1="r/m16/32/64" Operand2="imm8" Prefix0F="0F" FixedReg="5" Lock="Lock" Proc="03+" />
+  </Opcode>
+  <Opcode Name="CALL" Desc="Call Procedure">
+    <Variant Opcode="E8" Operand1="rel16/32" />
+    <Variant Opcode="FF" Operand1="r/m16/32" FixedReg="2" />
+    <Variant Opcode="FF" Operand1="r/m64" FixedReg="2" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CALLF" Desc="Call Procedure">
+    <Variant Opcode="9A" Operand1="ptr16:16/32" />
+    <Variant Opcode="FF" Operand1="m16:16/32/64" FixedReg="3" />
+  </Opcode>
+  <Opcode Name="CBW" Desc="Convert Byte to Word">
+    <Variant Opcode="98" Operand1="AX" Operand2="AL" />
+    <Variant Opcode="98" Operand1="AX" Operand2="AL" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CWDE" Desc="Convert">
+    <Variant Opcode="98" Operand1="EAX" Operand2="AX" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="98" Operand1="EAX" Operand2="AX" Proc="03+" />
+  </Opcode>
+  <Opcode Name="CDQE" Desc="Convert">
+    <Variant Opcode="98" Operand1="RAX" Operand2="EAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CDQ" Desc="Convert Doubleword to Quadword">
+    <Variant Opcode="99" Operand1="EDX" Operand2="EAX" Proc="03+" />
+    <Variant Opcode="99" Operand1="EDX" Operand2="EAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CLC" Desc="Clear Carry Flag">
+    <Variant Opcode="F8" />
+  </Opcode>
+  <Opcode Name="CLD" Desc="Clear Direction Flag">
+    <Variant Opcode="FC" />
+  </Opcode>
+  <Opcode Name="CLFLUSH" Desc="Flush Cache Line">
+    <Variant Opcode="AE" Operand1="m8" Prefix0F="0F" FixedReg="7" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CLI" Desc="Clear Interrupt Flag">
+    <Variant Opcode="FA" Ring="f1" />
+  </Opcode>
+  <Opcode Name="CLTS" Desc="Clear Task-Switched Flag in CR0">
+    <Variant Opcode="06" Operand1="CR0" Prefix0F="0F" Proc="02+" Ring="0" />
+  </Opcode>
+  <Opcode Name="CMC" Desc="Complement Carry Flag">
+    <Variant Opcode="F5" />
+  </Opcode>
+  <Opcode Name="CMOVB" Desc="Conditional Move - below/not above or equal/carry (CF=1)">
+    <Variant Opcode="42" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNAE" Desc="Conditional Move - below/not above or equal/carry (CF=1)">
+    <Variant Opcode="42" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVC" Desc="Conditional Move - below/not above or equal/carry (CF=1)">
+    <Variant Opcode="42" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVBE" Desc="Conditional Move - below or equal/not above (CF=1 AND ZF=1)">
+    <Variant Opcode="46" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNA" Desc="Conditional Move - below or equal/not above (CF=1 AND ZF=1)">
+    <Variant Opcode="46" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVL" Desc="Conditional Move - less/not greater (SF!=OF)">
+    <Variant Opcode="4C" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNGE" Desc="Conditional Move - less/not greater (SF!=OF)">
+    <Variant Opcode="4C" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVLE" Desc="Conditional Move - less or equal/not greater ((ZF=1) OR (SF!=OF))">
+    <Variant Opcode="4E" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNG" Desc="Conditional Move - less or equal/not greater ((ZF=1) OR (SF!=OF))">
+    <Variant Opcode="4E" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNB" Desc="Conditional Move - not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="43" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVAE" Desc="Conditional Move - not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="43" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNC" Desc="Conditional Move - not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="43" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNBE" Desc="Conditional Move - not below or equal/above (CF=0 AND ZF=0)">
+    <Variant Opcode="47" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVA" Desc="Conditional Move - not below or equal/above (CF=0 AND ZF=0)">
+    <Variant Opcode="47" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNL" Desc="Conditional Move - not less/greater or equal (SF=OF)">
+    <Variant Opcode="4D" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVGE" Desc="Conditional Move - not less/greater or equal (SF=OF)">
+    <Variant Opcode="4D" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNLE" Desc="Conditional Move - not less nor equal/greater ((ZF=0) AND (SF=OF))">
+    <Variant Opcode="4F" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVG" Desc="Conditional Move - not less nor equal/greater ((ZF=0) AND (SF=OF))">
+    <Variant Opcode="4F" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNO" Desc="Conditional Move - not overflow (OF=0)">
+    <Variant Opcode="41" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNP" Desc="Conditional Move - not parity/parity odd">
+    <Variant Opcode="4B" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVPO" Desc="Conditional Move - not parity/parity odd">
+    <Variant Opcode="4B" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNS" Desc="Conditional Move - not sign (SF=0)">
+    <Variant Opcode="49" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNZ" Desc="Conditional Move - not zero/not equal (ZF=1)">
+    <Variant Opcode="45" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVNE" Desc="Conditional Move - not zero/not equal (ZF=1)">
+    <Variant Opcode="45" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVO" Desc="Conditional Move - overflow (OF=1)">
+    <Variant Opcode="40" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVP" Desc="Conditional Move - parity/parity even (PF=1)">
+    <Variant Opcode="4A" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVPE" Desc="Conditional Move - parity/parity even (PF=1)">
+    <Variant Opcode="4A" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVS" Desc="Conditional Move - sign (SF=1)">
+    <Variant Opcode="48" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVZ" Desc="Conditional Move - zero/equal (ZF=0)">
+    <Variant Opcode="44" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMOVE" Desc="Conditional Move - zero/equal (ZF=0)">
+    <Variant Opcode="44" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="CMP" Desc="Compare Two Operands">
+    <Variant Opcode="38" Operand1="r/m8" Operand2="r8" FixedReg="r" />
+    <Variant Opcode="39" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" />
+    <Variant Opcode="3A" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="3B" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="3C" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="3D" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="7" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="7" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="7" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="CMPPD" Desc="Compare Packed Double-FP Values">
+    <Variant Opcode="C2" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CMPPS" Desc="Compare Packed Single-FP Values">
+    <Variant Opcode="C2" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CMPS" Desc="Compare String Operands">
+    <Variant Opcode="A6" Operand1="m8" Operand2="m8" />
+    <Variant Opcode="A7" Operand1="m16" Operand2="m16" />
+    <Variant Opcode="A7" Operand1="m16/32" Operand2="m16/32" Proc="03+" />
+    <Variant Opcode="A7" Operand1="m16/32/64" Operand2="m16/32/64" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CMPSB" Desc="Compare String Operands">
+    <Variant Opcode="A6" Operand1="m8" Operand2="m8" />
+  </Opcode>
+  <Opcode Name="CMPSW" Desc="Compare String Operands">
+    <Variant Opcode="A7" Operand1="m16" Operand2="m16" />
+    <Variant Opcode="A7" Operand1="m16" Operand2="m16" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CMPSD" Desc="Compare String Operands">
+    <Variant Opcode="A7" Operand1="m32" Operand2="m32" Proc="03+" />
+    <Variant Opcode="A7" Operand1="m32" Operand2="m32" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="C2" Operand1="xmm" Operand2="xmm/m64" Operand3="imm8" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CMPSQ" Desc="Compare String Operands">
+    <Variant Opcode="A7" Operand1="m64" Operand2="m64" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CMPSS" Desc="Compare Scalar Single-FP Values">
+    <Variant Opcode="C2" Operand1="xmm" Operand2="xmm/m32" Operand3="imm8" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CMPXCHG" Desc="Compare and Exchange">
+    <Variant Opcode="B0" Operand1="r/m8" Operand2="AL" Operand3="r8" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="04+" />
+    <Variant Opcode="B1" Operand1="r/m16/32/64" Operand2="rAX" Operand3="r16/32/64" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="04+" />
+  </Opcode>
+  <Opcode Name="CMPXCHG8B" Desc="Compare and Exchange Bytes">
+    <Variant Opcode="C7" Operand1="m64" Operand2="EAX" Operand3="EDX" Prefix0F="0F" FixedReg="1" Lock="Lock" Proc="P1+" />
+    <Variant Opcode="C7" Operand1="m64" Operand2="EAX" Operand3="EDX" Prefix0F="0F" FixedReg="1" Mode="64-bit" Lock="Lock" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CMPXCHG16B" Desc="Compare and Exchange Bytes">
+    <Variant Opcode="C7" Operand1="m128" Operand2="RAX" Operand3="RDX" Prefix0F="0F" FixedReg="1" Mode="64-bit" Lock="Lock" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="COMISD" Desc="Compare Scalar Ordered Double-FP Values and Set EFLAGS">
+    <Variant Opcode="2F" Operand1="xmm" Operand2="xmm/m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="COMISS" Desc="Compare Scalar Ordered Single-FP Values and Set EFLAGS">
+    <Variant Opcode="2F" Operand1="xmm" Operand2="xmm/m32" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CPUID" Desc="CPU Identification">
+    <Variant Opcode="A2" Operand2="EAX" Operand3="ECX" Prefix0F="0F" Proc="04++" />
+  </Opcode>
+  <Opcode Name="CRC32" Desc="Accumulate CRC32 Value">
+    <Variant Opcode="38 F0" Operand1="r32/64" Operand2="r/m8" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+    <Variant Opcode="38 F1" Operand1="r32/64" Operand2="r/m16/32/64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="CVTDQ2PD" Desc="Convert Packed DW Integers to Double-FP Values">
+    <Variant Opcode="E6" Operand1="xmm" Operand2="xmm/m128" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTDQ2PS" Desc="Convert Packed DW Integers to Single-FP Values">
+    <Variant Opcode="5B" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPD2DQ" Desc="Convert Packed Double-FP Values to DW Integers">
+    <Variant Opcode="E6" Operand1="xmm" Operand2="xmm/m128" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPD2PI" Desc="Convert Packed Double-FP Values to DW Integers">
+    <Variant Opcode="2D" Operand1="mm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPD2PS" Desc="Convert Packed Double-FP Values to Single-FP Values">
+    <Variant Opcode="5A" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPI2PD" Desc="Convert Packed DW Integers to Double-FP Values">
+    <Variant Opcode="2A" Operand1="xmm" Operand2="mm/m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPI2PS" Desc="Convert Packed DW Integers to Single-FP Values">
+    <Variant Opcode="2A" Operand1="xmm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CVTPS2DQ" Desc="Convert Packed Single-FP Values to DW Integers">
+    <Variant Opcode="5B" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPS2PD" Desc="Convert Packed Single-FP Values to Double-FP Values">
+    <Variant Opcode="5A" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTPS2PI" Desc="Convert Packed Single-FP Values to DW Integers">
+    <Variant Opcode="2D" Operand1="mm" Operand2="xmm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CVTSD2SI" Desc="Convert Scalar Double-FP Value to DW Integer">
+    <Variant Opcode="2D" Operand1="r32/64" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTSD2SS" Desc="Convert Scalar Double-FP Value to Scalar Single-FP Value">
+    <Variant Opcode="5A" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTSI2SD" Desc="Convert DW Integer to Scalar Double-FP Value">
+    <Variant Opcode="2A" Operand1="xmm" Operand2="r/m32/64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTSI2SS" Desc="Convert DW Integer to Scalar Single-FP Value">
+    <Variant Opcode="2A" Operand1="xmm" Operand2="r/m32/64" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CVTSS2SD" Desc="Convert Scalar Single-FP Value to Scalar Double-FP Value">
+    <Variant Opcode="5A" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTSS2SI" Desc="Convert Scalar Single-FP Value to DW Integer">
+    <Variant Opcode="2D" Operand1="r32/64" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CVTTPD2DQ" Desc="Convert with Trunc. Packed Double-FP Values to DW Integers">
+    <Variant Opcode="E6" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTTPD2PI" Desc="Convert with Trunc. Packed Double-FP Values to DW Integers">
+    <Variant Opcode="2C" Operand1="mm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTTPS2DQ" Desc="Convert with Trunc. Packed Single-FP Values to DW Integers">
+    <Variant Opcode="5B" Operand1="xmm" Operand2="xmm/m128" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTTPS2PI" Desc="Convert with Trunc. Packed Single-FP Values to DW Integers">
+    <Variant Opcode="2C" Operand1="mm" Operand2="xmm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CVTTSD2SI" Desc="Conv. with Trunc. Scalar Double-FP Value to Signed DW Int">
+    <Variant Opcode="2C" Operand1="r32/64" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CVTTSS2SI" Desc="Convert with Trunc. Scalar Single-FP Value to DW Integer">
+    <Variant Opcode="2C" Operand1="r32/64" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="CWD" Desc="Convert Word to Doubleword">
+    <Variant Opcode="99" Operand1="DX" Operand2="AX" />
+    <Variant Opcode="99" Operand1="DX" Operand2="AX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="CQO" Desc="Convert">
+    <Variant Opcode="99" Operand1="RDX" Operand2="RAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="DAA" Desc="Decimal Adjust AL after Addition">
+    <Variant Opcode="27" Operand1="AL" />
+  </Opcode>
+  <Opcode Name="DAS" Desc="Decimal Adjust AL after Subtraction">
+    <Variant Opcode="2F" Operand1="AL" />
+  </Opcode>
+  <Opcode Name="DEC" Desc="Decrement by 1">
+    <Variant Opcode="48" Operand1="r16/32" Add="01" />
+    <Variant Opcode="FE" Operand1="r/m8" FixedReg="1" />
+    <Variant Opcode="FF" Operand1="r/m16/32/64" FixedReg="1" />
+  </Opcode>
+  <Opcode Name="DIV" Desc="Unsigned Divide">
+    <Variant Opcode="F6" Operand1="AL" Operand2="AH" Operand3="AX" Operand4="r/m8" FixedReg="6" />
+    <Variant Opcode="F7" Operand1="rDX" Operand2="rAX" Operand3="r/m16/32/64" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="DIVPD" Desc="Divide Packed Double-FP Values">
+    <Variant Opcode="5E" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="DIVPS" Desc="Divide Packed Single-FP Values">
+    <Variant Opcode="5E" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="DIVSD" Desc="Divide Scalar Double-FP Values">
+    <Variant Opcode="5E" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="DIVSS" Desc="Divide Scalar Single-FP Values">
+    <Variant Opcode="5E" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="DPPD" Desc="Dot Product of Packed Double-FP Values">
+    <Variant Opcode="3A 41" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="DPPS" Desc="Dot Product of Packed Single-FP Values">
+    <Variant Opcode="3A 40" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="EMMS" Desc="Empty MMX Technology State">
+    <Variant Opcode="77" Prefix0F="0F" Group="mmx" Proc="PX+" />
+  </Opcode>
+  <Opcode Name="ENTER" Desc="Make Stack Frame for Procedure Parameters">
+    <Variant Opcode="C8" Operand1="eBP" Operand2="imm16" Operand3="imm8" Proc="01+" />
+    <Variant Opcode="C8" Operand1="rBP" Operand2="imm16" Operand3="imm8" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="EXTRACTPS" Desc="Extract Packed Single-FP Value">
+    <Variant Opcode="3A 17" Operand1="r/m32" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="F2XM1" Desc="Compute 2x-1">
+    <Variant Opcode="D9 F0" Operand1="ST" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FABS" Desc="Absolute Value">
+    <Variant Opcode="D9 E1" Operand1="ST" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FADD" Desc="Add">
+    <Variant Opcode="D8" Operand1="ST" Operand2="m32real" FixedReg="0" />
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi" FixedReg="0" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="0" />
+    <Variant Opcode="DC" Operand1="STi" Operand2="ST" FixedReg="0" />
+  </Opcode>
+  <Opcode Name="FADDP" Desc="Add and Pop">
+    <Variant Opcode="DE" Operand1="STi" Operand2="ST" FixedReg="0" Lock="FpuPop" />
+    <Variant Opcode="DE C1" Operand1="ST1" Operand2="ST" FixedReg="0" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FBLD" Desc="Load Binary Coded Decimal">
+    <Variant Opcode="DF" Operand1="ST" Operand2="m80dec" FixedReg="4" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FBSTP" Desc="Store BCD Integer and Pop">
+    <Variant Opcode="DF" Operand1="m80dec" Operand2="ST" FixedReg="6" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FCHS" Desc="Change Sign">
+    <Variant Opcode="D9 E0" Operand1="ST" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FCLEX" Desc="Clear Exceptions">
+    <Variant Opcode="DB E2" Prefix="9B" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FCMOVB" Desc="FP Conditional Move - below (CF=1)">
+    <Variant Opcode="DA" Operand1="ST" Operand2="STi" FixedReg="0" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVBE" Desc="FP Conditional Move - below or equal (CF=1 or ZF=1)">
+    <Variant Opcode="DA" Operand1="ST" Operand2="STi" FixedReg="2" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVE" Desc="FP Conditional Move - equal (ZF=1)">
+    <Variant Opcode="DA" Operand1="ST" Operand2="STi" FixedReg="1" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVNB" Desc="FP Conditional Move - not below (CF=0)">
+    <Variant Opcode="DB" Operand1="ST" Operand2="STi" FixedReg="0" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVNBE" Desc="FP Conditional Move - below or equal (CF=0 and ZF=0)">
+    <Variant Opcode="DB" Operand1="ST" Operand2="STi" FixedReg="2" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVNE" Desc="FP Conditional Move - not equal (ZF=0)">
+    <Variant Opcode="DB" Operand1="ST" Operand2="STi" FixedReg="1" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVNU" Desc="FP Conditional Move - not unordered (PF=0)">
+    <Variant Opcode="DB" Operand1="ST" Operand2="STi" FixedReg="3" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCMOVU" Desc="FP Conditional Move - unordered (PF=1)">
+    <Variant Opcode="DA" Operand1="ST" Operand2="STi" FixedReg="3" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCOM" Desc="Compare Real">
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi/m32real" FixedReg="2" />
+    <Variant Opcode="D8 D1" Operand1="ST" Operand2="ST1" FixedReg="2" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="FCOM2" Desc="Compare Real">
+    <Variant Opcode="DC" Operand1="ST" Operand2="STi" FixedReg="2" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FCOMI" Desc="Compare Floating Point Values and Set EFLAGS">
+    <Variant Opcode="DB" Operand1="ST" Operand2="STi" FixedReg="6" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCOMIP" Desc="Compare Floating Point Values and Set EFLAGS and Pop">
+    <Variant Opcode="DF" Operand1="ST" Operand2="STi" FixedReg="6" Lock="FpuPop" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FCOMP" Desc="Compare Real and Pop">
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi/m32real" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="D8 D9" Operand1="ST" Operand2="ST1" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="3" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FCOMP3" Desc="Compare Real and Pop">
+    <Variant Opcode="DC" Operand1="ST" Operand2="STi" FixedReg="3" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FCOMP5" Desc="Compare Real and Pop">
+    <Variant Opcode="DE" Operand1="ST" Operand2="STi" FixedReg="2" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FCOMPP" Desc="Compare Real and Pop Twice">
+    <Variant Opcode="DE D9" Operand1="ST" Operand2="ST1" FixedReg="3" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FCOS" Desc="Cosine">
+    <Variant Opcode="D9 FF" Operand1="ST" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FDECSTP" Desc="Decrement Stack-Top Pointer">
+    <Variant Opcode="D9 F6" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FDIV" Desc="Divide">
+    <Variant Opcode="D8" Operand1="ST" Operand2="m32real" FixedReg="6" />
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi" FixedReg="6" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="6" />
+    <Variant Opcode="DC" Operand1="STi" Operand2="ST" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FDIVP" Desc="Divide and Pop">
+    <Variant Opcode="DE" Operand1="STi" Operand2="ST" FixedReg="7" Lock="FpuPop" />
+    <Variant Opcode="DE F9" Operand1="ST1" Operand2="ST" FixedReg="7" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FDIVR" Desc="Reverse Divide">
+    <Variant Opcode="D8" Operand1="ST" Operand2="m32real" FixedReg="7" />
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi" FixedReg="7" />
+    <Variant Opcode="DC" Operand1="STi" Operand2="ST" FixedReg="6" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FDIVRP" Desc="Reverse Divide and Pop">
+    <Variant Opcode="DE" Operand1="STi" Operand2="ST" FixedReg="6" Lock="FpuPop" />
+    <Variant Opcode="DE F1" Operand1="ST1" Operand2="ST" FixedReg="6" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FFREE" Desc="Free Floating-Point Register">
+    <Variant Opcode="DD" Operand1="STi" FixedReg="0" />
+  </Opcode>
+  <Opcode Name="FFREEP" Desc="Free Floating-Point Register and Pop">
+    <Variant Opcode="DF" Operand1="STi" FixedReg="0" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FIADD" Desc="Add">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="0" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="0" />
+  </Opcode>
+  <Opcode Name="FICOM" Desc="Compare Integer">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="2" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="FICOMP" Desc="Compare Integer and Pop">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="3" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FIDIV" Desc="Divide">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="6" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FIDIVR" Desc="Reverse Divide">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="7" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FILD" Desc="Load Integer">
+    <Variant Opcode="DB" Operand1="ST" Operand2="m32int" FixedReg="0" Lock="FpuPush" />
+    <Variant Opcode="DF" Operand1="ST" Operand2="m16int" FixedReg="0" Lock="FpuPush" />
+    <Variant Opcode="DF" Operand1="ST" Operand2="m64int" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FIMUL" Desc="Multiply">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="1" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="1" />
+  </Opcode>
+  <Opcode Name="FINCSTP" Desc="Increment Stack-Top Pointer">
+    <Variant Opcode="D9 F7" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FINIT" Desc="Initialize Floating-Point Unit">
+    <Variant Opcode="DB E3" Prefix="9B" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FIST" Desc="Store Integer">
+    <Variant Opcode="DB" Operand1="m32int" Operand2="ST" FixedReg="2" />
+    <Variant Opcode="DF" Operand1="m16int" Operand2="ST" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="FISTP" Desc="Store Integer and Pop">
+    <Variant Opcode="DB" Operand1="m32int" Operand2="ST" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="DF" Operand1="m16int" Operand2="ST" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="DF" Operand1="m64int" Operand2="ST" FixedReg="7" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FISTTP" Desc="Store Integer with Truncation and Pop">
+    <Variant Opcode="DB" Operand1="m32int" Operand2="ST" FixedReg="1" Lock="FpuPop" Group="sse3" Proc="P4++" />
+    <Variant Opcode="DD" Operand1="m64int" Operand2="ST" FixedReg="1" Lock="FpuPop" Group="sse3" Proc="P4++" />
+    <Variant Opcode="DF" Operand1="m16int" Operand2="ST" FixedReg="1" Lock="FpuPop" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="FISUB" Desc="Subtract">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="4" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FISUBR" Desc="Reverse Subtract">
+    <Variant Opcode="DA" Operand1="ST" Operand2="m32int" FixedReg="5" />
+    <Variant Opcode="DE" Operand1="ST" Operand2="m16int" FixedReg="5" />
+  </Opcode>
+  <Opcode Name="FLD" Desc="Load Floating Point Value">
+    <Variant Opcode="D9" Operand1="ST" Operand2="STi/m32real" FixedReg="0" Lock="FpuPush" />
+    <Variant Opcode="DB" Operand1="ST" Operand2="m80real" FixedReg="5" Lock="FpuPush" />
+    <Variant Opcode="DD" Operand1="ST" Operand2="m64real" FixedReg="0" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLD1" Desc="Load Constant +1.0">
+    <Variant Opcode="D9 E8" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLDCW" Desc="Load x87 FPU Control Word">
+    <Variant Opcode="D9" Operand1="m16" FixedReg="5" />
+  </Opcode>
+  <Opcode Name="FLDENV" Desc="Load x87 FPU Environment">
+    <Variant Opcode="D9" Operand1="m14/28" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FLDL2E" Desc="Load Constant log2e">
+    <Variant Opcode="D9 EA" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLDL2T" Desc="Load Constant log210">
+    <Variant Opcode="D9 E9" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLDLG2" Desc="Load Constant log102">
+    <Variant Opcode="D9 EC" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLDLN2" Desc="Load Constant loge2">
+    <Variant Opcode="D9 ED" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLDPI" Desc="Load Constant">
+    <Variant Opcode="D9 EB" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FLDZ" Desc="Load Constant +0.0">
+    <Variant Opcode="D9 EE" Operand1="ST" FixedReg="5" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FMUL" Desc="Multiply">
+    <Variant Opcode="D8" Operand1="ST" Operand2="m32real" FixedReg="1" />
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi" FixedReg="1" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="1" />
+    <Variant Opcode="DC" Operand1="STi" Operand2="ST" FixedReg="1" />
+  </Opcode>
+  <Opcode Name="FMULP" Desc="Multiply and Pop">
+    <Variant Opcode="DE" Operand1="STi" Operand2="ST" FixedReg="1" Lock="FpuPop" />
+    <Variant Opcode="DE C9" Operand1="ST1" Operand2="ST" FixedReg="1" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FNCLEX" Desc="Clear Exceptions">
+    <Variant Opcode="DB E2" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FNDISI" Desc="Treated as Integer NOP">
+    <Variant Opcode="DB E1" FixedReg="4" Proc="01+" />
+  </Opcode>
+  <Opcode Name="FNENI" Desc="Treated as Integer NOP">
+    <Variant Opcode="DB E0" FixedReg="4" Proc="01+" />
+  </Opcode>
+  <Opcode Name="FNINIT" Desc="Initialize Floating-Point Unit">
+    <Variant Opcode="DB E3" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FNOP" Desc="No Operation">
+    <Variant Opcode="D9 D0" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="FNSAVE" Desc="Store x87 FPU State">
+    <Variant Opcode="DD" Operand1="m94/108" Operand2="ST" Operand3="ST1" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FNSETPM" Desc="Treated as Integer NOP">
+    <Variant Opcode="DB E4" FixedReg="4" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FNSTCW" Desc="Store x87 FPU Control Word">
+    <Variant Opcode="D9" Operand1="m16" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FNSTENV" Desc="Store x87 FPU Environment">
+    <Variant Opcode="D9" Operand1="m14/28" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FNSTSW" Desc="Store x87 FPU Status Word">
+    <Variant Opcode="DD" Operand1="m16" FixedReg="7" />
+    <Variant Opcode="DF E0" Operand1="AX" FixedReg="4" Proc="02+" />
+  </Opcode>
+  <Opcode Name="FPATAN" Desc="Partial Arctangent and Pop">
+    <Variant Opcode="D9 F3" Operand1="ST1" Operand2="ST" FixedReg="6" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FPREM" Desc="Partial Remainder (for compatibility with i8087 and i287)">
+    <Variant Opcode="D9 F8" Operand1="ST" Operand2="ST1" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FPREM1" Desc="IEEE Partial Remainder">
+    <Variant Opcode="D9 F5" Operand1="ST" Operand2="ST1" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FPTAN" Desc="Partial Tangent">
+    <Variant Opcode="D9 F2" Operand1="ST" FixedReg="6" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FRNDINT" Desc="Round to Integer">
+    <Variant Opcode="D9 FC" Operand1="ST" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FRSTOR" Desc="Restore x87 FPU State">
+    <Variant Opcode="DD" Operand1="ST" Operand2="ST1" Operand3="ST2" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FSAVE" Desc="Store x87 FPU State">
+    <Variant Opcode="DD" Operand1="m94/108" Operand2="ST" Operand3="ST1" Prefix="9B" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FSCALE" Desc="Scale">
+    <Variant Opcode="D9 FD" Operand1="ST" Operand2="ST1" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FSIN" Desc="Sine">
+    <Variant Opcode="D9 FE" Operand1="ST" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FSINCOS" Desc="Sine and Cosine">
+    <Variant Opcode="D9 FB" Operand1="ST" FixedReg="7" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FSQRT" Desc="Square Root">
+    <Variant Opcode="D9 FA" Operand1="ST" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FST" Desc="Store Floating Point Value">
+    <Variant Opcode="D9" Operand1="m32real" Operand2="ST" FixedReg="2" />
+    <Variant Opcode="DD" Operand1="m64real" Operand2="ST" FixedReg="2" />
+    <Variant Opcode="DD" Operand1="ST" Operand2="STi" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="FSTCW" Desc="Store x87 FPU Control Word">
+    <Variant Opcode="D9" Operand1="m16" Prefix="9B" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="FSTENV" Desc="Store x87 FPU Environment">
+    <Variant Opcode="D9" Operand1="m14/28" Prefix="9B" FixedReg="6" />
+  </Opcode>
+  <Opcode Name="FSTP" Desc="Store Floating Point Value and Pop">
+    <Variant Opcode="D9" Operand1="m32real" Operand2="ST" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="DB" Operand1="m80real" Operand2="ST" FixedReg="7" Lock="FpuPop" />
+    <Variant Opcode="DD" Operand1="m64real" Operand2="ST" FixedReg="3" Lock="FpuPop" />
+    <Variant Opcode="DD" Operand1="ST" Operand2="STi" FixedReg="3" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FSTP1" Desc="Store Floating Point Value and Pop">
+    <Variant Opcode="D9" Operand1="STi" Operand2="ST" FixedReg="3" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FSTP8" Desc="Store Floating Point Value and Pop">
+    <Variant Opcode="DF" Operand1="STi" Operand2="ST" FixedReg="2" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FSTP9" Desc="Store Floating Point Value and Pop">
+    <Variant Opcode="DF" Operand1="STi" Operand2="ST" FixedReg="3" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FSTSW" Desc="Store x87 FPU Status Word">
+    <Variant Opcode="DD" Operand1="m16" Prefix="9B" FixedReg="7" />
+    <Variant Opcode="DF E0" Operand1="AX" Prefix="9B" FixedReg="4" Proc="02+" />
+  </Opcode>
+  <Opcode Name="FSUB" Desc="Subtract">
+    <Variant Opcode="D8" Operand1="ST" Operand2="m32real" FixedReg="4" />
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi" FixedReg="4" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="4" />
+    <Variant Opcode="DC" Operand1="STi" Operand2="ST" FixedReg="5" />
+  </Opcode>
+  <Opcode Name="FSUBP" Desc="Subtract and Pop">
+    <Variant Opcode="DE" Operand1="STi" Operand2="ST" FixedReg="5" Lock="FpuPop" />
+    <Variant Opcode="DE E9" Operand1="ST1" Operand2="ST" FixedReg="5" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FSUBR" Desc="Reverse Subtract">
+    <Variant Opcode="D8" Operand1="ST" Operand2="m32real" FixedReg="5" />
+    <Variant Opcode="D8" Operand1="ST" Operand2="STi" FixedReg="5" />
+    <Variant Opcode="DC" Operand1="STi" Operand2="ST" FixedReg="4" />
+    <Variant Opcode="DC" Operand1="ST" Operand2="m64real" FixedReg="5" />
+  </Opcode>
+  <Opcode Name="FSUBRP" Desc="Reverse Subtract and Pop">
+    <Variant Opcode="DE" Operand1="STi" Operand2="ST" FixedReg="4" Lock="FpuPop" />
+    <Variant Opcode="DE E1" Operand1="ST1" Operand2="ST" FixedReg="4" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FTST" Desc="Test">
+    <Variant Opcode="D9 E4" Operand1="ST" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FUCOM" Desc="Unordered Compare Floating Point Values">
+    <Variant Opcode="DD" Operand1="ST" Operand2="STi" FixedReg="4" Proc="03+" />
+    <Variant Opcode="DD E1" Operand1="ST" Operand2="ST1" FixedReg="4" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FUCOMI" Desc="Unordered Compare Floating Point Values and Set EFLAGS">
+    <Variant Opcode="DB" Operand1="ST" Operand2="STi" FixedReg="5" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FUCOMIP" Desc="Unordered Compare Floating Point Values and Set EFLAGS and Pop">
+    <Variant Opcode="DF" Operand1="ST" Operand2="STi" FixedReg="5" Lock="FpuPop" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="FUCOMP" Desc="Unordered Compare Floating Point Values and Pop">
+    <Variant Opcode="DD" Operand1="ST" Operand2="STi" FixedReg="5" Lock="FpuPop" Proc="03+" />
+    <Variant Opcode="DD E9" Operand1="ST" Operand2="ST1" FixedReg="5" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FUCOMPP" Desc="Unordered Compare Floating Point Values and Pop Twice">
+    <Variant Opcode="DA E9" Operand1="ST" Operand2="ST1" FixedReg="5" Lock="FpuPop" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FWAIT" Desc="Check pending unmasked floating-point exceptions">
+    <Variant Opcode="9B" />
+  </Opcode>
+  <Opcode Name="WAIT" Desc="Check pending unmasked floating-point exceptions">
+    <Variant Opcode="9B" />
+  </Opcode>
+  <Opcode Name="FXAM" Desc="Examine">
+    <Variant Opcode="D9 E5" Operand1="ST" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="FXCH" Desc="Exchange Register Contents">
+    <Variant Opcode="D9" Operand1="ST" Operand2="STi" FixedReg="1" />
+    <Variant Opcode="D9 C9" Operand1="ST" Operand2="ST1" FixedReg="1" />
+  </Opcode>
+  <Opcode Name="FXCH4" Desc="Exchange Register Contents">
+    <Variant Opcode="DD" Operand1="ST" Operand2="STi" FixedReg="1" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FXCH7" Desc="Exchange Register Contents">
+    <Variant Opcode="DF" Operand1="ST" Operand2="STi" FixedReg="1" Proc="03+" />
+  </Opcode>
+  <Opcode Name="FXRSTOR" Desc="Restore x87 FPU, MMX, XMM, and MXCSR State">
+    <Variant Opcode="AE" Operand1="ST" Operand2="ST1" Operand3="ST2" Prefix0F="0F" FixedReg="1" Proc="P2++" />
+    <Variant Opcode="AE" Operand1="ST" Operand2="ST1" Operand3="ST2" Prefix0F="0F" FixedReg="1" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="FXSAVE" Desc="Save x87 FPU, MMX, XMM, and MXCSR State">
+    <Variant Opcode="AE" Operand1="m512" Operand2="ST" Operand3="ST1" Prefix0F="0F" FixedReg="0" Proc="P2++" />
+    <Variant Opcode="AE" Operand1="m512" Operand2="ST" Operand3="ST1" Prefix0F="0F" FixedReg="0" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="FXTRACT" Desc="Extract Exponent and Significand">
+    <Variant Opcode="D9 F4" Operand1="ST" FixedReg="6" Lock="FpuPush" />
+  </Opcode>
+  <Opcode Name="FYL2X" Desc="Compute y to log2x and Pop">
+    <Variant Opcode="D9 F1" Operand1="ST1" Operand2="ST" FixedReg="6" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="FYL2XP1" Desc="Compute y to log2(x+1) and Pop">
+    <Variant Opcode="D9 F9" Operand1="ST1" Operand2="ST" FixedReg="7" Lock="FpuPop" />
+  </Opcode>
+  <Opcode Name="GETSEC" Desc="GETSEC Leaf Functions">
+    <Variant Opcode="37" Operand1="EAX" Prefix0F="0F" Group="smx" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="HADDPD" Desc="Packed Double-FP Horizontal Add">
+    <Variant Opcode="7C" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="HADDPS" Desc="Packed Single-FP Horizontal Add">
+    <Variant Opcode="7C" Operand1="xmm" Operand2="xmm/m128" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="HINT_NOP" Desc="Hintable NOP">
+    <Variant Opcode="18" Operand1="r/m16/32" Prefix0F="0F" FixedReg="4" Proc="PP+" />
+    <Variant Opcode="18" Operand1="r/m16/32" Prefix0F="0F" FixedReg="5" Proc="PP+" />
+    <Variant Opcode="18" Operand1="r/m16/32" Prefix0F="0F" FixedReg="6" Proc="PP+" />
+    <Variant Opcode="18" Operand1="r/m16/32" Prefix0F="0F" FixedReg="7" Proc="PP+" />
+    <Variant Opcode="19" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1A" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1B" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1C" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1D" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1E" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="1" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="2" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="3" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="4" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="5" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="6" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="7" Proc="PP+" />
+  </Opcode>
+  <Opcode Name="HLT" Desc="Halt">
+    <Variant Opcode="F4" Ring="0" />
+  </Opcode>
+  <Opcode Name="HSUBPD" Desc="Packed Double-FP Horizontal Subtract">
+    <Variant Opcode="7D" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="HSUBPS" Desc="Packed Single-FP Horizontal Subtract">
+    <Variant Opcode="7D" Operand1="xmm" Operand2="xmm/m128" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="IDIV" Desc="Signed Divide">
+    <Variant Opcode="F6" Operand1="AL" Operand2="AH" Operand3="AX" Operand4="r/m8" FixedReg="7" />
+    <Variant Opcode="F7" Operand1="rDX" Operand2="rAX" Operand3="r/m16/32/64" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="IMUL" Desc="Signed Multiply">
+    <Variant Opcode="69" Operand1="r16/32/64" Operand2="r/m16/32/64" Operand3="imm16/32" FixedReg="r" Proc="01+" />
+    <Variant Opcode="6B" Operand1="r16/32/64" Operand2="r/m16/32/64" Operand3="imm8" FixedReg="r" Proc="01+" />
+    <Variant Opcode="F6" Operand1="AX" Operand2="AL" Operand3="r/m8" FixedReg="5" />
+    <Variant Opcode="F7" Operand1="rDX" Operand2="rAX" Operand3="r/m16/32/64" FixedReg="5" />
+    <Variant Opcode="AF" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="IN" Desc="Input from Port">
+    <Variant Opcode="E4" Operand1="AL" Operand2="imm8" Ring="f1" />
+    <Variant Opcode="E5" Operand1="eAX" Operand2="imm8" Ring="f1" />
+    <Variant Opcode="EC" Operand1="AL" Operand2="DX" Ring="f1" />
+    <Variant Opcode="ED" Operand1="eAX" Operand2="DX" Ring="f1" />
+  </Opcode>
+  <Opcode Name="INC" Desc="Increment by 1">
+    <Variant Opcode="40" Operand1="r16/32" Add="01" />
+    <Variant Opcode="FE" Operand1="r/m8" FixedReg="0" />
+    <Variant Opcode="FF" Operand1="r/m16/32/64" FixedReg="0" />
+  </Opcode>
+  <Opcode Name="INS" Desc="Input from Port to String">
+    <Variant Opcode="6C" Operand1="m8" Operand2="DX" Proc="01+" Ring="f1" />
+    <Variant Opcode="6D" Operand1="m16" Operand2="DX" Proc="01+" Ring="f1" />
+    <Variant Opcode="6D" Operand1="m16/32" Operand2="DX" Proc="03+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="INSB" Desc="Input from Port to String">
+    <Variant Opcode="6C" Operand1="m8" Operand2="DX" Proc="01+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="INSW" Desc="Input from Port to String">
+    <Variant Opcode="6D" Operand1="m16" Operand2="DX" Proc="01+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="INSD" Desc="Input from Port to String">
+    <Variant Opcode="6D" Operand1="m32" Operand2="DX" Proc="03+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="INSERTPS" Desc="Insert Packed Single-FP Value">
+    <Variant Opcode="3A 21" Operand1="xmm" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="3A 21" Operand1="xmm" Operand2="m32" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="INT" Desc="Call to Interrupt Procedure">
+    <Variant Opcode="CC" Operand1="3" Operand2="eFlags" Ring="f" />
+    <Variant Opcode="CD" Operand1="imm8" Operand2="eFlags" Ring="f" />
+  </Opcode>
+  <Opcode Name="INT1" Desc="Call to Interrupt Procedure">
+    <Variant Opcode="F1" Operand1="eFlags" Proc="03+" />
+  </Opcode>
+  <Opcode Name="ICEBP" Desc="Call to Interrupt Procedure">
+    <Variant Opcode="F1" Operand1="eFlags" Proc="03+" />
+  </Opcode>
+  <Opcode Name="INTO" Desc="Call to Interrupt Procedure">
+    <Variant Opcode="CE" Operand1="eFlags" Ring="f" />
+  </Opcode>
+  <Opcode Name="INVD" Desc="Invalidate Internal Caches">
+    <Variant Opcode="08" Prefix0F="0F" Proc="04+" Ring="0" />
+  </Opcode>
+  <Opcode Name="INVEPT" Desc="Invalidate Translations Derived from EPT">
+    <Variant Opcode="38 80" Operand1="r32" Operand2="m128" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="Protect_64bit" Group="vmx" Proc="C2++" Ring="0" />
+    <Variant Opcode="38 80" Operand1="r64" Operand2="m128" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="vmx" Proc="C2++" Ring="0" />
+  </Opcode>
+  <Opcode Name="INVLPG" Desc="Invalidate TLB Entry">
+    <Variant Opcode="01" Operand1="m" Prefix0F="0F" FixedReg="7" Proc="04+" Ring="0" />
+  </Opcode>
+  <Opcode Name="INVVPID" Desc="Invalidate Translations Based on VPID">
+    <Variant Opcode="38 81" Operand1="r32" Operand2="m128" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="Protect_64bit" Group="vmx" Proc="C2++" Ring="0" />
+    <Variant Opcode="38 81" Operand1="r64" Operand2="m128" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="vmx" Proc="C2++" Ring="0" />
+  </Opcode>
+  <Opcode Name="IRET" Desc="Interrupt Return">
+    <Variant Opcode="CF" Operand1="Flags" Ring="f" />
+    <Variant Opcode="CF" Operand1="Flags" Mode="64-bit" Ring="f" />
+  </Opcode>
+  <Opcode Name="IRETD" Desc="Interrupt Return">
+    <Variant Opcode="CF" Operand1="EFlags" Mode="64-bit" Ring="f" />
+    <Variant Opcode="CF" Operand1="EFlags" Proc="03+" Ring="f" />
+  </Opcode>
+  <Opcode Name="IRETQ" Desc="Interrupt Return">
+    <Variant Opcode="CF" Operand1="RFlags" Mode="64-bit" Ring="f" />
+  </Opcode>
+  <Opcode Name="JB" Desc="Jump short if below/not above or equal/carry (CF=1)">
+    <Variant Opcode="72" Operand1="rel8" />
+    <Variant Opcode="82" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNAE" Desc="Jump short if below/not above or equal/carry (CF=1)">
+    <Variant Opcode="72" Operand1="rel8" />
+    <Variant Opcode="82" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JC" Desc="Jump short if below/not above or equal/carry (CF=1)">
+    <Variant Opcode="72" Operand1="rel8" />
+    <Variant Opcode="82" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JBE" Desc="Jump short if below or equal/not above (CF=1 AND ZF=1)">
+    <Variant Opcode="76" Operand1="rel8" />
+    <Variant Opcode="86" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNA" Desc="Jump short if below or equal/not above (CF=1 AND ZF=1)">
+    <Variant Opcode="76" Operand1="rel8" />
+    <Variant Opcode="86" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JCXZ" Desc="Jump short if eCX register is 0">
+    <Variant Opcode="E3" Operand1="rel8" Operand2="CX" />
+  </Opcode>
+  <Opcode Name="JECXZ" Desc="Jump short if eCX register is 0">
+    <Variant Opcode="E3" Operand1="rel8" Operand2="ECX" />
+    <Variant Opcode="E3" Operand1="rel8" Operand2="ECX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="JRCXZ" Desc="Jump short if rCX register is 0">
+    <Variant Opcode="E3" Operand1="rel8" Operand2="RCX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="JL" Desc="Jump short if less/not greater (SF!=OF)">
+    <Variant Opcode="7C" Operand1="rel8" />
+    <Variant Opcode="8C" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNGE" Desc="Jump short if less/not greater (SF!=OF)">
+    <Variant Opcode="7C" Operand1="rel8" />
+    <Variant Opcode="8C" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JLE" Desc="Jump short if less or equal/not greater ((ZF=1) OR (SF!=OF))">
+    <Variant Opcode="7E" Operand1="rel8" />
+    <Variant Opcode="8E" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNG" Desc="Jump short if less or equal/not greater ((ZF=1) OR (SF!=OF))">
+    <Variant Opcode="7E" Operand1="rel8" />
+    <Variant Opcode="8E" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JMP" Desc="Jump">
+    <Variant Opcode="E9" Operand1="rel16/32" />
+    <Variant Opcode="EB" Operand1="rel8" />
+    <Variant Opcode="FF" Operand1="r/m16/32" FixedReg="4" />
+    <Variant Opcode="FF" Operand1="r/m64" FixedReg="4" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="JMPF" Desc="Jump">
+    <Variant Opcode="EA" Operand1="ptr16:16/32" />
+    <Variant Opcode="FF" Operand1="m16:16/32/64" FixedReg="5" />
+  </Opcode>
+  <Opcode Name="JNB" Desc="Jump short if not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="73" Operand1="rel8" />
+    <Variant Opcode="83" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JAE" Desc="Jump short if not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="73" Operand1="rel8" />
+    <Variant Opcode="83" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNC" Desc="Jump short if not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="73" Operand1="rel8" />
+    <Variant Opcode="83" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNBE" Desc="Jump short if not below or equal/above (CF=0 AND ZF=0)">
+    <Variant Opcode="77" Operand1="rel8" />
+    <Variant Opcode="87" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JA" Desc="Jump short if not below or equal/above (CF=0 AND ZF=0)">
+    <Variant Opcode="77" Operand1="rel8" />
+    <Variant Opcode="87" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNL" Desc="Jump short if not less/greater or equal (SF=OF)">
+    <Variant Opcode="7D" Operand1="rel8" />
+    <Variant Opcode="8D" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JGE" Desc="Jump short if not less/greater or equal (SF=OF)">
+    <Variant Opcode="7D" Operand1="rel8" />
+    <Variant Opcode="8D" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNLE" Desc="Jump short if not less nor equal/greater ((ZF=0) AND (SF=OF))">
+    <Variant Opcode="7F" Operand1="rel8" />
+    <Variant Opcode="8F" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JG" Desc="Jump short if not less nor equal/greater ((ZF=0) AND (SF=OF))">
+    <Variant Opcode="7F" Operand1="rel8" />
+    <Variant Opcode="8F" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNO" Desc="Jump short if not overflow (OF=0)">
+    <Variant Opcode="71" Operand1="rel8" />
+    <Variant Opcode="81" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNP" Desc="Jump short if not parity/parity odd">
+    <Variant Opcode="7B" Operand1="rel8" />
+    <Variant Opcode="8B" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JPO" Desc="Jump short if not parity/parity odd">
+    <Variant Opcode="7B" Operand1="rel8" />
+    <Variant Opcode="8B" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNS" Desc="Jump short if not sign (SF=0)">
+    <Variant Opcode="79" Operand1="rel8" />
+    <Variant Opcode="89" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNZ" Desc="Jump short if not zero/not equal (ZF=1)">
+    <Variant Opcode="75" Operand1="rel8" />
+    <Variant Opcode="85" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JNE" Desc="Jump short if not zero/not equal (ZF=1)">
+    <Variant Opcode="75" Operand1="rel8" />
+    <Variant Opcode="85" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JO" Desc="Jump short if overflow (OF=1)">
+    <Variant Opcode="70" Operand1="rel8" />
+    <Variant Opcode="80" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JP" Desc="Jump short if parity/parity even (PF=1)">
+    <Variant Opcode="7A" Operand1="rel8" />
+    <Variant Opcode="8A" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JPE" Desc="Jump short if parity/parity even (PF=1)">
+    <Variant Opcode="7A" Operand1="rel8" />
+    <Variant Opcode="8A" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JS" Desc="Jump short if sign (SF=1)">
+    <Variant Opcode="78" Operand1="rel8" />
+    <Variant Opcode="88" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JZ" Desc="Jump short if zero/equal (ZF=0)">
+    <Variant Opcode="74" Operand1="rel8" />
+    <Variant Opcode="84" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="JE" Desc="Jump short if zero/equal (ZF=0)">
+    <Variant Opcode="74" Operand1="rel8" />
+    <Variant Opcode="84" Operand1="rel16/32" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="LAHF" Desc="Load Status Flags into AH Register">
+    <Variant Opcode="9F" Operand1="AH" />
+  </Opcode>
+  <Opcode Name="LAR" Desc="Load Access Rights Byte">
+    <Variant Opcode="02" Operand1="r16/32/64" Operand2="m16" Prefix0F="0F" FixedReg="r" Mode="Protect_64bit" Proc="02+" />
+    <Variant Opcode="02" Operand1="r16/32/64" Operand2="r16/32" Prefix0F="0F" FixedReg="r" Mode="Protect_64bit" Proc="02+" />
+  </Opcode>
+  <Opcode Name="LDDQU" Desc="Load Unaligned Integer 128 Bits">
+    <Variant Opcode="F0" Operand1="xmm" Operand2="m128" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="LDMXCSR" Desc="Load MXCSR Register">
+    <Variant Opcode="AE" Operand1="m32" Prefix0F="0F" FixedReg="2" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="LDS" Desc="Load Far Pointer">
+    <Variant Opcode="C5" Operand1="DS" Operand2="r16/32" Operand3="m16:16/32" FixedReg="r" />
+  </Opcode>
+  <Opcode Name="LEA" Desc="Load Effective Address">
+    <Variant Opcode="8D" Operand1="r16/32/64" Operand2="m" FixedReg="r" />
+  </Opcode>
+  <Opcode Name="LEAVE" Desc="High Level Procedure Exit">
+    <Variant Opcode="C9" Operand1="eBP" Proc="01+" />
+    <Variant Opcode="C9" Operand1="rBP" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LES" Desc="Load Far Pointer">
+    <Variant Opcode="C4" Operand1="ES" Operand2="r16/32" Operand3="m16:16/32" FixedReg="r" />
+  </Opcode>
+  <Opcode Name="LFENCE" Desc="Load Fence">
+    <Variant Opcode="AE" Prefix0F="0F" FixedReg="5" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LFS" Desc="Load Far Pointer">
+    <Variant Opcode="B4" Operand1="FS" Operand2="r16/32/64" Operand3="m16:16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="LGDT" Desc="Load Global Descriptor Table Register">
+    <Variant Opcode="01" Operand1="GDTR" Operand2="m" Prefix0F="0F" FixedReg="2" Proc="02+" Ring="0" />
+  </Opcode>
+  <Opcode Name="LGS" Desc="Load Far Pointer">
+    <Variant Opcode="B5" Operand1="GS" Operand2="r16/32/64" Operand3="m16:16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="LIDT" Desc="Load Interrupt Descriptor Table Register">
+    <Variant Opcode="01" Operand1="IDTR" Operand2="m" Prefix0F="0F" FixedReg="3" Proc="02+" Ring="0" />
+  </Opcode>
+  <Opcode Name="LLDT" Desc="Load Local Descriptor Table Register">
+    <Variant Opcode="00" Operand1="LDTR" Operand2="r/m16" Prefix0F="0F" FixedReg="2" Mode="Protect_64bit" Proc="02+" Ring="0" />
+  </Opcode>
+  <Opcode Name="LMSW" Desc="Load Machine Status Word">
+    <Variant Opcode="01" Operand1="MSW" Operand2="r/m16" Prefix0F="0F" FixedReg="6" Proc="02+" Ring="0" />
+  </Opcode>
+  <Opcode Name="LODS" Desc="Load String">
+    <Variant Opcode="AC" Operand1="AL" Operand2="m8" />
+    <Variant Opcode="AD" Operand1="AX" Operand2="m16" />
+    <Variant Opcode="AD" Operand1="eAX" Operand2="m16/32" Proc="03+" />
+    <Variant Opcode="AD" Operand1="rAX" Operand2="m16/32/64" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LODSB" Desc="Load String">
+    <Variant Opcode="AC" Operand1="AL" Operand2="m8" />
+  </Opcode>
+  <Opcode Name="LODSW" Desc="Load String">
+    <Variant Opcode="AD" Operand1="AX" Operand2="m16" />
+    <Variant Opcode="AD" Operand1="AX" Operand2="m16" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LODSD" Desc="Load String">
+    <Variant Opcode="AD" Operand1="EAX" Operand2="m32" Proc="03+" />
+    <Variant Opcode="AD" Operand1="EAX" Operand2="m32" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LODSQ" Desc="Load String">
+    <Variant Opcode="AD" Operand1="RAX" Operand2="m64" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LOOP" Desc="Decrement count; Jump short if count!=0">
+    <Variant Opcode="E2" Operand1="eCX" Operand2="rel8" />
+    <Variant Opcode="E2" Operand1="rCX" Operand2="rel8" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LOOPNZ" Desc="Decrement count; Jump short if count!=0 and ZF=0">
+    <Variant Opcode="E0" Operand1="eCX" Operand2="rel8" />
+    <Variant Opcode="E0" Operand1="rCX" Operand2="rel8" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LOOPNE" Desc="Decrement count; Jump short if count!=0 and ZF=0">
+    <Variant Opcode="E0" Operand1="eCX" Operand2="rel8" />
+    <Variant Opcode="E0" Operand1="rCX" Operand2="rel8" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LOOPZ" Desc="Decrement count; Jump short if count!=0 and ZF=1">
+    <Variant Opcode="E1" Operand1="eCX" Operand2="rel8" />
+    <Variant Opcode="E1" Operand1="rCX" Operand2="rel8" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LOOPE" Desc="Decrement count; Jump short if count!=0 and ZF=1">
+    <Variant Opcode="E1" Operand1="eCX" Operand2="rel8" />
+    <Variant Opcode="E1" Operand1="rCX" Operand2="rel8" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="LSL" Desc="Load Segment Limit">
+    <Variant Opcode="03" Operand1="r16/32/64" Operand2="m16" Prefix0F="0F" FixedReg="r" Mode="Protect_64bit" Proc="02+" />
+    <Variant Opcode="03" Operand1="r16/32/64" Operand2="r16/32" Prefix0F="0F" FixedReg="r" Mode="Protect_64bit" Proc="02+" />
+  </Opcode>
+  <Opcode Name="LSS" Desc="Load Far Pointer">
+    <Variant Opcode="B2" Operand1="SS" Operand2="r16/32/64" Operand3="m16:16/32/64" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="LTR" Desc="Load Task Register">
+    <Variant Opcode="00" Operand1="TR" Operand2="r/m16" Prefix0F="0F" FixedReg="3" Mode="Protect_64bit" Proc="02+" Ring="0" />
+  </Opcode>
+  <Opcode Name="MASKMOVDQU" Desc="Store Selected Bytes of Double Quadword">
+    <Variant Opcode="F7" Operand1="m128" Operand2="xmm" Operand3="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MASKMOVQ" Desc="Store Selected Bytes of Quadword">
+    <Variant Opcode="F7" Operand1="m64" Operand2="mm" Operand3="mm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MAXPD" Desc="Return Maximum Packed Double-FP Values">
+    <Variant Opcode="5F" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MAXPS" Desc="Return Maximum Packed Single-FP Values">
+    <Variant Opcode="5F" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MAXSD" Desc="Return Maximum Scalar Double-FP Value">
+    <Variant Opcode="5F" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MAXSS" Desc="Return Maximum Scalar Single-FP Value">
+    <Variant Opcode="5F" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MFENCE" Desc="Memory Fence">
+    <Variant Opcode="AE" Prefix0F="0F" FixedReg="6" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MINPD" Desc="Return Minimum Packed Double-FP Values">
+    <Variant Opcode="5D" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MINPS" Desc="Return Minimum Packed Single-FP Values">
+    <Variant Opcode="5D" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MINSD" Desc="Return Minimum Scalar Double-FP Value">
+    <Variant Opcode="5D" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MINSS" Desc="Return Minimum Scalar Single-FP Value">
+    <Variant Opcode="5D" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MONITOR" Desc="Set Up Monitor Address">
+    <Variant Opcode="01 C8" Operand1="m8" Operand2="ECX" Operand3="EDX" Prefix0F="0F" FixedReg="1" Group="sse3" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="MOV" Desc="Move">
+    <Variant Opcode="88" Operand1="r/m8" Operand2="r8" FixedReg="r" />
+    <Variant Opcode="89" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" />
+    <Variant Opcode="8A" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="8B" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="8C" Operand1="m16" Operand2="Sreg" FixedReg="r" />
+    <Variant Opcode="8C" Operand1="r16/32/64" Operand2="Sreg" FixedReg="r" />
+    <Variant Opcode="8E" Operand1="Sreg" Operand2="r/m16" FixedReg="r" />
+    <Variant Opcode="A0" Operand1="AL" Operand2="moffs8" />
+    <Variant Opcode="A1" Operand1="rAX" Operand2="moffs16/32/64" />
+    <Variant Opcode="A2" Operand1="moffs8" Operand2="AL" />
+    <Variant Opcode="A3" Operand1="moffs16/32/64" Operand2="rAX" />
+    <Variant Opcode="B0" Operand1="r8" Operand2="imm8" Add="01" />
+    <Variant Opcode="B8" Operand1="r16/32/64" Operand2="imm16/32/64" Add="01" />
+    <Variant Opcode="C6" Operand1="r/m8" Operand2="imm8" FixedReg="0" />
+    <Variant Opcode="C7" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="0" />
+    <Variant Opcode="20" Operand1="r32" Operand2="CRn" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="20" Operand1="r32" Operand2="CRn" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="20" Operand1="r64" Operand2="CRn" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="P4+" Ring="0" />
+    <Variant Opcode="20" Operand1="r64" Operand2="CRn" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="P4+" Ring="0" />
+    <Variant Opcode="21" Operand1="r32" Operand2="DRn" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="21" Operand1="r32" Operand2="DRn" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="21" Operand1="r64" Operand2="DRn" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="03+" Ring="0" />
+    <Variant Opcode="21" Operand1="r64" Operand2="DRn" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="03+" Ring="0" />
+    <Variant Opcode="22" Operand1="CRn" Operand2="r32" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="22" Operand1="CRn" Operand2="r32" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="22" Operand1="CRn" Operand2="r64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="P4+" Ring="0" />
+    <Variant Opcode="22" Operand1="CRn" Operand2="r64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="P4+" Ring="0" />
+    <Variant Opcode="23" Operand1="DRn" Operand2="r32" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="23" Operand1="DRn" Operand2="r64" Prefix0F="0F" FixedReg="r" Proc="03+" Ring="0" />
+    <Variant Opcode="23" Operand1="DRn" Operand2="r64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="03+" Ring="0" />
+    <Variant Opcode="23" Operand1="DRn" Operand2="r64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Proc="03+" Ring="0" />
+  </Opcode>
+  <Opcode Name="MOVAPD" Desc="Move Aligned Packed Double-FP Values">
+    <Variant Opcode="28" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="29" Operand1="xmm/m128" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVAPS" Desc="Move Aligned Packed Single-FP Values">
+    <Variant Opcode="28" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="29" Operand1="xmm/m128" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVBE" Desc="Move Data After Swapping Bytes">
+    <Variant Opcode="38 F0" Operand1="r16/32/64" Operand2="m16/32/64" Prefix0F="0F" FixedReg="r" Proc="C2++" />
+    <Variant Opcode="38 F1" Operand1="m16/32/64" Operand2="r16/32/64" Prefix0F="0F" FixedReg="r" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="MOVD" Desc="Move Doubleword">
+    <Variant Opcode="6E" Operand1="mm" Operand2="r/m32" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="6E" Operand1="mm" Operand2="r/m32" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="mmx" Proc="P4+" />
+    <Variant Opcode="6E" Operand1="xmm" Operand2="r/m32" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="6E" Operand1="xmm" Operand2="r/m32" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="sse2" Proc="P4+" />
+    <Variant Opcode="7E" Operand1="r/m32" Operand2="mm" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="7E" Operand1="r/m32" Operand2="mm" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="mmx" Proc="P4+" />
+    <Variant Opcode="7E" Operand1="r/m32" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="7E" Operand1="r/m32" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVQ" Desc="Move Doubleword/Quadword">
+    <Variant Opcode="6E" Operand1="mm" Operand2="r/m64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="mmx" Proc="P4+" />
+    <Variant Opcode="6E" Operand1="xmm" Operand2="r/m64" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="sse2" Proc="P4+" />
+    <Variant Opcode="7E" Operand1="r/m64" Operand2="mm" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="mmx" Proc="P4+" />
+    <Variant Opcode="7E" Operand1="r/m64" Operand2="r/m" Prefix="66" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="sse2" Proc="P4+" />
+    <Variant Opcode="6F" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="7E" Operand1="xmm" Operand2="xmm/m64" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="7F" Operand1="mm/m64" Operand2="mm" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D6" Operand1="xmm/m64" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVDDUP" Desc="Move One Double-FP and Duplicate">
+    <Variant Opcode="12" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="MOVDQ2Q" Desc="Move Quadword from XMM to MMX Technology Register">
+    <Variant Opcode="D6" Operand1="mm" Operand2="xmm" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVDQA" Desc="Move Aligned Double Quadword">
+    <Variant Opcode="6F" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="7F" Operand1="xmm/m128" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVDQU" Desc="Move Unaligned Double Quadword">
+    <Variant Opcode="6F" Operand1="xmm" Operand2="xmm/m128" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="7F" Operand1="xmm/m128" Operand2="xmm" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVHLPS" Desc="Move Packed Single-FP Values High to Low">
+    <Variant Opcode="12" Operand1="xmm" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVHPD" Desc="Move High Packed Double-FP Value">
+    <Variant Opcode="16" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="17" Operand1="m64" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVHPS" Desc="Move High Packed Single-FP Values">
+    <Variant Opcode="16" Operand1="xmm" Operand2="m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="17" Operand1="m64" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVLHPS" Desc="Move Packed Single-FP Values Low to High">
+    <Variant Opcode="16" Operand1="xmm" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVLPD" Desc="Move Low Packed Double-FP Value">
+    <Variant Opcode="12" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="13" Operand1="m64" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVLPS" Desc="Move Low Packed Single-FP Values">
+    <Variant Opcode="12" Operand1="xmm" Operand2="m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="13" Operand1="m64" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVMSKPD" Desc="Extract Packed Double-FP Sign Mask">
+    <Variant Opcode="50" Operand1="r32/64" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVMSKPS" Desc="Extract Packed Single-FP Sign Mask">
+    <Variant Opcode="50" Operand1="r32/64" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVNTDQ" Desc="Store Double Quadword Using Non-Temporal Hint">
+    <Variant Opcode="E7" Operand1="m128" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVNTDQA" Desc="Load Double Quadword Non-Temporal Aligned Hint">
+    <Variant Opcode="38 2A" Operand1="xmm" Operand2="m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="MOVNTI" Desc="Store Doubleword Using Non-Temporal Hint">
+    <Variant Opcode="C3" Operand1="m32/64" Operand2="r32/64" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVNTPD" Desc="Store Packed Double-FP Values Using Non-Temporal Hint">
+    <Variant Opcode="2B" Operand1="m128" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVNTPS" Desc="Store Packed Single-FP Values Using Non-Temporal Hint">
+    <Variant Opcode="2B" Operand1="m128" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVNTQ" Desc="Store of Quadword Using Non-Temporal Hint">
+    <Variant Opcode="E7" Operand1="m64" Operand2="mm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVQ2DQ" Desc="Move Quadword from MMX Technology to XMM Register">
+    <Variant Opcode="D6" Operand1="xmm" Operand2="mm" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVS" Desc="Move Data from String to String">
+    <Variant Opcode="A4" Operand1="m8" Operand2="m8" />
+    <Variant Opcode="A5" Operand1="m16" Operand2="m16" />
+    <Variant Opcode="A5" Operand1="m16/32" Operand2="m16/32" Proc="03+" />
+    <Variant Opcode="A5" Operand1="m16/32/64" Operand2="m16/32/64" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVSB" Desc="Move Data from String to String">
+    <Variant Opcode="A4" Operand1="m8" Operand2="m8" />
+  </Opcode>
+  <Opcode Name="MOVSW" Desc="Move Data from String to String">
+    <Variant Opcode="A5" Operand1="m16" Operand2="m16" />
+    <Variant Opcode="A5" Operand1="m16" Operand2="m16" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVSD" Desc="Move Data from String to String">
+    <Variant Opcode="A5" Operand1="m32" Operand2="m32" Proc="03+" />
+    <Variant Opcode="A5" Operand1="m32" Operand2="m32" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="10" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="11" Operand1="xmm/m64" Operand2="xmm" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVSQ" Desc="Move Data from String to String">
+    <Variant Opcode="A5" Operand1="m64" Operand2="m64" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVSHDUP" Desc="Move Packed Single-FP High and Duplicate">
+    <Variant Opcode="16" Operand1="xmm" Operand2="xmm/m64" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="MOVSLDUP" Desc="Move Packed Single-FP Low and Duplicate">
+    <Variant Opcode="12" Operand1="xmm" Operand2="xmm/m64" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse3" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="MOVSS" Desc="Move Scalar Single-FP Values">
+    <Variant Opcode="10" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="11" Operand1="xmm/m32" Operand2="xmm" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVSX" Desc="Move with Sign-Extension">
+    <Variant Opcode="BE" Operand1="r16/32/64" Operand2="r/m8" Prefix0F="0F" FixedReg="r" Proc="03+" />
+    <Variant Opcode="BF" Operand1="r16/32/64" Operand2="r/m16" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="MOVSXD" Desc="Move with Sign-Extension">
+    <Variant Opcode="63" Operand1="r32/64" Operand2="r/m32" FixedReg="r" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVUPD" Desc="Move Unaligned Packed Double-FP Value">
+    <Variant Opcode="10" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="11" Operand1="xmm/m128" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MOVUPS" Desc="Move Unaligned Packed Single-FP Values">
+    <Variant Opcode="10" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="11" Operand1="xmm/m128" Operand2="xmm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MOVZX" Desc="Move with Zero-Extend">
+    <Variant Opcode="B6" Operand1="r16/32/64" Operand2="r/m8" Prefix0F="0F" FixedReg="r" Proc="03+" />
+    <Variant Opcode="B7" Operand1="r16/32/64" Operand2="r/m16" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="MPSADBW" Desc="Compute Multiple Packed Sums of Absolute Difference">
+    <Variant Opcode="3A 42" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="MUL" Desc="Unsigned Multiply">
+    <Variant Opcode="F6" Operand1="AX" Operand2="AL" Operand3="r/m8" FixedReg="4" />
+    <Variant Opcode="F7" Operand1="rDX" Operand2="rAX" Operand3="r/m16/32/64" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="MULPD" Desc="Multiply Packed Double-FP Values">
+    <Variant Opcode="59" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MULPS" Desc="Multiply Packed Single-FP Values">
+    <Variant Opcode="59" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MULSD" Desc="Multiply Scalar Double-FP Values">
+    <Variant Opcode="59" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="MULSS" Desc="Multiply Scalar Single-FP Value">
+    <Variant Opcode="59" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="MWAIT" Desc="Monitor Wait">
+    <Variant Opcode="01 C9" Operand1="EAX" Operand2="ECX" Prefix0F="0F" FixedReg="1" Group="sse3" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="NEG" Desc="Two's Complement Negation">
+    <Variant Opcode="F6" Operand1="r/m8" FixedReg="3" />
+    <Variant Opcode="F7" Operand1="r/m16/32/64" FixedReg="3" />
+  </Opcode>
+  <Opcode Name="NOP" Desc="No Operation">
+    <Variant Opcode="90" />
+    <Variant Opcode="0D" Operand1="r/m16/32" Prefix0F="0F" Proc="PP+" />
+    <Variant Opcode="1F" Operand1="r/m16/32" Prefix0F="0F" FixedReg="0" Proc="P4++" />
+  </Opcode>
+  <Opcode Name="NOT" Desc="One's Complement Negation">
+    <Variant Opcode="F6" Operand1="r/m8" FixedReg="2" />
+    <Variant Opcode="F7" Operand1="r/m16/32/64" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="OR" Desc="Logical Inclusive OR">
+    <Variant Opcode="08" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="09" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="0A" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="0B" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="0C" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="0D" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="1" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="1" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="1" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="1" Lock="Lock" Proc="03+" />
+  </Opcode>
+  <Opcode Name="ORPD" Desc="Bitwise Logical OR of Double-FP Values">
+    <Variant Opcode="56" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="ORPS" Desc="Bitwise Logical OR of Single-FP Values">
+    <Variant Opcode="56" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="OUT" Desc="Output to Port">
+    <Variant Opcode="E6" Operand1="imm8" Operand2="AL" Ring="f1" />
+    <Variant Opcode="E7" Operand1="imm8" Operand2="eAX" Ring="f1" />
+    <Variant Opcode="EE" Operand1="DX" Operand2="AL" Ring="f1" />
+    <Variant Opcode="EF" Operand1="DX" Operand2="eAX" Ring="f1" />
+  </Opcode>
+  <Opcode Name="OUTS" Desc="Output String to Port">
+    <Variant Opcode="6E" Operand1="DX" Operand2="m8" Proc="01+" Ring="f1" />
+    <Variant Opcode="6F" Operand1="DX" Operand2="m16" Proc="01+" Ring="f1" />
+    <Variant Opcode="6F" Operand1="DX" Operand2="m16/32" Proc="03+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="OUTSB" Desc="Output String to Port">
+    <Variant Opcode="6E" Operand1="DX" Operand2="m8" Proc="01+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="OUTSW" Desc="Output String to Port">
+    <Variant Opcode="6F" Operand1="DX" Operand2="m16" Proc="01+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="OUTSD" Desc="Output String to Port">
+    <Variant Opcode="6F" Operand1="DX" Operand2="m32" Proc="03+" Ring="f1" />
+  </Opcode>
+  <Opcode Name="PABSB" Desc="Packed Absolute Value">
+    <Variant Opcode="38 1C" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 1C" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PABSD" Desc="Packed Absolute Value">
+    <Variant Opcode="38 1E" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 1E" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PABSW" Desc="Packed Absolute Value">
+    <Variant Opcode="38 1D" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 1D" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PACKSSDW" Desc="Pack with Signed Saturation">
+    <Variant Opcode="6B" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="6B" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PACKSSWB" Desc="Pack with Signed Saturation">
+    <Variant Opcode="63" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="63" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PACKUSDW" Desc="Pack with Unsigned Saturation">
+    <Variant Opcode="38 2B" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PACKUSWB" Desc="Pack with Unsigned Saturation">
+    <Variant Opcode="67" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="67" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDB" Desc="Add Packed Integers">
+    <Variant Opcode="FC" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="FC" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDD" Desc="Add Packed Integers">
+    <Variant Opcode="FE" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="FE" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDQ" Desc="Add Packed Quadword Integers">
+    <Variant Opcode="D4" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="PX+" />
+    <Variant Opcode="D4" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDSB" Desc="Add Packed Signed Integers with Signed Saturation">
+    <Variant Opcode="EC" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="EC" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDSW" Desc="Add Packed Signed Integers with Signed Saturation">
+    <Variant Opcode="ED" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="ED" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDUSB" Desc="Add Packed Unsigned Integers with Unsigned Saturation">
+    <Variant Opcode="DC" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="DC" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDUSW" Desc="Add Packed Unsigned Integers with Unsigned Saturation">
+    <Variant Opcode="DD" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="DD" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PADDW" Desc="Add Packed Integers">
+    <Variant Opcode="FD" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="FD" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PALIGNR" Desc="Packed Align Right">
+    <Variant Opcode="3A 0F" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="3A 0F" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PAND" Desc="Logical AND">
+    <Variant Opcode="DB" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="DB" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PANDN" Desc="Logical AND NOT">
+    <Variant Opcode="DF" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="DF" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PAUSE" Desc="Spin Loop Hint">
+    <Variant Opcode="90" Prefix="F3" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PAVGB" Desc="Average Packed Integers">
+    <Variant Opcode="E0" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="E0" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PAVGW" Desc="Average Packed Integers">
+    <Variant Opcode="E3" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="E3" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PBLENDVB" Desc="Variable Blend Packed Bytes">
+    <Variant Opcode="38 10" Operand1="xmm" Operand2="xmm/m128" Operand3="XMM0" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PBLENDW" Desc="Blend Packed Words">
+    <Variant Opcode="3A 0E" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PCMPEQB" Desc="Compare Packed Data for Equal">
+    <Variant Opcode="74" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="74" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PCMPEQD" Desc="Compare Packed Data for Equal">
+    <Variant Opcode="76" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="76" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PCMPEQQ" Desc="Compare Packed Qword Data for Equal">
+    <Variant Opcode="38 29" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PCMPEQW" Desc="Compare Packed Data for Equal">
+    <Variant Opcode="75" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="75" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PCMPESTRI" Desc="Packed Compare Explicit Length Strings, Return Index">
+    <Variant Opcode="3A 61" Operand1="rCX" Operand2="xmm" Operand3="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PCMPESTRM" Desc="Packed Compare Explicit Length Strings, Return Mask">
+    <Variant Opcode="3A 60" Operand1="XMM0" Operand2="xmm" Operand3="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PCMPGTB" Desc="Compare Packed Signed Integers for Greater Than">
+    <Variant Opcode="64" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="64" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PCMPGTD" Desc="Compare Packed Signed Integers for Greater Than">
+    <Variant Opcode="66" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="66" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PCMPGTQ" Desc="Compare Packed Qword Data for Greater Than">
+    <Variant Opcode="38 37" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PCMPGTW" Desc="Compare Packed Signed Integers for Greater Than">
+    <Variant Opcode="65" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="65" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PCMPISTRI" Desc="Packed Compare Implicit Length Strings, Return Index">
+    <Variant Opcode="3A 63" Operand1="rCX" Operand2="xmm" Operand3="xmm/m128" Operand4="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PCMPISTRM" Desc="Packed Compare Implicit Length Strings, Return Mask">
+    <Variant Opcode="3A 62" Operand1="XMM0" Operand2="xmm" Operand3="xmm/m128" Operand4="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse42" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PEXTRB" Desc="Extract Byte">
+    <Variant Opcode="3A 14" Operand1="m8" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="3A 14" Operand1="r32/64" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PEXTRD" Desc="Extract Dword/Qword">
+    <Variant Opcode="3A 16" Operand1="r/m32" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PEXTRQ" Desc="Extract Dword/Qword">
+    <Variant Opcode="3A 16" Operand1="r/m64" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PEXTRW" Desc="Extract Word">
+    <Variant Opcode="3A 15" Operand1="m16" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="3A 15" Operand1="r32/64" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="C5" Operand1="r32/64" Operand2="mm" Operand3="imm8" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="C5" Operand1="r32/64" Operand2="xmm" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PHADDD" Desc="Packed Horizontal Add">
+    <Variant Opcode="38 02" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 02" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PHADDSW" Desc="Packed Horizontal Add and Saturate">
+    <Variant Opcode="38 03" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 03" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PHADDW" Desc="Packed Horizontal Add">
+    <Variant Opcode="38 01" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 01" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PHMINPOSUW" Desc="Packed Horizontal Word Minimum">
+    <Variant Opcode="38 41" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PHSUBD" Desc="Packed Horizontal Subtract">
+    <Variant Opcode="38 06" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 06" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PHSUBSW" Desc="Packed Horizontal Subtract and Saturate">
+    <Variant Opcode="38 07" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 07" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PHSUBW" Desc="Packed Horizontal Subtract">
+    <Variant Opcode="38 05" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 05" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PINSRB" Desc="Insert Byte">
+    <Variant Opcode="3A 20" Operand1="xmm" Operand2="m8" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="3A 20" Operand1="xmm" Operand2="r32/64" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PINSRD" Desc="Insert Dword/Qword">
+    <Variant Opcode="3A 22" Operand1="xmm" Operand2="r/m32" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PINSRQ" Desc="Insert Dword/Qword">
+    <Variant Opcode="3A 22" Operand1="xmm" Operand2="r/m64" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PINSRW" Desc="Insert Word">
+    <Variant Opcode="C4" Operand1="mm" Operand2="r32/64" Operand3="imm8" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="C4" Operand1="mm" Operand2="m16" Operand3="imm8" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="C4" Operand1="xmm" Operand2="r32/64" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="C4" Operand1="xmm" Operand2="m16" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMADDUBSW" Desc="Multiply and Add Packed Signed and Unsigned Bytes">
+    <Variant Opcode="38 04" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 04" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PMADDWD" Desc="Multiply and Add Packed Integers">
+    <Variant Opcode="F5" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="F5" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PMAXSB" Desc="Maximum of Packed Signed Byte Integers">
+    <Variant Opcode="38 3C" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMAXSD" Desc="Maximum of Packed Signed Dword Integers">
+    <Variant Opcode="38 3D" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMAXSW" Desc="Maximum of Packed Signed Word Integers">
+    <Variant Opcode="EE" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="EE" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMAXUB" Desc="Maximum of Packed Unsigned Byte Integers">
+    <Variant Opcode="DE" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="DE" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMAXUD" Desc="Maximum of Packed Unsigned Dword Integers">
+    <Variant Opcode="38 3F" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMAXUW" Desc="Maximum of Packed Unsigned Word Integers">
+    <Variant Opcode="38 3E" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMINSB" Desc="Minimum of Packed Signed Byte Integers">
+    <Variant Opcode="38 38" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMINSD" Desc="Minimum of Packed Signed Dword Integers">
+    <Variant Opcode="38 39" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMINSW" Desc="Minimum of Packed Signed Word Integers">
+    <Variant Opcode="EA" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="EA" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMINUB" Desc="Minimum of Packed Unsigned Byte Integers">
+    <Variant Opcode="DA" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="DA" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMINUD" Desc="Minimum of Packed Unsigned Dword Integers">
+    <Variant Opcode="38 3B" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMINUW" Desc="Minimum of Packed Unsigned Word Integers">
+    <Variant Opcode="38 3A" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVMSKB" Desc="Move Byte Mask">
+    <Variant Opcode="D7" Operand1="r32/64" Operand2="mm" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="D7" Operand1="r32/64" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMOVSXBD" Desc="Packed Move with Sign Extend">
+    <Variant Opcode="38 21" Operand1="xmm" Operand2="m32" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 21" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVSXBQ" Desc="Packed Move with Sign Extend">
+    <Variant Opcode="38 22" Operand1="xmm" Operand2="m16" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 22" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVSXBW" Desc="Packed Move with Sign Extend">
+    <Variant Opcode="38 20" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 20" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVSXDQ" Desc="Packed Move with Sign Extend">
+    <Variant Opcode="38 25" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 25" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVSXWD" Desc="Packed Move with Sign Extend">
+    <Variant Opcode="38 23" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 23" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVSXWQ" Desc="Packed Move with Sign Extend">
+    <Variant Opcode="38 24" Operand1="xmm" Operand2="m32" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 24" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVZXBD" Desc="Packed Move with Zero Extend">
+    <Variant Opcode="38 31" Operand1="xmm" Operand2="m32" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 31" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVZXBQ" Desc="Packed Move with Zero Extend">
+    <Variant Opcode="38 32" Operand1="xmm" Operand2="m16" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 32" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVZXBW" Desc="Packed Move with Zero Extend">
+    <Variant Opcode="38 30" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 30" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVZXDQ" Desc="Packed Move with Zero Extend">
+    <Variant Opcode="38 35" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 35" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVZXWD" Desc="Packed Move with Zero Extend">
+    <Variant Opcode="38 33" Operand1="xmm" Operand2="m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 33" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMOVZXWQ" Desc="Packed Move with Zero Extend">
+    <Variant Opcode="38 34" Operand1="xmm" Operand2="m32" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+    <Variant Opcode="38 34" Operand1="xmm" Operand2="xmm" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMULDQ" Desc="Multiply Packed Signed Dword Integers">
+    <Variant Opcode="38 28" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMULHRSW" Desc="Packed Multiply High with Round and Scale">
+    <Variant Opcode="38 0B" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 0B" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PMULHUW" Desc="Multiply Packed Unsigned Integers and Store High Result">
+    <Variant Opcode="E4" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="E4" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PMULHW" Desc="Multiply Packed Signed Integers and Store High Result">
+    <Variant Opcode="E5" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="E5" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PMULLD" Desc="Multiply Packed Signed Dword Integers and Store Low Result">
+    <Variant Opcode="38 40" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PMULLW" Desc="Multiply Packed Signed Integers and Store Low Result">
+    <Variant Opcode="D5" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D5" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PMULUDQ" Desc="Multiply Packed Unsigned DW Integers">
+    <Variant Opcode="F4" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="F4" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="POP" Desc="Pop a Value from the Stack">
+    <Variant Opcode="07" Operand1="ES" />
+    <Variant Opcode="17" Operand1="SS" />
+    <Variant Opcode="1F" Operand1="DS" />
+    <Variant Opcode="58" Operand1="r16/32" Add="01" />
+    <Variant Opcode="58" Operand1="r64/16" Add="01" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="8F" Operand1="r/m16/32" FixedReg="0" />
+    <Variant Opcode="8F" Operand1="r/m64/16" FixedReg="0" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="A1" Operand1="FS" Prefix0F="0F" Proc="03+" />
+    <Variant Opcode="A9" Operand1="GS" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="POPA" Desc="Pop All General-Purpose Registers">
+    <Variant Opcode="61" Operand1="DI" Operand2="SI" Operand3="BP" Proc="01+" />
+  </Opcode>
+  <Opcode Name="POPAD" Desc="Pop All General-Purpose Registers">
+    <Variant Opcode="61" Operand1="EDI" Operand2="ESI" Operand3="EBP" Proc="03+" />
+  </Opcode>
+  <Opcode Name="POPCNT" Desc="Bit Population Count">
+    <Variant Opcode="B8" Operand1="r16/32/64" Operand2="r/m16/32/64" Prefix="F3" Prefix0F="0F" FixedReg="r" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="POPF" Desc="Pop Stack into FLAGS Register">
+    <Variant Opcode="9D" Operand1="Flags" />
+    <Variant Opcode="9D" Operand1="Flags" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="POPFQ" Desc="Pop Stack into rFLAGS Register">
+    <Variant Opcode="9D" Operand1="RFlags" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="POPFD" Desc="Pop Stack into eFLAGS Register">
+    <Variant Opcode="9D" Operand1="EFlags" Proc="03+" />
+  </Opcode>
+  <Opcode Name="POR" Desc="Bitwise Logical OR">
+    <Variant Opcode="EB" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="EB" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PREFETCHNTA" Desc="Prefetch Data Into Caches">
+    <Variant Opcode="18" Operand1="m8" Prefix0F="0F" FixedReg="0" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PREFETCHT0" Desc="Prefetch Data Into Caches">
+    <Variant Opcode="18" Operand1="m8" Prefix0F="0F" FixedReg="1" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PREFETCHT1" Desc="Prefetch Data Into Caches">
+    <Variant Opcode="18" Operand1="m8" Prefix0F="0F" FixedReg="2" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PREFETCHT2" Desc="Prefetch Data Into Caches">
+    <Variant Opcode="18" Operand1="m8" Prefix0F="0F" FixedReg="3" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PSADBW" Desc="Compute Sum of Absolute Differences">
+    <Variant Opcode="F6" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+    <Variant Opcode="F6" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PSHUFB" Desc="Packed Shuffle Bytes">
+    <Variant Opcode="38 00" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 00" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PSHUFD" Desc="Shuffle Packed Doublewords">
+    <Variant Opcode="70" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSHUFHW" Desc="Shuffle Packed High Words">
+    <Variant Opcode="70" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSHUFLW" Desc="Shuffle Packed Low Words">
+    <Variant Opcode="70" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSHUFW" Desc="Shuffle Packed Words">
+    <Variant Opcode="70" Operand1="mm" Operand2="mm/m64" Operand3="imm8" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="PSIGNB" Desc="Packed SIGN">
+    <Variant Opcode="38 08" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 08" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PSIGND" Desc="Packed SIGN">
+    <Variant Opcode="38 0A" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 0A" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PSIGNW" Desc="Packed SIGN">
+    <Variant Opcode="38 09" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+    <Variant Opcode="38 09" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="ssse3" Proc="C2+" />
+  </Opcode>
+  <Opcode Name="PSLLD" Desc="Shift Packed Data Left Logical">
+    <Variant Opcode="72" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="6" Group="mmx" Proc="PX+" />
+    <Variant Opcode="72" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="6" Group="sse2" Proc="P4+" />
+    <Variant Opcode="F2" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="F2" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSLLDQ" Desc="Shift Double Quadword Left Logical">
+    <Variant Opcode="73" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="7" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSLLQ" Desc="Shift Packed Data Left Logical">
+    <Variant Opcode="73" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="6" Group="mmx" Proc="PX+" />
+    <Variant Opcode="73" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="6" Group="sse2" Proc="P4+" />
+    <Variant Opcode="F3" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="F3" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSLLW" Desc="Shift Packed Data Left Logical">
+    <Variant Opcode="71" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="6" Group="mmx" Proc="PX+" />
+    <Variant Opcode="71" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="6" Group="sse2" Proc="P4+" />
+    <Variant Opcode="F1" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="F1" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSRAD" Desc="Shift Packed Data Right Arithmetic">
+    <Variant Opcode="72" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="4" Group="mmx" Proc="PX+" />
+    <Variant Opcode="72" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="4" Group="sse2" Proc="P4+" />
+    <Variant Opcode="E2" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="E2" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSRAW" Desc="Shift Packed Data Right Arithmetic">
+    <Variant Opcode="71" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="4" Group="mmx" Proc="PX+" />
+    <Variant Opcode="71" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="4" Group="sse2" Proc="P4+" />
+    <Variant Opcode="E1" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="E1" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSRLD" Desc="Shift Double Quadword Right Logical">
+    <Variant Opcode="72" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="2" Group="mmx" Proc="PX+" />
+    <Variant Opcode="72" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="2" Group="sse2" Proc="P4+" />
+    <Variant Opcode="D2" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D2" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSRLDQ" Desc="Shift Double Quadword Right Logical">
+    <Variant Opcode="73" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="3" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSRLQ" Desc="Shift Packed Data Right Logical">
+    <Variant Opcode="73" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="2" Group="mmx" Proc="PX+" />
+    <Variant Opcode="73" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="2" Group="sse2" Proc="P4+" />
+    <Variant Opcode="D3" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D3" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSRLW" Desc="Shift Packed Data Right Logical">
+    <Variant Opcode="71" Operand1="mm" Operand2="imm8" Prefix0F="0F" FixedReg="2" Group="mmx" Proc="PX+" />
+    <Variant Opcode="71" Operand1="xmm" Operand2="imm8" Prefix="66" Prefix0F="0F" FixedReg="2" Group="sse2" Proc="P4+" />
+    <Variant Opcode="D1" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D1" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBB" Desc="Subtract Packed Integers">
+    <Variant Opcode="F8" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="F8" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBD" Desc="Subtract Packed Integers">
+    <Variant Opcode="FA" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="FA" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBQ" Desc="Subtract Packed Quadword Integers">
+    <Variant Opcode="FB" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+    <Variant Opcode="FB" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBSB" Desc="Subtract Packed Signed Integers with Signed Saturation">
+    <Variant Opcode="E8" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="E8" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBSW" Desc="Subtract Packed Signed Integers with Signed Saturation">
+    <Variant Opcode="E9" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="E9" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBUSB" Desc="Subtract Packed Unsigned Integers with Unsigned Saturation">
+    <Variant Opcode="D8" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D8" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PSUBUSW" Desc="Subtract Packed Unsigned Integers with Unsigned Saturation">
+    <Variant Opcode="D9" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="D9" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="PX+" />
+  </Opcode>
+  <Opcode Name="PSUBW" Desc="Subtract Packed Integers">
+    <Variant Opcode="F9" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="F9" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PTEST" Desc="Logical Compare">
+    <Variant Opcode="38 17" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="PUNPCKHBW" Desc="Unpack High Data">
+    <Variant Opcode="68" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="68" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKHDQ" Desc="Unpack High Data">
+    <Variant Opcode="6A" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="6A" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKHQDQ" Desc="Unpack High Data">
+    <Variant Opcode="6D" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKHWD" Desc="Unpack High Data">
+    <Variant Opcode="69" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="69" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKLBW" Desc="Unpack Low Data">
+    <Variant Opcode="60" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="60" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKLDQ" Desc="Unpack Low Data">
+    <Variant Opcode="62" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="62" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKLQDQ" Desc="Unpack Low Data">
+    <Variant Opcode="6C" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUNPCKLWD" Desc="Unpack Low Data">
+    <Variant Opcode="61" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="61" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUSH" Desc="Push Word, Doubleword or Quadword Onto the Stack">
+    <Variant Opcode="06" Operand1="ES" />
+    <Variant Opcode="0E" Operand1="CS" />
+    <Variant Opcode="16" Operand1="SS" />
+    <Variant Opcode="1E" Operand1="DS" />
+    <Variant Opcode="50" Operand1="r16/32" Add="01" />
+    <Variant Opcode="50" Operand1="r64/16" Add="01" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="68" Operand1="imm16/32" Proc="01+" />
+    <Variant Opcode="6A" Operand1="imm8" Proc="01+" />
+    <Variant Opcode="FF" Operand1="r/m16/32" FixedReg="6" />
+    <Variant Opcode="FF" Operand1="r/m64/16" FixedReg="6" Mode="64-bit" Proc="P4+" />
+    <Variant Opcode="A0" Operand1="FS" Prefix0F="0F" Proc="03+" />
+    <Variant Opcode="A8" Operand1="GS" Prefix0F="0F" Proc="03+" />
+  </Opcode>
+  <Opcode Name="PUSHA" Desc="Push All General-Purpose Registers">
+    <Variant Opcode="60" Operand1="AX" Operand2="CX" Operand3="DX" Proc="01+" />
+  </Opcode>
+  <Opcode Name="PUSHAD" Desc="Push All General-Purpose Registers">
+    <Variant Opcode="60" Operand1="EAX" Operand2="ECX" Operand3="EDX" Proc="03+" />
+  </Opcode>
+  <Opcode Name="PUSHF" Desc="Push FLAGS Register onto the Stack">
+    <Variant Opcode="9C" Operand1="Flags" />
+    <Variant Opcode="9C" Operand1="Flags" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUSHFQ" Desc="Push rFLAGS Register onto the Stack">
+    <Variant Opcode="9C" Operand1="RFlags" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="PUSHFD" Desc="Push eFLAGS Register onto the Stack">
+    <Variant Opcode="9C" Operand1="EFlags" Proc="03+" />
+  </Opcode>
+  <Opcode Name="PXOR" Desc="Logical Exclusive OR">
+    <Variant Opcode="EF" Operand1="mm" Operand2="mm/m64" Prefix0F="0F" FixedReg="r" Group="mmx" Proc="PX+" />
+    <Variant Opcode="EF" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="RCL" Desc="Rotate">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="2" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="2" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="2" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="2" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="2" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="2" />
+  </Opcode>
+  <Opcode Name="RCPPS" Desc="Compute Reciprocals of Packed Single-FP Values">
+    <Variant Opcode="53" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="RCPSS" Desc="Compute Reciprocal of Scalar Single-FP Values">
+    <Variant Opcode="53" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="RCR" Desc="Rotate">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="3" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="3" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="3" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="3" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="3" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="3" />
+  </Opcode>
+  <Opcode Name="RDMSR" Desc="Read from Model Specific Register">
+    <Variant Opcode="32" Operand1="rAX" Operand2="rDX" Operand3="rCX" Operand4="MSR" Prefix0F="0F" Proc="P1+" Ring="0" />
+  </Opcode>
+  <Opcode Name="RDPMC" Desc="Read Performance-Monitoring Counters">
+    <Variant Opcode="33" Operand1="EAX" Operand2="EDX" Operand3="PMC" Prefix0F="0F" Proc="PX+" Ring="f3" />
+  </Opcode>
+  <Opcode Name="RDTSC" Desc="Read Time-Stamp Counter">
+    <Variant Opcode="31" Operand1="EAX" Operand2="EDX" Prefix0F="0F" Proc="P1+" Ring="f2" />
+  </Opcode>
+  <Opcode Name="RDTSCP" Desc="Read Time-Stamp Counter and Processor ID">
+    <Variant Opcode="01 F9" Operand1="EAX" Operand2="EDX" Operand3="ECX" Prefix0F="0F" FixedReg="7" Proc="C7+" Ring="f2" />
+  </Opcode>
+  <Opcode Name="RETF" Desc="Return from procedure">
+    <Variant Opcode="CA" Operand1="imm16" Ring="f" />
+    <Variant Opcode="CB" Ring="f" />
+  </Opcode>
+  <Opcode Name="RETN" Desc="Return from procedure">
+    <Variant Opcode="C2" Operand1="imm16" />
+    <Variant Opcode="C3" />
+  </Opcode>
+  <Opcode Name="ROL" Desc="Rotate">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="0" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="0" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="0" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="0" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="0" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="0" />
+  </Opcode>
+  <Opcode Name="ROR" Desc="Rotate">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="1" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="1" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="1" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="1" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="1" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="1" />
+  </Opcode>
+  <Opcode Name="ROUNDPD" Desc="Round Packed Double-FP Values">
+    <Variant Opcode="3A 09" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="ROUNDPS" Desc="Round Packed Single-FP Values">
+    <Variant Opcode="3A 08" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="ROUNDSD" Desc="Round Scalar Double-FP Values">
+    <Variant Opcode="3A 0B" Operand1="xmm" Operand2="xmm/m64" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="ROUNDSS" Desc="Round Scalar Single-FP Values">
+    <Variant Opcode="3A 0A" Operand1="xmm" Operand2="xmm/m32" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse41" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="RSM" Desc="Resume from System Management Mode">
+    <Variant Opcode="AA" Operand1="Flags" Prefix0F="0F" Mode="SMM" Proc="03++" />
+  </Opcode>
+  <Opcode Name="RSQRTPS" Desc="Compute Recipr. of Square Roots of Packed Single-FP Values">
+    <Variant Opcode="52" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="RSQRTSS" Desc="Compute Recipr. of Square Root of Scalar Single-FP Value">
+    <Variant Opcode="52" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="SAHF" Desc="Store AH into Flags">
+    <Variant Opcode="9E" Operand1="AH" />
+  </Opcode>
+  <Opcode Name="SAL" Desc="Shift">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="6" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="6" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="6" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="6" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="6" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="6" />
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="4" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="4" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="4" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="4" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="4" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="SHL" Desc="Shift">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="6" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="6" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="6" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="6" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="6" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="6" />
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="4" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="4" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="4" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="4" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="4" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="4" />
+  </Opcode>
+  <Opcode Name="SALC" Desc="Set AL If Carry">
+    <Variant Opcode="D6" Operand1="AL" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SETALC" Desc="Set AL If Carry">
+    <Variant Opcode="D6" Operand1="AL" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SAR" Desc="Shift">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="7" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="7" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="7" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="7" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="7" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="7" />
+  </Opcode>
+  <Opcode Name="SBB" Desc="Integer Subtraction with Borrow">
+    <Variant Opcode="18" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="19" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="1A" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="1B" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="1C" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="1D" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="3" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="3" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="3" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="3" Lock="Lock" />
+  </Opcode>
+  <Opcode Name="SCAS" Desc="Scan String">
+    <Variant Opcode="AE" Operand1="m8" Operand2="AL" />
+    <Variant Opcode="AF" Operand1="m16" Operand2="AX" />
+    <Variant Opcode="AF" Operand1="m16/32" Operand2="eAX" Proc="03+" />
+    <Variant Opcode="AF" Operand1="m16/32/64" Operand2="rAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SCASB" Desc="Scan String">
+    <Variant Opcode="AE" Operand1="m8" Operand2="AL" />
+  </Opcode>
+  <Opcode Name="SCASW" Desc="Scan String">
+    <Variant Opcode="AF" Operand1="m16" Operand2="AX" />
+    <Variant Opcode="AF" Operand1="m16" Operand2="AX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SCASD" Desc="Scan String">
+    <Variant Opcode="AF" Operand1="m32" Operand2="EAX" Proc="03+" />
+    <Variant Opcode="AF" Operand1="m32" Operand2="EAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SCASQ" Desc="Scan String">
+    <Variant Opcode="AF" Operand1="m64" Operand2="RAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SETB" Desc="Set Byte on Condition - below/not above or equal/carry (CF=1)">
+    <Variant Opcode="92" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNAE" Desc="Set Byte on Condition - below/not above or equal/carry (CF=1)">
+    <Variant Opcode="92" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETC" Desc="Set Byte on Condition - below/not above or equal/carry (CF=1)">
+    <Variant Opcode="92" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETBE" Desc="Set Byte on Condition - below or equal/not above (CF=1 AND ZF=1)">
+    <Variant Opcode="96" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNA" Desc="Set Byte on Condition - below or equal/not above (CF=1 AND ZF=1)">
+    <Variant Opcode="96" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETL" Desc="Set Byte on Condition - less/not greater (SF!=OF)">
+    <Variant Opcode="9C" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNGE" Desc="Set Byte on Condition - less/not greater (SF!=OF)">
+    <Variant Opcode="9C" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETLE" Desc="Set Byte on Condition - less or equal/not greater ((ZF=1) OR (SF!=OF))">
+    <Variant Opcode="9E" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNG" Desc="Set Byte on Condition - less or equal/not greater ((ZF=1) OR (SF!=OF))">
+    <Variant Opcode="9E" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNB" Desc="Set Byte on Condition - not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="93" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETAE" Desc="Set Byte on Condition - not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="93" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNC" Desc="Set Byte on Condition - not below/above or equal/not carry (CF=0)">
+    <Variant Opcode="93" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNBE" Desc="Set Byte on Condition - not below or equal/above (CF=0 AND ZF=0)">
+    <Variant Opcode="97" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETA" Desc="Set Byte on Condition - not below or equal/above (CF=0 AND ZF=0)">
+    <Variant Opcode="97" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNL" Desc="Set Byte on Condition - not less/greater or equal (SF=OF)">
+    <Variant Opcode="9D" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETGE" Desc="Set Byte on Condition - not less/greater or equal (SF=OF)">
+    <Variant Opcode="9D" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNLE" Desc="Set Byte on Condition - not less nor equal/greater ((ZF=0) AND (SF=OF))">
+    <Variant Opcode="9F" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETG" Desc="Set Byte on Condition - not less nor equal/greater ((ZF=0) AND (SF=OF))">
+    <Variant Opcode="9F" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNO" Desc="Set Byte on Condition - not overflow (OF=0)">
+    <Variant Opcode="91" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNP" Desc="Set Byte on Condition - not parity/parity odd">
+    <Variant Opcode="9B" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETPO" Desc="Set Byte on Condition - not parity/parity odd">
+    <Variant Opcode="9B" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNS" Desc="Set Byte on Condition - not sign (SF=0)">
+    <Variant Opcode="99" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNZ" Desc="Set Byte on Condition - not zero/not equal (ZF=1)">
+    <Variant Opcode="95" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETNE" Desc="Set Byte on Condition - not zero/not equal (ZF=1)">
+    <Variant Opcode="95" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETO" Desc="Set Byte on Condition - overflow (OF=1)">
+    <Variant Opcode="90" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETP" Desc="Set Byte on Condition - parity/parity even (PF=1)">
+    <Variant Opcode="9A" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETPE" Desc="Set Byte on Condition - parity/parity even (PF=1)">
+    <Variant Opcode="9A" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETS" Desc="Set Byte on Condition - sign (SF=1)">
+    <Variant Opcode="98" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETZ" Desc="Set Byte on Condition - zero/equal (ZF=0)">
+    <Variant Opcode="94" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SETE" Desc="Set Byte on Condition - zero/equal (ZF=0)">
+    <Variant Opcode="94" Operand1="r/m8" Prefix0F="0F" FixedReg="0" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SFENCE" Desc="Store Fence">
+    <Variant Opcode="AE" Prefix0F="0F" FixedReg="7" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="SGDT" Desc="Store Global Descriptor Table Register">
+    <Variant Opcode="01" Operand1="m" Operand2="GDTR" Prefix0F="0F" FixedReg="0" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SHLD" Desc="Double Precision Shift Left">
+    <Variant Opcode="A4" Operand1="r/m16/32/64" Operand2="r16/32/64" Operand3="imm8" Prefix0F="0F" FixedReg="r" Proc="03+" />
+    <Variant Opcode="A5" Operand1="r/m16/32/64" Operand2="r16/32/64" Operand3="CL" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SHR" Desc="Shift">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="imm8" FixedReg="5" Proc="01+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="5" Proc="01+" />
+    <Variant Opcode="D0" Operand1="r/m8" Operand2="1" FixedReg="5" />
+    <Variant Opcode="D1" Operand1="r/m16/32/64" Operand2="1" FixedReg="5" />
+    <Variant Opcode="D2" Operand1="r/m8" Operand2="CL" FixedReg="5" />
+    <Variant Opcode="D3" Operand1="r/m16/32/64" Operand2="CL" FixedReg="5" />
+  </Opcode>
+  <Opcode Name="SHRD" Desc="Double Precision Shift Right">
+    <Variant Opcode="AC" Operand1="r/m16/32/64" Operand2="r16/32/64" Operand3="imm8" Prefix0F="0F" FixedReg="r" Proc="03+" />
+    <Variant Opcode="AD" Operand1="r/m16/32/64" Operand2="r16/32/64" Operand3="CL" Prefix0F="0F" FixedReg="r" Proc="03+" />
+  </Opcode>
+  <Opcode Name="SHUFPD" Desc="Shuffle Packed Double-FP Values">
+    <Variant Opcode="C6" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SHUFPS" Desc="Shuffle Packed Single-FP Values">
+    <Variant Opcode="C6" Operand1="xmm" Operand2="xmm/m128" Operand3="imm8" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="SIDT" Desc="Store Interrupt Descriptor Table Register">
+    <Variant Opcode="01" Operand1="m" Operand2="IDTR" Prefix0F="0F" FixedReg="1" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SLDT" Desc="Store Local Descriptor Table Register">
+    <Variant Opcode="00" Operand1="m16" Operand2="LDTR" Prefix0F="0F" FixedReg="0" Mode="Protect_64bit" Proc="02+" />
+    <Variant Opcode="00" Operand1="r16/32/64" Operand2="LDTR" Prefix0F="0F" FixedReg="0" Mode="Protect_64bit" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SMSW" Desc="Store Machine Status Word">
+    <Variant Opcode="01" Operand1="m16" Operand2="MSW" Prefix0F="0F" FixedReg="4" Proc="02+" />
+    <Variant Opcode="01" Operand1="r16/32/64" Operand2="MSW" Prefix0F="0F" FixedReg="4" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SQRTPD" Desc="Compute Square Roots of Packed Double-FP Values">
+    <Variant Opcode="51" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SQRTPS" Desc="Compute Square Roots of Packed Single-FP Values">
+    <Variant Opcode="51" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="SQRTSD" Desc="Compute Square Root of Scalar Double-FP Value">
+    <Variant Opcode="51" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SQRTSS" Desc="Compute Square Root of Scalar Single-FP Value">
+    <Variant Opcode="51" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="STC" Desc="Set Carry Flag">
+    <Variant Opcode="F9" />
+  </Opcode>
+  <Opcode Name="STD" Desc="Set Direction Flag">
+    <Variant Opcode="FD" />
+  </Opcode>
+  <Opcode Name="STI" Desc="Set Interrupt Flag">
+    <Variant Opcode="FB" Ring="f1" />
+  </Opcode>
+  <Opcode Name="STMXCSR" Desc="Store MXCSR Register State">
+    <Variant Opcode="AE" Operand1="m32" Prefix0F="0F" FixedReg="3" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="STOS" Desc="Store String">
+    <Variant Opcode="AA" Operand1="m8" Operand2="AL" />
+    <Variant Opcode="AB" Operand1="m16" Operand2="AX" />
+    <Variant Opcode="AB" Operand1="m16/32" Operand2="eAX" Proc="03+" />
+    <Variant Opcode="AB" Operand1="m16/32/64" Operand2="rAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="STOSB" Desc="Store String">
+    <Variant Opcode="AA" Operand1="m8" Operand2="AL" />
+  </Opcode>
+  <Opcode Name="STOSW" Desc="Store String">
+    <Variant Opcode="AB" Operand1="m16" Operand2="AX" />
+    <Variant Opcode="AB" Operand1="m16" Operand2="AX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="STOSD" Desc="Store String">
+    <Variant Opcode="AB" Operand1="m32" Operand2="EAX" Proc="03+" />
+    <Variant Opcode="AB" Operand1="m32" Operand2="EAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="STOSQ" Desc="Store String">
+    <Variant Opcode="AB" Operand1="m64" Operand2="RAX" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="STR" Desc="Store Task Register">
+    <Variant Opcode="00" Operand1="m16" Operand2="TR" Prefix0F="0F" FixedReg="1" Mode="Protect_64bit" Proc="02+" />
+    <Variant Opcode="00" Operand1="r16/32/64" Operand2="TR" Prefix0F="0F" FixedReg="1" Mode="Protect_64bit" Proc="02+" />
+  </Opcode>
+  <Opcode Name="SUB" Desc="Subtract">
+    <Variant Opcode="28" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="29" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="2A" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="2B" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="2C" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="2D" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="5" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="5" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="5" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="5" Lock="Lock" />
+  </Opcode>
+  <Opcode Name="SUBPD" Desc="Subtract Packed Double-FP Values">
+    <Variant Opcode="5C" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SUBPS" Desc="Subtract Packed Single-FP Values">
+    <Variant Opcode="5C" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="SUBSD" Desc="Subtract Scalar Double-FP Values">
+    <Variant Opcode="5C" Operand1="xmm" Operand2="xmm/m64" Prefix="F2" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SUBSS" Desc="Subtract Scalar Single-FP Values">
+    <Variant Opcode="5C" Operand1="xmm" Operand2="xmm/m32" Prefix="F3" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="SWAPGS" Desc="Swap GS Base Register">
+    <Variant Opcode="01 F8" Operand1="GS" Prefix0F="0F" FixedReg="7" Mode="64-bit" Proc="P4+" Ring="0" />
+  </Opcode>
+  <Opcode Name="SYSCALL" Desc="Fast System Call">
+    <Variant Opcode="05" Operand1="RCX" Operand2="R11" Operand3="SS" Prefix0F="0F" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SYSENTER" Desc="Fast System Call">
+    <Variant Opcode="34" Operand1="SS" Operand2="ESP" Prefix0F="0F" Mode="Protect_64bit" Proc="P2+" />
+    <Variant Opcode="34" Operand1="SS" Operand2="RSP" Prefix0F="0F" Mode="64-bit" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="SYSEXIT" Desc="Fast Return from Fast System Call">
+    <Variant Opcode="35" Operand1="SS" Operand2="eSP" Prefix0F="0F" Mode="Protect_64bit" Proc="P2+" Ring="0" />
+  </Opcode>
+  <Opcode Name="SYSRET" Desc="Return From Fast System Call">
+    <Variant Opcode="07" Operand1="SS" Operand2="EFlags" Operand3="R11" Prefix0F="0F" Mode="64-bit" Proc="P4+" Ring="0" />
+  </Opcode>
+  <Opcode Name="TEST" Desc="Logical Compare">
+    <Variant Opcode="84" Operand1="r/m8" Operand2="r8" FixedReg="r" />
+    <Variant Opcode="85" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" />
+    <Variant Opcode="A8" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="A9" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="F6" Operand1="r/m8" Operand2="imm8" FixedReg="0" />
+    <Variant Opcode="F6" Operand1="r/m8" Operand2="imm8" FixedReg="1" />
+    <Variant Opcode="F7" Operand1="r/m16/32/64" Operand2="imm16/32/64" FixedReg="0" />
+    <Variant Opcode="F7" Operand1="r/m16/32/64" Operand2="imm16/32/64" FixedReg="1" />
+  </Opcode>
+  <Opcode Name="UCOMISD" Desc="Unordered Compare Scalar Double-FP Values and Set EFLAGS">
+    <Variant Opcode="2E" Operand1="xmm" Operand2="xmm/m64" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="UCOMISS" Desc="Unordered Compare Scalar Single-FP Values and Set EFLAGS">
+    <Variant Opcode="2E" Operand1="xmm" Operand2="xmm/m32" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="UD" Desc="Undefined Instruction">
+    <Variant Opcode="B9" Operand1="r" Operand2="r/m" Prefix0F="0F" FixedReg="r" Proc="02+" />
+  </Opcode>
+  <Opcode Name="UD2" Desc="Undefined Instruction">
+    <Variant Opcode="0B" Prefix0F="0F" Proc="02+" />
+  </Opcode>
+  <Opcode Name="UNPCKHPD" Desc="Unpack and Interleave High Packed Double-FP Values">
+    <Variant Opcode="15" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="UNPCKHPS" Desc="Unpack and Interleave High Packed Single-FP Values">
+    <Variant Opcode="15" Operand1="xmm" Operand2="xmm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="UNPCKLPD" Desc="Unpack and Interleave Low Packed Double-FP Values">
+    <Variant Opcode="14" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="UNPCKLPS" Desc="Unpack and Interleave Low Packed Single-FP Values">
+    <Variant Opcode="14" Operand1="xmm" Operand2="xmm/m64" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="VERR" Desc="Verify a Segment for Reading">
+    <Variant Opcode="00" Operand1="r/m16" Prefix0F="0F" FixedReg="4" Mode="Protect_64-bit" Proc="02+" />
+  </Opcode>
+  <Opcode Name="VERW" Desc="Verify a Segment for Writing">
+    <Variant Opcode="00" Operand1="r/m16" Prefix0F="0F" FixedReg="5" Mode="Protect_64-bit" Proc="02+" />
+  </Opcode>
+  <Opcode Name="VMCALL" Desc="Call to VM Monitor">
+    <Variant Opcode="01 C1" Prefix0F="0F" FixedReg="0" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMCLEAR" Desc="Clear Virtual-Machine Control Structure">
+    <Variant Opcode="C7" Operand1="m64" Prefix="66" Prefix0F="0F" FixedReg="6" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMLAUNCH" Desc="Launch Virtual Machine">
+    <Variant Opcode="01 C2" Prefix0F="0F" FixedReg="0" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMPTRLD" Desc="Load Pointer to Virtual-Machine Control Structure">
+    <Variant Opcode="C7" Operand1="m64" Prefix0F="0F" FixedReg="6" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMPTRST" Desc="Store Pointer to Virtual-Machine Control Structure">
+    <Variant Opcode="C7" Operand1="m64" Prefix0F="0F" FixedReg="7" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMREAD" Desc="Read Field from Virtual-Machine Control Structure">
+    <Variant Opcode="78" Operand1="r/m32" Operand2="r32" Prefix0F="0F" FixedReg="r" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+    <Variant Opcode="78" Operand1="r/m64" Operand2="r64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMRESUME" Desc="Resume Virtual Machine">
+    <Variant Opcode="01 C3" Prefix0F="0F" FixedReg="0" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMWRITE" Desc="Write Field to Virtual-Machine Control Structure">
+    <Variant Opcode="79" Operand1="r32" Operand2="r/m32" Prefix0F="0F" FixedReg="r" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+    <Variant Opcode="79" Operand1="r64" Operand2="r/m64" Prefix0F="0F" FixedReg="r" Mode="64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMXOFF" Desc="Leave VMX Operation">
+    <Variant Opcode="01 C4" Prefix0F="0F" FixedReg="0" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="VMXON" Desc="Enter VMX Operation">
+    <Variant Opcode="C7" Operand1="m64" Prefix="F3" Prefix0F="0F" FixedReg="6" Mode="Protect_64-bit" Group="vmx" Proc="P4++" Ring="0" />
+  </Opcode>
+  <Opcode Name="WBINVD" Desc="Write Back and Invalidate Cache">
+    <Variant Opcode="09" Prefix0F="0F" Proc="04+" Ring="0" />
+  </Opcode>
+  <Opcode Name="WRMSR" Desc="Write to Model Specific Register">
+    <Variant Opcode="30" Operand1="MSR" Operand2="rCX" Operand3="rAX" Operand4="rDX" Prefix0F="0F" Proc="P1+" Ring="0" />
+  </Opcode>
+  <Opcode Name="XADD" Desc="Exchange and Add">
+    <Variant Opcode="C0" Operand1="r/m8" Operand2="r8" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="04+" />
+    <Variant Opcode="C1" Operand1="r/m16/32/64" Operand2="r16/32/64" Prefix0F="0F" FixedReg="r" Lock="Lock" Proc="04+" />
+  </Opcode>
+  <Opcode Name="XCHG" Desc="Exchange Register/Memory with Register">
+    <Variant Opcode="86" Operand1="r8" Operand2="r/m8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="87" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="90" Operand1="r16/32/64" Operand2="rAX" Add="01" />
+  </Opcode>
+  <Opcode Name="XGETBV" Desc="Get Value of Extended Control Register">
+    <Variant Opcode="01 D0" Operand1="EDX" Operand2="EAX" Operand3="ECX" Operand4="XCR" Prefix0F="0F" FixedReg="2" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="XLAT" Desc="Table Look-up Translation">
+    <Variant Opcode="D7" Operand1="AL" Operand2="m8" />
+  </Opcode>
+  <Opcode Name="XLATB" Desc="Table Look-up Translation">
+    <Variant Opcode="D7" Operand1="AL" Operand2="m8" />
+  </Opcode>
+  <Opcode Name="XOR" Desc="Logical Exclusive OR">
+    <Variant Opcode="30" Operand1="r/m8" Operand2="r8" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="31" Operand1="r/m16/32/64" Operand2="r16/32/64" FixedReg="r" Lock="Lock" />
+    <Variant Opcode="32" Operand1="r8" Operand2="r/m8" FixedReg="r" />
+    <Variant Opcode="33" Operand1="r16/32/64" Operand2="r/m16/32/64" FixedReg="r" />
+    <Variant Opcode="34" Operand1="AL" Operand2="imm8" />
+    <Variant Opcode="35" Operand1="rAX" Operand2="imm16/32" />
+    <Variant Opcode="80" Operand1="r/m8" Operand2="imm8" FixedReg="6" Lock="Lock" />
+    <Variant Opcode="81" Operand1="r/m16/32/64" Operand2="imm16/32" FixedReg="6" Lock="Lock" />
+    <Variant Opcode="82" Operand1="r/m8" Operand2="imm8" FixedReg="6" Lock="Lock" />
+    <Variant Opcode="83" Operand1="r/m16/32/64" Operand2="imm8" FixedReg="6" Lock="Lock" Proc="03+" />
+  </Opcode>
+  <Opcode Name="XORPD" Desc="Bitwise Logical XOR for Double-FP Values">
+    <Variant Opcode="57" Operand1="xmm" Operand2="xmm/m128" Prefix="66" Prefix0F="0F" FixedReg="r" Group="sse2" Proc="P4+" />
+  </Opcode>
+  <Opcode Name="XORPS" Desc="Bitwise Logical XOR for Single-FP Values">
+    <Variant Opcode="57" Operand1="xmm" Operand2="xmm/m128" Prefix0F="0F" FixedReg="r" Group="sse1" Proc="P3+" />
+  </Opcode>
+  <Opcode Name="XRSTOR" Desc="Restore Processor Extended States">
+    <Variant Opcode="AE" Operand1="ST" Operand2="ST1" Operand3="ST2" Prefix0F="0F" FixedReg="5" Proc="C2++" />
+    <Variant Opcode="AE" Operand1="ST" Operand2="ST1" Operand3="ST2" Prefix0F="0F" FixedReg="5" Mode="64-bit" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="XSAVE" Desc="Save Processor Extended States">
+    <Variant Opcode="AE" Operand1="m" Operand2="EDX" Operand3="EAX" Prefix0F="0F" FixedReg="4" Proc="C2++" />
+    <Variant Opcode="AE" Operand1="m" Operand2="EDX" Operand3="EAX" Prefix0F="0F" FixedReg="4" Mode="64-bit" Proc="C2++" />
+  </Opcode>
+  <Opcode Name="XSETBV" Desc="Set Extended Control Register">
+    <Variant Opcode="01 D1" Operand1="XCR" Operand2="ECX" Operand3="EDX" Operand4="EAX" Prefix0F="0F" FixedReg="2" Proc="C2++" Ring="0" />
+  </Opcode>
+</OpcodeList>

@@ -105,7 +105,7 @@ namespace SharpAssembler.Architectures.X86
             : this(opcodeBytes, fixedReg, DataSize.None, descriptors)
         {
             if (fixedReg > 0x07)
-                throw new ArgumentOutOfRangeException("fixedReg", "Only the least significant 3 bits may be set.");
+                throw new ArgumentOutOfRangeException(nameof(fixedReg), "Only the least significant 3 bits may be set.");
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace SharpAssembler.Architectures.X86
         public X86OpcodeVariant(byte[] opcodeBytes, byte fixedReg, DataSize operandSize, params OperandDescriptor[] descriptors)
         {
             if (fixedReg > 0x7)
-                throw new ArgumentOutOfRangeException("fixedReg", "Only the least significant 3 bits may be set.");
+                throw new ArgumentOutOfRangeException(nameof(fixedReg), "Only the least significant 3 bits may be set.");
 
             OpcodeBytes = opcodeBytes;
             FixedReg = fixedReg;
