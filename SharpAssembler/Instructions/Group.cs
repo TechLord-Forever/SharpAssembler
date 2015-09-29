@@ -37,7 +37,7 @@ namespace SharpAssembler.Instructions
         /// Initializes a new instance of the <see cref="Group"/> class.
         /// </summary>
         public Group()
-            : this(new ConstructableCollection())
+            : this(new Collection<Constructable>())
         {
         }
 
@@ -61,12 +61,6 @@ namespace SharpAssembler.Instructions
         public override IEnumerable<IEmittable> Construct(Context context)
         {
             return Content.SelectMany(c => c.Construct(context));
-        }
-
-        /// <inheritdoc />
-        public override void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitGroup(this);
         }
     }
 }

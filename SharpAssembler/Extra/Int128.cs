@@ -491,14 +491,14 @@ namespace SharpAssembler
         }
 
         /// <summary>
-        /// Converts the value of this instance to an <see cref="Object"/> of the specified <see cref="Type"/> that has
+        /// Converts the value of this instance to an <see cref="object"/> of the specified <see cref="Type"/> that has
         /// an equivalent value, using the specified culture-specific formatting information.
         /// </summary>
         /// <param name="conversionType">The <see cref="Type"/> to which the value of this instance is
         /// converted.</param>
         /// <param name="provider">An <see cref="IFormatProvider"/> interface implementation that supplies
         /// culture-specific formatting information.</param>
-        /// <returns>An <see cref="Object"/> instance of type <paramref name="conversionType"/> whose value is
+        /// <returns>An <see cref="object"/> instance of type <paramref name="conversionType"/> whose value is
         /// equivalent to the value of this instance.</returns>
         object IConvertible.ToType(Type conversionType, IFormatProvider provider)
         {

@@ -38,7 +38,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             instr.SetModRMByte();
 
             bool ripRelative =
-                RelativeAddress ?? ((X86Architecture)context.Representation.Architecture).UseRIPRelativeAddressing;
+                RelativeAddress ?? ((X86Architecture)context.Architecture).UseRIPRelativeAddressing;
             bool forceRipRelative = RelativeAddress.HasValue && RelativeAddress == true;
 
             if (BaseRegister == Register.None && IndexRegister == Register.None)

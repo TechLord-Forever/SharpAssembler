@@ -63,7 +63,6 @@ namespace SharpAssembler.Architectures.X86
         /// <value>A bitwise combination of members of the <see cref="CpuFeatures"/> enumeration.</value>
         public virtual CpuFeatures Features { get; private set; }
 
-        #region Methods
         /// <summary>
         /// Converts the value of this instance to its equivalent string representation.
         /// </summary>
@@ -72,7 +71,6 @@ namespace SharpAssembler.Architectures.X86
         {
             return Name;
         }
-        #endregion
 
         #region Predefined
         /// <summary>

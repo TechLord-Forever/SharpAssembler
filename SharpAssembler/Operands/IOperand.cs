@@ -35,15 +35,13 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration;
         /// or <see cref="DataSize.None"/> to specify no size.</value>
-        DataSize PreferredSize
-        { get; set; }
+        DataSize PreferredSize { get; set; }
 
         /// <summary>
         /// Gets the actual size of operand.
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration;
         /// or <see cref="DataSize.None"/>.</value>
-        DataSize Size
-        { get; }
+        DataSize Size { get; }
     }
 }

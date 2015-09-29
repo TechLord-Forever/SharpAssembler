@@ -71,11 +71,5 @@ namespace SharpAssembler.Instructions
         {
             yield return new RawEmittable(Encoding.GetBytes(Data));
         }
-
-        /// <inheritdoc />
-        public override void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitDeclareString(this);
-        }
     }
 }

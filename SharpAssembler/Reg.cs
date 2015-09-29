@@ -1,448 +1,459 @@
-﻿#region Copyright and License
-/*
- * SharpAssembler
- * Library for .NET that assembles a predetermined list of
- * instructions into machine code.
- *
- * Copyright (C) 2011-2012 Daniël Pelsmaeker
- *
- * This file is part of SharpAssembler.
- *
- * SharpAssembler is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * SharpAssembler is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.
- */
-#endregion
-using System.Diagnostics.Contracts;
+﻿using SharpAssembler.Architectures.X86;
 
-namespace SharpAssembler.Architectures.X86
+namespace SharpAssembler
 {
     /// <summary>
-    /// An x86-64 register.
+    ///
     /// </summary>
-    public enum Register
+    public class Register_
     {
         /// <summary>
-        /// No register.
+        ///
         /// </summary>
-        None = 0,
+        public byte Value { get; private set; }
 
+        /// <summary>
+        ///
+        /// </summary>
+        public RegisterType Type { get; private set; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public DataSize Size { get { return (DataSize)((int)Type & 0x3F); } }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="type"></param>
+        public Register_(byte value, RegisterType type)
+        {
+            Value = value;
+            Type  = type;
+        }
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    public static class Reg
+    {
         /// <summary>
         /// The lower 8-bits of the accumulator register.
         /// </summary>
-        AL = 0x00 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ AL { get; } = new Register_(0x00, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the accumulator register.
         /// </summary>
-        AX = 0x00 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ AX { get; } = new Register_(0x00, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the accumulator register.
         /// </summary>
-        EAX = 0x00 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ EAX { get; } = new Register_(0x00, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the accumulator register.
         /// </summary>
-        RAX = 0x00 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RAX { get; } = new Register_(0x00, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The first 64-bit SIMD register.
         /// </summary>
-        MM0 = 0x00 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM0 { get; } = new Register_(0x00, RegisterType.Simd64Bit);
         /// <summary>
         /// The first 128-bit SIMD register.
         /// </summary>
-        XMM0 = 0x00 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM0 { get; } = new Register_(0x00, RegisterType.Simd128Bit);
         /// <summary>
         /// The extra segment register.
         /// </summary>
-        ES = 0x00 | (RegisterType.Segment << 5),
+        public static Register_ ES { get; } = new Register_(0x00, RegisterType.Segment);
         /// <summary>
         /// The first control register.
         /// </summary>
-        CR0 = 0x00 | (RegisterType.Control << 5),
+        public static Register_ CR0 { get; } = new Register_(0x00, RegisterType.Control);
         /// <summary>
         /// The first debug register.
         /// </summary>
-        DR0 = 0x00 | (RegisterType.Debug << 5),
+        public static Register_ DR0 { get; } = new Register_(0x00, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 0.
         /// </summary>
-        ST0 = 0x00 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST0 { get; } = new Register_(0x00, RegisterType.FloatingPoint);
 
         /// <summary>
         /// The lower 8-bits of the counter register.
         /// </summary>
-        CL = 0x01 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ CL { get; } = new Register_(0x01, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the counter register.
         /// </summary>
-        CX = 0x01 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ CX { get; } = new Register_(0x01, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the counter register.
         /// </summary>
-        ECX = 0x01 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ ECX { get; } = new Register_(0x01, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the counter register.
         /// </summary>
-        RCX = 0x01 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RCX { get; } = new Register_(0x01, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The second 64-bit SIMD register.
         /// </summary>
-        MM1 = 0x01 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM1 { get; } = new Register_(0x01, RegisterType.Simd64Bit);
         /// <summary>
         /// The second 128-bit SIMD register.
         /// </summary>
-        XMM1 = 0x01 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM1 { get; } = new Register_(0x01, RegisterType.Simd128Bit);
         /// <summary>
         /// The code segment register.
         /// </summary>
-        CS = 0x01 | (RegisterType.Segment << 5),
+        public static Register_ CS { get; } = new Register_(0x01, RegisterType.Segment);
         /// <summary>
         /// The second control register.
         /// </summary>
-        CR1 = 0x01 | (RegisterType.Control << 5),
+        public static Register_ CR1 { get; } = new Register_(0x01, RegisterType.Control);
         /// <summary>
         /// The second debug register.
         /// </summary>
-        DR1 = 0x01 | (RegisterType.Debug << 5),
+        public static Register_ DR1 { get; } = new Register_(0x01, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 1.
         /// </summary>
-        ST1 = 0x01 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST1 { get; } = new Register_(0x01, RegisterType.FloatingPoint);
 
         /// <summary>
         /// The lower 8-bits of the data register.
         /// </summary>
-        DL = 0x02 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ DL { get; } = new Register_(0x02, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the data register.
         /// </summary>
-        DX = 0x02 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ DX { get; } = new Register_(0x02, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the data register.
         /// </summary>
-        EDX = 0x02 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ EDX { get; } = new Register_(0x02, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the data register.
         /// </summary>
-        RDX = 0x02 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RDX { get; } = new Register_(0x02, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The third 64-bit SIMD register.
         /// </summary>
-        MM2 = 0x02 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM2 { get; } = new Register_(0x02, RegisterType.Simd64Bit);
         /// <summary>
         /// The third 128-bit SIMD register.
         /// </summary>
-        XMM2 = 0x02 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM2 { get; } = new Register_(0x02, RegisterType.Simd128Bit);
         /// <summary>
         /// The stack segment register.
         /// </summary>
-        SS = 0x02 | (RegisterType.Segment << 5),
+        public static Register_ SS { get; } = new Register_(0x02, RegisterType.Segment);
         /// <summary>
         /// The third control register.
         /// </summary>
-        CR2 = 0x02 | (RegisterType.Control << 5),
+        public static Register_ CR2 { get; } = new Register_(0x02, RegisterType.Control);
         /// <summary>
         /// The third debug register.
         /// </summary>
-        DR2 = 0x02 | (RegisterType.Debug << 5),
+        public static Register_ DR2 { get; } = new Register_(0x02, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 2.
         /// </summary>
-        ST2 = 0x02 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST2 { get; } = new Register_(0x02, RegisterType.FloatingPoint);
 
         /// <summary>
         /// The lower 8-bits of the base register.
         /// </summary>
-        BL = 0x03 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ BL { get; } = new Register_(0x03, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the base register.
         /// </summary>
-        BX = 0x03 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ BX { get; } = new Register_(0x03, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the base register.
         /// </summary>
-        EBX = 0x03 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ EBX { get; } = new Register_(0x03, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the base register.
         /// </summary>
-        RBX = 0x03 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RBX { get; } = new Register_(0x03, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The fourth 64-bit SIMD register.
         /// </summary>
-        MM3 = 0x03 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM3 { get; } = new Register_(0x03, RegisterType.Simd64Bit);
         /// <summary>
         /// The fourth 128-bit SIMD register.
         /// </summary>
-        XMM3 = 0x03 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM3 { get; } = new Register_(0x03, RegisterType.Simd128Bit);
         /// <summary>
         /// The data segment register.
         /// </summary>
-        DS = 0x03 | (RegisterType.Segment << 5),
+        public static Register_ DS { get; } = new Register_(0x03, RegisterType.Segment);
         /// <summary>
         /// The fourth control register.
         /// </summary>
-        CR3 = 0x03 | (RegisterType.Control << 5),
+        public static Register_ CR3 { get; } = new Register_(0x03, RegisterType.Control);
         /// <summary>
         /// The fourth debug register.
         /// </summary>
-        DR3 = 0x03 | (RegisterType.Debug << 5),
+        public static Register_ DR3 { get; } = new Register_(0x03, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 3.
         /// </summary>
-        ST3 = 0x03 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST3 { get; } = new Register_(0x03, RegisterType.FloatingPoint);
 
         /// <summary>
         /// The higher 8-bits of the lower 16-bits of the accumulator register.
         /// </summary>
-        AH = 0x04 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ AH { get; } = new Register_(0x04, RegisterType.GeneralPurpose8Bit);
+
         /// <summary>
         /// The lower 8-bits of the stack pointer register.
         /// </summary>
-        SPL = AH | 0x10,    // Required REX prefix.
+        //SPL = AH | 0x10,    // Required REX prefix.
+
         /// <summary>
         /// The lower 16-bits of the stack pointer register.
         /// </summary>
-        SP = 0x04 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ SP { get; } = new Register_(0x04, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the stack pointer register.
         /// </summary>
-        ESP = 0x04 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ ESP { get; } = new Register_(0x04, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the stack pointer register.
         /// </summary>
-        RSP = 0x04 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RSP { get; } = new Register_(0x04, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The fifth 64-bit SIMD register.
         /// </summary>
-        MM4 = 0x04 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM4 { get; } = new Register_(0x04, RegisterType.Simd64Bit);
         /// <summary>
         /// The fifth 128-bit SIMD register.
         /// </summary>
-        XMM4 = 0x04 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM4 { get; } = new Register_(0x04, RegisterType.Simd128Bit);
         /// <summary>
         /// The second extra segment register.
         /// </summary>
-        FS = 0x04 | (RegisterType.Segment << 5),
+        public static Register_ FS { get; } = new Register_(0x04, RegisterType.Segment);
         /// <summary>
         /// The fifth control register.
         /// </summary>
-        CR4 = 0x04 | (RegisterType.Control << 5),
+        public static Register_ CR4 { get; } = new Register_(0x04, RegisterType.Control);
         /// <summary>
         /// The fifth debug register.
         /// </summary>
-        DR4 = 0x04 | (RegisterType.Debug << 5),
+        public static Register_ DR4 { get; } = new Register_(0x04, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 4.
         /// </summary>
-        ST4 = 0x04 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST4 { get; } = new Register_(0x04, RegisterType.FloatingPoint);
 
         /// <summary>
         /// The higher 8-bits of the lower 16-bits of the counter register.
         /// </summary>
-        CH = 0x05 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ CH { get; } = new Register_(0x05, RegisterType.GeneralPurpose8Bit);
+
         /// <summary>
         /// The lower 8-bits of the base pointer register.
         /// </summary>
-        BPL = CH | 0x10,    // Required REX prefix.
+        //BPL = CH | 0x10,    // Required REX prefix.
+
         /// <summary>
         /// The lower 16-bits of the base pointer register.
         /// </summary>
-        BP = 0x05 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ BP { get; } = new Register_(0x05, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the base pointer register.
         /// </summary>
-        EBP = 0x05 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ EBP { get; } = new Register_(0x05, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the base pointer register.
         /// </summary>
-        RBP = 0x05 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RBP { get; } = new Register_(0x05, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The sixth 64-bit SIMD register.
         /// </summary>
-        MM5 = 0x05 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM5 { get; } = new Register_(0x05, RegisterType.Simd64Bit);
         /// <summary>
         /// The sixth 128-bit SIMD register.
         /// </summary>
-        XMM5 = 0x05 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM5 { get; } = new Register_(0x05, RegisterType.Simd128Bit);
         /// <summary>
         /// The third extra segment register.
         /// </summary>
-        GS = 0x05 | (RegisterType.Segment << 5),
+        public static Register_ GS { get; } = new Register_(0x05, RegisterType.Segment);
         /// <summary>
         /// The sixth control register.
         /// </summary>
-        CR5 = 0x05 | (RegisterType.Control << 5),
+        public static Register_ CR5 { get; } = new Register_(0x05, RegisterType.Control);
         /// <summary>
         /// The sixth debug register.
         /// </summary>
-        DR5 = 0x05 | (RegisterType.Debug << 5),
+        public static Register_ DR5 { get; } = new Register_(0x05, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 5.
         /// </summary>
-        ST5 = 0x05 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST5 { get; } = new Register_(0x05, RegisterType.FloatingPoint);
 
 
 
         /// <summary>
         /// The higher 8-bits of the lower 16-bits of the data register.
         /// </summary>
-        DH = 0x06 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ DH { get; } = new Register_(0x06, RegisterType.GeneralPurpose8Bit);
+
         /// <summary>
         /// The lower 8-bits of the source index register.
         /// </summary>
-        SIL = DH | 0x10,    // Required REX prefix.
+        //SIL = DH | 0x10,    // Required REX prefix.
+
         /// <summary>
         /// The lower 16-bits of the source index register.
         /// </summary>
-        SI = 0x06 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ SI { get; } = new Register_(0x06, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the source index register.
         /// </summary>
-        ESI = 0x06 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ ESI { get; } = new Register_(0x06, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the source index register.
         /// </summary>
-        RSI = 0x06 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RSI { get; } = new Register_(0x06, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The seventh 64-bit SIMD register.
         /// </summary>
-        MM6 = 0x06 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM6 { get; } = new Register_(0x06, RegisterType.Simd64Bit);
         /// <summary>
         /// The seventh 128-bit SIMD register.
         /// </summary>
-        XMM6 = 0x06 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM6 { get; } = new Register_(0x06, RegisterType.Simd128Bit);
         // Stack register
         /// <summary>
         /// The seventh control register.
         /// </summary>
-        CR6 = 0x06 | (RegisterType.Control << 5),
+        public static Register_ CR6 { get; } = new Register_(0x06, RegisterType.Control);
         /// <summary>
         /// The seventh debug register.
         /// </summary>
-        DR6 = 0x06 | (RegisterType.Debug << 5),
+        public static Register_ DR6 { get; } = new Register_(0x06, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 6.
         /// </summary>
-        ST6 = 0x06 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST6 { get; } = new Register_(0x06, RegisterType.FloatingPoint);
 
 
 
         /// <summary>
         /// The higher 8-bits of the lower 16-bits of the base register.
         /// </summary>
-        BH = 0x07 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ BH { get; } = new Register_(0x07, RegisterType.GeneralPurpose8Bit);
+
         /// <summary>
         /// The lower 8-bits of the destination index register.
         /// </summary>
-        DIL = BH | 0x10,    // Required REX prefix.
+        //DIL = BH | 0x10,    // Required REX prefix.
+
         /// <summary>
         /// The lower 16-bits of the destination index register.
         /// </summary>
-        DI = 0x07 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ DI { get; } = new Register_(0x07, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the destination index register.
         /// </summary>
-        EDI = 0x07 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ EDI { get; } = new Register_(0x07, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the destination index register.
         /// </summary>
-        RDI = 0x07 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ RDI { get; } = new Register_(0x07, RegisterType.GeneralPurpose64Bit);
         /// <summary>
         /// The eighth 64-bit SIMD register.
         /// </summary>
-        MM7 = 0x07 | (RegisterType.Simd64Bit << 5),
+        public static Register_ MM7 { get; } = new Register_(0x07, RegisterType.Simd64Bit);
         /// <summary>
         /// The eighth 128-bit SIMD register.
         /// </summary>
-        XMM7 = 0x07 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM7 { get; } = new Register_(0x07, RegisterType.Simd128Bit);
         // Stack register
         /// <summary>
         /// The eighth control register.
         /// </summary>
-        CR7 = 0x07 | (RegisterType.Control << 5),
+        public static Register_ CR7 { get; } = new Register_(0x07, RegisterType.Control);
         /// <summary>
         /// The eighth debug register.
         /// </summary>
-        DR7 = 0x07 | (RegisterType.Debug << 5),
+        public static Register_ DR7 { get; } = new Register_(0x07, RegisterType.Debug);
         /// <summary>
         /// The floating point stack register index 7.
         /// </summary>
-        ST7 = 0x07 | (RegisterType.FloatingPoint << 5),
+        public static Register_ ST7 { get; } = new Register_(0x07, RegisterType.FloatingPoint);
 
 
 
         /// <summary>
         /// The lower 8-bits of the nineth general purpose register.
         /// </summary>
-        R8L = 0x08 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R8L { get; } = new Register_(0x08, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the nineth general purpose register.
         /// </summary>
-        R8W = 0x08 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R8W { get; } = new Register_(0x08, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the nineth general purpose register.
         /// </summary>
-        R8D = 0x08 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R8D { get; } = new Register_(0x08, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the nineth general purpose register.
         /// </summary>
-        R8 = 0x08 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R8 { get; } = new Register_(0x08, RegisterType.GeneralPurpose64Bit);
         // MM0
         /// <summary>
         /// The nineth 128-bit SIMD register.
         /// </summary>
-        XMM8 = 0x08 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM8 { get; } = new Register_(0x08, RegisterType.Simd128Bit);
         // ES
         /// <summary>
         /// The nineth control register.
         /// </summary>
-        CR8 = 0x08 | (RegisterType.Control << 5),
+        public static Register_ CR8 { get; } = new Register_(0x08, RegisterType.Control);
         /// <summary>
         /// The nineth debug register.
         /// </summary>
-        DR8 = 0x08 | (RegisterType.Debug << 5),
+        public static Register_ DR8 { get; } = new Register_(0x08, RegisterType.Debug);
         // Floating point stack register.
 
 
         /// <summary>
         /// The lower 8-bits of the tenth general purpose register.
         /// </summary>
-        R9L = 0x09 | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R9L { get; } = new Register_(0x09, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the tenth general purpose register.
         /// </summary>
-        R9W = 0x09 | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R9W { get; } = new Register_(0x09, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the tenth general purpose register.
         /// </summary>
-        R9D = 0x09 | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R9D { get; } = new Register_(0x09, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the tenth general purpose register.
         /// </summary>
-        R9 = 0x09 | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R9 { get; } = new Register_(0x09, RegisterType.GeneralPurpose64Bit);
         // MM1
         /// <summary>
         /// The tenth 128-bit SIMD register.
         /// </summary>
-        XMM9 = 0x09 | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM9 { get; } = new Register_(0x09, RegisterType.Simd128Bit);
         // CS
         /// <summary>
         /// The tenth control register.
         /// </summary>
-        CR9 = 0x09 | (RegisterType.Control << 5),
+        public static Register_ CR9 { get; } = new Register_(0x09, RegisterType.Control);
         /// <summary>
         /// The tenth debug register.
         /// </summary>
-        DR9 = 0x09 | (RegisterType.Debug << 5),
+        public static Register_ DR9 { get; } = new Register_(0x09, RegisterType.Debug);
         // Floating point stack register.
 
 
@@ -450,66 +461,66 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// The lower 8-bits of the eleventh general purpose register.
         /// </summary>
-        R10L = 0x0A | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R10L { get; } = new Register_(0x0A, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the eleventh general purpose register.
         /// </summary>
-        R10W = 0x0A | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R10W { get; } = new Register_(0x0A, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the eleventh general purpose register.
         /// </summary>
-        R10D = 0x0A | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R10D { get; } = new Register_(0x0A, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the eleventh general purpose register.
         /// </summary>
-        R10 = 0x0A | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R10 { get; } = new Register_(0x0A, RegisterType.GeneralPurpose64Bit);
         // MM2
         /// <summary>
         /// The eleventh 128-bit SIMD register.
         /// </summary>
-        XMM10 = 0x0A | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM10 { get; } = new Register_(0x0A, RegisterType.Simd128Bit);
         // SS
         /// <summary>
         /// The eleventh control register.
         /// </summary>
-        CR10 = 0x0A | (RegisterType.Control << 5),
+        public static Register_ CR10 { get; } = new Register_(0x0A, RegisterType.Control);
         /// <summary>
         /// The eleventh debug register.
         /// </summary>
-        DR10 = 0x0A | (RegisterType.Debug << 5),
+        public static Register_ DR10 { get; } = new Register_(0x0A, RegisterType.Debug);
         // Floating point stack register.
 
 
         /// <summary>
         /// The lower 8-bits of the twelfth general purpose register.
         /// </summary>
-        R11L = 0x0B | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R11L { get; } = new Register_(0x0B, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the twelfth general purpose register.
         /// </summary>
-        R11W = 0x0B | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R11W { get; } = new Register_(0x0B, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the twelfth general purpose register.
         /// </summary>
-        R11D = 0x0B | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R11D { get; } = new Register_(0x0B, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the twelfth general purpose register.
         /// </summary>
-        R11 = 0x0B | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R11 { get; } = new Register_(0x0B, RegisterType.GeneralPurpose64Bit);
         // MM3
         /// <summary>
         /// The twelfth 128-bit SIMD register.
         /// </summary>
-        XMM11 = 0x0B | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM11 { get; } = new Register_(0x0B, RegisterType.Simd128Bit);
         // DS
         /// <summary>
         /// The twelfth control register.
         /// </summary>
-        CR11 = 0x0B | (RegisterType.Control << 5),
+        public static Register_ CR11 { get; } = new Register_(0x0B, RegisterType.Control);
         /// <summary>
         /// The twelfth debug register.
         /// </summary>
-        DR11 = 0x0B | (RegisterType.Debug << 5),
+        public static Register_ DR11 { get; } = new Register_(0x0B, RegisterType.Debug);
         // Floating point stack register.
 
 
@@ -518,33 +529,33 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// The lower 8-bits of the thirteenth general purpose register.
         /// </summary>
-        R12L = 0x0C | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R12L { get; } = new Register_(0x0C, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the thirteenth general purpose register.
         /// </summary>
-        R12W = 0x0C | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R12W { get; } = new Register_(0x0C, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the thirteenth general purpose register.
         /// </summary>
-        R12D = 0x0C | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R12D { get; } = new Register_(0x0C, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the thirteenth general purpose register.
         /// </summary>
-        R12 = 0x0C | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R12 { get; } = new Register_(0x0C, RegisterType.GeneralPurpose64Bit);
         // MM4
         /// <summary>
         /// The thirteenth 128-bit SIMD register.
         /// </summary>
-        XMM12 = 0x0C | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM12 { get; } = new Register_(0x0C, RegisterType.Simd128Bit);
         // FS
         /// <summary>
         /// The thirteenth control register.
         /// </summary>
-        CR12 = 0x0C | (RegisterType.Control << 5),
+        public static Register_ CR12 { get; } = new Register_(0x0C, RegisterType.Control);
         /// <summary>
         /// The thirteenth debug register.
         /// </summary>
-        DR12 = 0x0C | (RegisterType.Debug << 5),
+        public static Register_ DR12 { get; } = new Register_(0x0C, RegisterType.Debug);
         // Floating point stack register.
 
 
@@ -552,33 +563,33 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// The lower 8-bits of the fourteenth general purpose register.
         /// </summary>
-        R13L = 0x0D | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R13L { get; } = new Register_(0x0D, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the fourteenth general purpose register.
         /// </summary>
-        R13W = 0x0D | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R13W { get; } = new Register_(0x0D, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the fourteenth general purpose register.
         /// </summary>
-        R13D = 0x0D | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R13D { get; } = new Register_(0x0D, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the fourteenth general purpose register.
         /// </summary>
-        R13 = 0x0D | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R13 { get; } = new Register_(0x0D, RegisterType.GeneralPurpose64Bit);
         // MM5
         /// <summary>
         /// The fourteenth 128-bit SIMD register.
         /// </summary>
-        XMM13 = 0x0D | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM13 { get; } = new Register_(0x0D, RegisterType.Simd128Bit);
         // GS
         /// <summary>
         /// The fourteenth control register.
         /// </summary>
-        CR13 = 0x0D | (RegisterType.Control << 5),
+        public static Register_ CR13 { get; } = new Register_(0x0D, RegisterType.Control);
         /// <summary>
         /// The fourteenth debug register.
         /// </summary>
-        DR13 = 0x0D | (RegisterType.Debug << 5),
+        public static Register_ DR13 { get; } = new Register_(0x0D, RegisterType.Debug);
         // Floating point stack register.
 
 
@@ -586,33 +597,33 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// The lower 8-bits of the fifteenth general purpose register.
         /// </summary>
-        R14L = 0x0E | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R14L { get; } = new Register_(0x0E, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the fifteenth general purpose register.
         /// </summary>
-        R14W = 0x0E | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R14W { get; } = new Register_(0x0E, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the fifteenth general purpose register.
         /// </summary>
-        R14D = 0x0E | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R14D { get; } = new Register_(0x0E, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the fifteenth general purpose register.
         /// </summary>
-        R14 = 0x0E | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R14 { get; } = new Register_(0x0E, RegisterType.GeneralPurpose64Bit);
         // MM6
         /// <summary>
         /// The fifteenth 128-bit SIMD register.
         /// </summary>
-        XMM14 = 0x0E | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM14 { get; } = new Register_(0x0E, RegisterType.Simd128Bit);
         // Stack register
         /// <summary>
         /// The fifteenth control register.
         /// </summary>
-        CR14 = 0x0E | (RegisterType.Control << 5),
+        public static Register_ CR14 { get; } = new Register_(0x0E, RegisterType.Control);
         /// <summary>
         /// The fifteenth debug register.
         /// </summary>
-        DR14 = 0x0E | (RegisterType.Debug << 5),
+        public static Register_ DR14 { get; } = new Register_(0x0E, RegisterType.Debug);
         // Floating point stack register.
 
 
@@ -620,71 +631,33 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// The lower 8-bits of the sixteenth general purpose register.
         /// </summary>
-        R15L = 0x0F | (RegisterType.GeneralPurpose8Bit << 5),
+        public static Register_ R15L { get; } = new Register_(0x0F, RegisterType.GeneralPurpose8Bit);
         /// <summary>
         /// The lower 16-bits of the sixteenth general purpose register.
         /// </summary>
-        R15W = 0x0F | (RegisterType.GeneralPurpose16Bit << 5),
+        public static Register_ R15W { get; } = new Register_(0x0F, RegisterType.GeneralPurpose16Bit);
         /// <summary>
         /// The lower 32-bits of the sixteenth general purpose register.
         /// </summary>
-        R15D = 0x0F | (RegisterType.GeneralPurpose32Bit << 5),
+        public static Register_ R15D { get; } = new Register_(0x0F, RegisterType.GeneralPurpose32Bit);
         /// <summary>
         /// The lower 64-bits of the sixteenth general purpose register.
         /// </summary>
-        R15 = 0x0F | (RegisterType.GeneralPurpose64Bit << 5),
+        public static Register_ R15 { get; } = new Register_(0x0F, RegisterType.GeneralPurpose64Bit);
         // MM7
         /// <summary>
         /// The sixteenth 128-bit SIMD register.
         /// </summary>
-        XMM15 = 0x0F | (RegisterType.Simd128Bit << 5),
+        public static Register_ XMM15 { get; } = new Register_(0x0F, RegisterType.Simd128Bit);
         // Stack register
         /// <summary>
         /// The sixteenth control register.
         /// </summary>
-        CR15 = 0x0F | (RegisterType.Control << 5),
+        public static Register_ CR15 { get; } = new Register_(0x0F, RegisterType.Control);
         /// <summary>
         /// The sixteenth debug register.
         /// </summary>
-        DR15 = 0x0F | (RegisterType.Debug << 5),
+        public static Register_ DR15 { get; } = new Register_(0x0F, RegisterType.Debug);
         // Floating point stack register.
-    }
-
-
-
-    /// <summary>
-    /// Extensions for the <see cref="Register"/> type.
-    /// </summary>
-    public static class RegisterExtensions
-    {
-        /// <summary>
-        /// Returns the register type of the specified register.
-        /// </summary>
-        /// <param name="register">The <see cref="Register"/> to get the type for.</param>
-        /// <returns>The <see cref="RegisterType"/> of the register.</returns>
-        public static RegisterType GetRegisterType(this Register register)
-        {
-            return (RegisterType)((int)register >> 5);
-        }
-
-        /// <summary>
-        /// Returns the value of the specified register.
-        /// </summary>
-        /// <param name="register">The <see cref="Register"/> to get the value for.</param>
-        /// <returns>The value (between 0 and 15) of the register.</returns>
-        public static byte GetValue(this Register register)
-        {
-            return (byte)((int)register & 0xF);
-        }
-
-        /// <summary>
-        /// Returns the register size of the specified register.
-        /// </summary>
-        /// <param name="register">The <see cref="Register"/> to get the size for.</param>
-        /// <returns>The <see cref="DataSize"/> of the register.</returns>
-        public static DataSize GetSize(this Register register)
-        {
-            return GetRegisterType(register).GetSize();
-        }
     }
 }

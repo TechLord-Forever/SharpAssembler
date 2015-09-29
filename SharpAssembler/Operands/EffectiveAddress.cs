@@ -32,7 +32,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// An effective address.
     /// </summary>
     public partial class EffectiveAddress : Operand,
-        IRegisterOrMemoryOperand, ISourceOperand
+        IOperand
     {
         #region Constructors
         /// <summary>
@@ -156,12 +156,12 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             DataSize addressSize = GetAddressSize(context);
 
-            instr.SetOperandSize(context.Representation.Architecture.OperandSize, Size);
+            instr.SetOperandSize(context.Architecture.OperandSize, Size);
 
-            if (context.Representation.Architecture.OperandSize != DataSize.Bit64 &&
+            if (context.Architecture.OperandSize != DataSize.Bit64 &&
                 Size == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit operand cannot be used with non-64-bit operand sizes.");
-            if (context.Representation.Architecture.AddressSize != DataSize.Bit64 &&
+            if (context.Architecture.AddressSize != DataSize.Bit64 &&
                 addressSize == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit effective address cannot be used with non-64-bit address sizes.");
 
@@ -186,7 +186,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             // When the registers have a width different from the current
             // operating mode width, then we have to add an address size prefix.
             // At this point, we know that the widths are valid.
-            instr.SetAddressSize(context.Representation.Architecture.AddressSize, addressSize);
+            instr.SetAddressSize(context.Architecture.AddressSize, addressSize);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             DataSize addressSize = AddressSize;
             DataSize baseWidth = BaseRegister.GetSize();
             DataSize indexWidth = IndexRegister.GetSize();
-            DataSize contextAddressSize = context.Representation.Architecture.AddressSize;
+            DataSize contextAddressSize = context.Architecture.AddressSize;
 
             if (addressSize == DataSize.None)
                 addressSize = baseWidth;
@@ -263,7 +263,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                     // Does the result have a (resolved or not resolved) reference?
                     if (displacementExpression.Reference != null && !displacementExpression.Reference.Resolved)
                         // When the result has a reference, use the architecture's address size.
-                        displacementSize = context.Representation.Architecture.AddressSize;
+                        displacementSize = context.Architecture.AddressSize;
                     else
                         // Otherwise, use the most efficient word size.
                         displacementSize = MathExt.GetSizeOfValue(displacementExpression.Evaluate(context));    //.Constant);

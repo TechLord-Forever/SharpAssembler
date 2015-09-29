@@ -52,7 +52,5 @@ namespace SharpAssembler.Architectures.X86
         /// An offset (reloff) relative to the instruction pointer.
         /// </summary>
         RelativeOffset = 0x0040,
-        // TODO: Add the rest.
-
     }
 }

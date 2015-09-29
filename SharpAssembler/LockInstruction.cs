@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SharpAssembler.Architectures.X86.Operands;
-using System.Diagnostics.Contracts;
 
 namespace SharpAssembler.Architectures.X86
 {
@@ -23,7 +21,6 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public bool Lock { get; set; } = false;
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="LockInstruction"/> class.
         /// </summary>
@@ -32,8 +29,6 @@ namespace SharpAssembler.Architectures.X86
         public LockInstruction(X86Opcode opcode, params Operand[] operands)
             : this(opcode, (IList<Operand>)operands)
         {
-            Contract.Requires<ArgumentNullException>(opcode != null);
-            Contract.Requires<ArgumentNullException>(operands != null);
         }
 
         /// <summary>
@@ -44,10 +39,7 @@ namespace SharpAssembler.Architectures.X86
         public LockInstruction(X86Opcode opcode, IList<Operand> operands)
             : base(opcode, operands)
         {
-            Contract.Requires<ArgumentNullException>(opcode != null);
-            Contract.Requires<ArgumentNullException>(operands != null);
         }
-        #endregion
 
         /// <inheritdoc />
         protected override bool GetLockPrefix()

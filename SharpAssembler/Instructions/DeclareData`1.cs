@@ -122,11 +122,5 @@ namespace SharpAssembler.Instructions
             Marshal.FreeHGlobal(ptr);
             return length;
         }
-
-        /// <inheritdoc />
-        public override void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitDeclareData(this);
-        }
     }
 }

@@ -57,12 +57,5 @@ namespace SharpAssembler
         /// The operand size may be overrided for individual instructions, depending on the architecture.
         /// </remarks>
         DataSize OperandSize { get; }
-
-        /// <summary>
-        /// Creates a new <see cref="Context"/> object which can be used to construct and encode an object file.
-        /// </summary>
-        /// <param name="objectfile">The <see cref="ObjectFile"/> for which the context is created.</param>
-        /// <returns>An architecture specific <see cref="Context"/>.</returns>
-        Context CreateContext(ObjectFile objectfile);
     }
 }

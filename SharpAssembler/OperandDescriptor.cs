@@ -9,7 +9,6 @@ namespace SharpAssembler.Architectures.X86
     /// </summary>
     public struct OperandDescriptor : IEquatable<OperandDescriptor>
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="OperandDescriptor"/> structure.
         /// </summary>
@@ -18,12 +17,6 @@ namespace SharpAssembler.Architectures.X86
         public OperandDescriptor(OperandType operandType, DataSize size)
             : this(operandType, RegisterType.None, size, OperandEncoding.Default)
         {
-            Contract.Requires<ArgumentException>(operandType != OperandType.FixedRegister,
-                "To specify a fixed register, use the appropriate constructor.");
-            Contract.Requires<ArgumentException>(
-                operandType != OperandType.RegisterOperand && operandType != OperandType.RegisterOrMemoryOperand,
-                "A register type must be specified when the type of operand may take a register." +
-                "Use the appropriate constructor.");
         }
 
         /// <summary>
@@ -34,12 +27,6 @@ namespace SharpAssembler.Architectures.X86
         public OperandDescriptor(OperandType operandType, RegisterType registerType)
             : this(operandType, registerType, OperandEncoding.Default)
         {
-            Contract.Requires<ArgumentException>(operandType != OperandType.FixedRegister,
-                "To specify a fixed register, use the appropriate constructor.");
-            Contract.Requires<ArgumentException>(
-                (operandType != OperandType.RegisterOperand && operandType != OperandType.RegisterOrMemoryOperand)
-                || registerType != RegisterType.None,
-                "A register type must be specified when the type of operand may take a register.");
         }
 
         /// <summary>
@@ -51,12 +38,6 @@ namespace SharpAssembler.Architectures.X86
         public OperandDescriptor(OperandType operandType, DataSize size, OperandEncoding encoding)
             : this(operandType, RegisterType.None, size, encoding)
         {
-            Contract.Requires<ArgumentException>(operandType != OperandType.FixedRegister,
-                "To specify a fixed register, use the appropriate constructor.");
-            Contract.Requires<ArgumentException>(
-                operandType != OperandType.RegisterOperand && operandType != OperandType.RegisterOrMemoryOperand,
-                "A register type must be specified when the type of operand may take a register." +
-                "Use the appropriate constructor.");
         }
 
         /// <summary>
@@ -68,12 +49,6 @@ namespace SharpAssembler.Architectures.X86
         public OperandDescriptor(OperandType operandType, RegisterType registerType,    OperandEncoding encoding)
             : this(operandType, registerType, DataSize.None, encoding)
         {
-            Contract.Requires<ArgumentException>(operandType != OperandType.FixedRegister,
-                "To specify a fixed register, use the appropriate constructor.");
-            Contract.Requires<ArgumentException>(
-                (operandType != OperandType.RegisterOperand && operandType != OperandType.RegisterOrMemoryOperand)
-                || registerType != RegisterType.None,
-                "A register type must be specified when the type of operand may take a register.");
         }
 
         /// <summary>
@@ -85,13 +60,6 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="encoding">Specifies how the operand is encoded.</param>
         private OperandDescriptor(OperandType operandType, RegisterType registerType, DataSize size, OperandEncoding encoding)
         {
-            Contract.Requires<ArgumentException>(operandType != OperandType.FixedRegister,
-                "To specify a fixed register, use the appropriate constructor.");
-            Contract.Requires<ArgumentException>(
-                (operandType != OperandType.RegisterOperand && operandType != OperandType.RegisterOrMemoryOperand)
-                || registerType != RegisterType.None,
-                "A register type must be specified when the type of operand may take a register.");
-
             this.operandType = operandType;
             this.registerType = registerType;
             this.size = (size != DataSize.None ? size : registerType.GetSize());
@@ -111,7 +79,6 @@ namespace SharpAssembler.Architectures.X86
             fixedRegister = register;
             operandEncoding = OperandEncoding.Default;
         }
-        #endregion
 
         #region Properties
         private OperandType operandType;

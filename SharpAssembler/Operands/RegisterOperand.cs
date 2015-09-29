@@ -33,7 +33,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// In the Intel manuals, a register operand is denoted as <c>r8</c>, <c>r16</c>, <c>r32</c> or <c>r64</c>.
     /// </remarks>
     public partial class RegisterOperand : Operand,
-        IRegisterOrMemoryOperand, ISourceOperand
+        IOperand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterOperand"/> class.
@@ -88,7 +88,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
         internal override void Construct(Context context, EncodedInstruction instr)
         {
-            if (context.Representation.Architecture.OperandSize != DataSize.Bit64 &&
+            if (context.Architecture.OperandSize != DataSize.Bit64 &&
                 Register.GetSize() == DataSize.Bit64)
             {
                 throw new AssemblerException(string.Format(
@@ -117,7 +117,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             }
 
             // Set the operand size to the size of the register.
-            instr.SetOperandSize(context.Representation.Architecture.OperandSize, Register.GetSize());
+            instr.SetOperandSize(context.Architecture.OperandSize, Register.GetSize());
         }
 
         /// <summary>

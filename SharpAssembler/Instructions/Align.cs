@@ -91,14 +91,7 @@ namespace SharpAssembler.Instructions
         public override IEnumerable<IEmittable> Construct(Context context)
         {
             int padding = (int)context.Address.GetPadding(Boundary);
-
             return new IEmittable[]{ new RawEmittable(GeneratePadding(context, padding)) };
-        }
-
-        /// <inheritdoc />
-        public override void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitAlign(this);
         }
     }
 }

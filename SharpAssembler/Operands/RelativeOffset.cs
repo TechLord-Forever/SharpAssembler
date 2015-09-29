@@ -79,14 +79,14 @@ namespace SharpAssembler.Architectures.X86.Operands
             // Determine the size of the immediate operand. Otherwise the length is not calculated correctly.
             DataSize size = PreferredSize;
             if (size == DataSize.None)
-                size = context.Representation.Architecture.OperandSize;
+                size = context.Architecture.OperandSize;
             if (size >= DataSize.Bit64)
                 throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
                     "{0}-bit operands cannot be encoded.",
                     ((int)size) << 3));
             else if (size == DataSize.None)
                 throw new AssemblerException("The operand size is not specified.");
-            instr.SetOperandSize(context.Representation.Architecture.OperandSize, size);
+            instr.SetOperandSize(context.Architecture.OperandSize, size);
             instr.ImmediateSize = size;
 
             // Let's evaluate the expression.

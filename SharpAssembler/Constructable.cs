@@ -23,16 +23,15 @@
  */
 #endregion
 using System.Collections;
-using SharpAssembler.Instructions;
 using System.Collections.Generic;
 
 namespace SharpAssembler
 {
     /// <summary>
-    /// An interface for entities which can be contained in a <see cref="Section"/> and can create a
+    /// An interface for entities which can be contained can create a
     /// representation of themselves.
     /// </summary>
-    public abstract class Constructable : IAnnotatable, IObjectFileVisitable
+    public abstract class Constructable// : IAnnotatable//, IObjectFileVisitable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Constructable"/> class.
@@ -51,29 +50,10 @@ namespace SharpAssembler
         public IDictionary Annotations { get; private set; } = new Hashtable();
 
         /// <summary>
-        /// Gets or sets a <see cref="Comment"/> which is associated with this <see cref="Constructable"/>.
-        /// </summary>
-        /// <value>A <see cref="Comment"/>; or <see langword="null"/> when no comment is associated.</value>
-        public Comment Comment { get; set; }
-
-        /// <summary>
         /// Modifies the context and constructs an emittable representing this constructable.
         /// </summary>
         /// <param name="context">The mutable <see cref="Context"/> in which the emittable will be constructed.</param>
         /// <returns>A list of constructed emittables; or an empty list.</returns>
         public abstract IEnumerable<IEmittable> Construct(Context context);
-
-        /// <inheritdoc />
-        public virtual void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitConstructable(this);
-        }
-
-        /// <summary>
-        /// Gets the <see cref="Section"/> in which this constructable is declared.
-        /// </summary>
-        /// <value>A <see cref="Section"/>; or <see langword="null"/> when the constructable is not part of any
-        /// section.</value>
-        public Section Parent { get; internal set; }
     }
 }

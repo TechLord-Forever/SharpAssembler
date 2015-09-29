@@ -39,24 +39,15 @@ namespace SharpAssembler
         /// <summary>
         /// Initializes a new instance of the <see cref="Context"/> class.
         /// </summary>
-        /// <param name="representation">The representation being assembled.</param>
-        public Context(ObjectFile representation)
+        public Context()
         {
-            Representation = representation;
         }
 
         /// <summary>
-        /// Gets the <see cref="ObjectFile"/> representation being assembled.
+        /// Gets the architecture for which this object file was created.
         /// </summary>
-        /// <value>An <see cref="ObjectFile"/>.</value>
-        public ObjectFile Representation { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="Section"/> currently being processed.
-        /// </summary>
-        /// <value>A <see cref="Section"/>; or <see langword="null"/> when no section is currently being
-        /// processed.</value>
-        public Section Section { get; set; }
+        /// <value>An <see cref="IArchitecture"/>.</value>
+        public IArchitecture Architecture { get; private set; }
 
         /// <summary>
         /// Gets or sets the current virtual address.
@@ -87,7 +78,7 @@ namespace SharpAssembler
         public virtual void Reset()
         {
             Address = 0;
-            Section = null;
         }
     }
 }
+

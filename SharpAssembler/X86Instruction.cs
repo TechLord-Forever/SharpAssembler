@@ -33,20 +33,14 @@ namespace SharpAssembler.Architectures.X86
     /// <summary>
     /// An x86-64 instruction.
     /// </summary>
-    public partial class X86Instruction : Constructable, IInstruction
+    public partial class X86Instruction : Constructable
     {
         /// <summary>
         /// Gets the opcode of the instruction.
         /// </summary>
-        /// <value>The <see cref="IOpcode"/> of the instruction,
+        /// <value>The <see cref="X86Opcode"/> of the instruction,
         /// which describes the semantics of the instruction.</value>
         public X86Opcode Opcode { get; private set; }
-
-        /// <inheritdoc />
-        IOpcode IInstruction.Opcode
-        {
-            get { return Opcode; }
-        }
 
         /// <summary>
         /// Gets or sets an explicit operand size for this instruction.
@@ -59,7 +53,6 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public DataSize ExplicitOperandSize { get; set; } = DataSize.None;
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Instruction"/> class.
         /// </summary>
@@ -81,15 +74,8 @@ namespace SharpAssembler.Architectures.X86
             Opcode = opcode;
             this.operands = operands.ToArray();
         }
-        #endregion
 
-        #region Operands
         private Operand[] operands;
-        /// <inheritdoc />
-        ReadOnlyCollection<IOperand> IInstruction.GetOperands()
-        {
-            return new ReadOnlyCollection<IOperand>((IOperand[])operands);
-        }
 
         /// <summary>
         /// Returns the operands to the instruction.
@@ -99,9 +85,7 @@ namespace SharpAssembler.Architectures.X86
         {
             return new ReadOnlyCollection<Operand>(operands);
         }
-        #endregion
 
-        #region Methods
         /// <inheritdoc />
         public override string ToString()
         {
@@ -109,9 +93,7 @@ namespace SharpAssembler.Architectures.X86
                 Opcode.Mnemonic,
                 string.Join(", ", GetOperands()));
         }
-        #endregion
 
-        #region Construction
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)
         {
@@ -121,7 +103,7 @@ namespace SharpAssembler.Architectures.X86
                 throw new AssemblerException("No matching instruction variant was found.");
 
             // Construct the chosen variant.
-            EncodedInstruction instr = variant.Construct(context, GetOperands(), GetLockPrefix());
+            var instr = variant.Construct(context, GetOperands(), GetLockPrefix());
 
             return new IEmittable[] { instr };
         }
@@ -152,6 +134,5 @@ namespace SharpAssembler.Architectures.X86
 
             return variant;
         }
-        #endregion
     }
 }

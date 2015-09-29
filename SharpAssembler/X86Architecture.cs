@@ -22,9 +22,6 @@
  * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #endregion
-using System;
-using System.ComponentModel;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 
 namespace SharpAssembler.Architectures.X86
@@ -34,14 +31,11 @@ namespace SharpAssembler.Architectures.X86
     /// </summary>
     public class X86Architecture : IArchitecture
     {
-        #region Fields
         /// <summary>
         /// The default CPU type.
         /// </summary>
         private static readonly CpuType DefaultCpuType = CpuType.IntelSandyBridge;
-        #endregion
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Architecture"/> class.
         /// </summary>
@@ -50,7 +44,8 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public X86Architecture()
             : this(null, CpuFeatures.None, DataSize.None)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Architecture"/> class.
@@ -70,7 +65,8 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="features">The features of the CPU.</param>
         public X86Architecture(CpuFeatures features)
             : this(null, features, DataSize.None)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Architecture"/> class.
@@ -83,11 +79,6 @@ namespace SharpAssembler.Architectures.X86
         public X86Architecture(CpuType type, DataSize addressingMode)
             : this(type, CpuFeatures.None, addressingMode)
         {
-            #region Contract
-            Contract.Requires<InvalidEnumArgumentException>(Enum.IsDefined(typeof(DataSize), addressingMode));
-            Contract.Requires<ArgumentException>(addressingMode == DataSize.None || IsValidAddressSize(type, addressingMode),
-                "Specify a valid address size for this architecture and CPU type.");
-            #endregion
         }
 
         /// <summary>
@@ -98,11 +89,6 @@ namespace SharpAssembler.Architectures.X86
         public X86Architecture(CpuFeatures features, DataSize addressingMode)
             : this(null, features, addressingMode)
         {
-            #region Contract
-            Contract.Requires<InvalidEnumArgumentException>(Enum.IsDefined(typeof(DataSize), addressingMode));
-            Contract.Requires<ArgumentException>(addressingMode == DataSize.None || IsValidAddressSize(null, addressingMode),
-                "Specify a valid address size for this architecture.");
-            #endregion
         }
 
         /// <summary>
@@ -119,12 +105,6 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public X86Architecture(CpuType type, CpuFeatures features, DataSize addressingMode, bool ripRelative = false)
         {
-            #region Contract
-            Contract.Requires<InvalidEnumArgumentException>(Enum.IsDefined(typeof(DataSize), addressingMode));
-            Contract.Requires<ArgumentException>(addressingMode == DataSize.None || IsValidAddressSize(type, addressingMode),
-                "Specify a valid address size for this architecture and CPU type.");
-            #endregion
-
             // When none of the parameters (type, features) are specified, use the default
             // CPU type.
             if (type == null && features == CpuFeatures.None)
@@ -139,9 +119,7 @@ namespace SharpAssembler.Architectures.X86
             operandSize = addressingMode;
             useRIPRelativeAddressing = ripRelative;
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets the name of the architecture.
         /// </summary>
@@ -222,18 +200,8 @@ namespace SharpAssembler.Architectures.X86
         {
             get { return useRIPRelativeAddressing; }
         }
-        #endregion
 
         #region Methods
-        /// <summary>
-        /// Creates a new <see cref="Context"/> object which can be used to construct and encode an object file.
-        /// </summary>
-        /// <param name="objectfile">The <see cref="ObjectFile"/> for which the context is created.</param>
-        /// <returns>An architecture specific <see cref="Context"/>.</returns>
-        public Context CreateContext(ObjectFile objectfile)
-        {
-            return new Context(objectfile);
-        }
 
         /// <summary>
         /// Gets the default size of the address.

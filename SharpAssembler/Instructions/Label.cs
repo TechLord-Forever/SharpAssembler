@@ -22,7 +22,6 @@
  * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #endregion
-using System;
 using SharpAssembler.Symbols;
 using System.Collections.Generic;
 
@@ -121,21 +120,6 @@ namespace SharpAssembler.Instructions
         void IAssociatable.SetAssociatedSymbol(Symbol symbol)
         {
             definedSymbol = symbol;
-        }
-
-        /// <inheritdoc />
-        public override void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitLabel(this);
-        }
-
-        /// <summary>
-        /// Gets the <see cref="IFile"/> in which this <see cref="Section"/> is defined.
-        /// </summary>
-        /// <value>A <see cref="IFile"/>.</value>
-        IFile IAssociatable.ParentFile
-        {
-            get { throw new NotImplementedException(); }
         }
     }
 }

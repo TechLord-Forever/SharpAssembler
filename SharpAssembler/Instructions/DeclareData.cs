@@ -158,11 +158,5 @@ namespace SharpAssembler.Instructions
         {
             yield return new ExpressionEmittable(Expression.Compile()(context), Size);
         }
-
-        /// <inheritdoc />
-        public override void Accept(IObjectFileVisitor visitor)
-        {
-            visitor.VisitDeclareData(this);
-        }
     }
 }

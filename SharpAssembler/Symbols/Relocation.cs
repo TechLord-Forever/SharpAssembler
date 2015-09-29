@@ -23,7 +23,6 @@
  */
 #endregion
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace SharpAssembler.Symbols
@@ -31,21 +30,19 @@ namespace SharpAssembler.Symbols
     /// <summary>
     /// Specifies a single relocation.
     /// </summary>
-    public sealed class Relocation : IAnnotatable
+    public sealed class Relocation// : IAnnotatable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Relocation"/> class.
         /// </summary>
         /// <param name="symbol">The target symbol.</param>
-        /// <param name="section">The section in which the storage unit to be relocated resides.</param>
-        /// <param name="offset">The offset relative to the start of <paramref name="section"/> at which the storage
+        /// <param name="offset">The offset relative to the start of at which the storage
         /// unit to be relocated resides.</param>
         /// <param name="addend">The constant used to compute the value of the relocatable field.</param>
         /// <param name="type">The type of relocation compution to perform.</param>
-        public Relocation(Symbol symbol, Section section, Int128 offset, Int128 addend, RelocationType type)
+        public Relocation(Symbol symbol, Int128 offset, Int128 addend, RelocationType type)
         {
             TargetSymbol = symbol;
-            Section = section;
             Offset = offset;
             Addend = addend;
             Type = type;
@@ -64,17 +61,9 @@ namespace SharpAssembler.Symbols
         public Symbol TargetSymbol { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Section"/> in which the storage unit to be relocated resides.
-        /// </summary>
-        /// <value>The <see cref="Section"/> containing the storage unit.</value>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public Section Section { get; set; }
-
-        /// <summary>
         /// Gets or sets the offset of the storage unit to be relocated, relative to the start of the section
         /// containing the storage unit.
         /// </summary>
-        /// <value>The offset of the storage unit relative to the start of <see cref="Section"/>.</value>
         public Int128 Offset { get; set; }
 
         /// <summary>
@@ -116,10 +105,8 @@ namespace SharpAssembler.Symbols
         {
             return string.Format(
                 CultureInfo.InvariantCulture,
-                "<Relocation [{0} + 0x{1:X} -> {3}>",
-                Section.Identifier,
+                "<Relocation [0x{1:X} -> {3}>",
                 Offset,
-                //length, "({2} bytes)]"
                 TargetSymbol.Identifier);
         }
         #endregion

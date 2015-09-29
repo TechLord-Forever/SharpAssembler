@@ -37,26 +37,20 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// </remarks>
     public class FarPointer : Operand
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="FarPointer"/> class.
         /// </summary>
         /// <param name="selector">The 16-bit selector expression.</param>
         /// <param name="offset">The offset expression.</param>
         /// <param name="size">The size of the offset; or <see cref="DataSize.None"/> to specify no size.</param>
-        public FarPointer(
-            Expression<Func<Context, ReferenceOffset>> selector,
-            Expression<Func<Context, ReferenceOffset>> offset,
-            DataSize size)
+        public FarPointer(Expression<Func<Context, ReferenceOffset>> selector, Expression<Func<Context, ReferenceOffset>> offset, DataSize size)
             : base(size)
         {
             Selector = selector;
             Offset = offset;
             PreferredSize = size;
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets or sets the expression evaluating to the 16-bit selector.
         /// </summary>
@@ -68,9 +62,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <value>A function taking a <see cref="Context"/> and returning a <see cref="ReferenceOffset"/>.</value>
         public Expression<Func<Context, ReferenceOffset>> Offset { get; set; }
-        #endregion
 
-        #region Methods
         /// <summary>
         /// Constructs the operand's representation.
         /// </summary>
@@ -78,8 +70,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
         internal override void Construct(Context context, EncodedInstruction instr)
         {
-            // CONTRACT: Operand
-
             ReferenceOffset offsetResult = Offset.Compile()(context);
             ReferenceOffset selectorResult = Selector?.Compile()(context);
 
@@ -90,7 +80,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                 // Does the result have a (resolved or not resolved) reference?
                 if (offsetResult.Reference != null)
                     // When the result has a reference, use the architecture's operand size.
-                    size = context.Representation.Architecture.OperandSize;
+                    size = context.Architecture.OperandSize;
                 else
                     // Otherwise, use the most efficient word size.
                     size = MathExt.GetSizeOfValue(offsetResult.Constant);
@@ -110,7 +100,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             instr.ImmediateSize = size;
             instr.ExtraImmediate = selectorResult;
             instr.ExtraImmediateSize = (DataSize)2;
-            instr.SetOperandSize(context.Representation.Architecture.OperandSize, size);
+            instr.SetOperandSize(context.Architecture.OperandSize, size);
         }
 
         /// <summary>
@@ -153,6 +143,5 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             return string.Format(CultureInfo.InvariantCulture, "{0}:{1}", Selector, Offset);
         }
-        #endregion
     }
 }

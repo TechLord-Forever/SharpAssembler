@@ -10,14 +10,11 @@ namespace SharpAssembler.Architectures.X86
     /// <summary>
     /// A description for an instruction.
     /// </summary>
-    public abstract partial class X86Opcode : IOpcode
+    public abstract partial class X86Opcode
     {
-        private readonly string mnemonic;
         /// <inheritdoc />
-        public virtual string Mnemonic
-        {
-            get { return mnemonic; }
-        }
+        public virtual string Mnemonic { get; protected set; }
+
 
         /// <summary>
         /// Gets a read-only ordered collection of opcode variants.
@@ -39,7 +36,6 @@ namespace SharpAssembler.Architectures.X86
             get { return false; }
         }
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Opcode"/> class.
         /// </summary>
@@ -49,10 +45,9 @@ namespace SharpAssembler.Architectures.X86
         {
             Contract.Requires<ArgumentNullException>(mnemonic != null);
             Contract.Requires<ArgumentNullException>(variants != null);
-            this.mnemonic = mnemonic;
+            Mnemonic = mnemonic;
             Variants = variants.ToList().AsReadOnly();
         }
-        #endregion
 
         /// <summary>
         /// Creates a new instruction for this opcode.

@@ -34,127 +34,58 @@ namespace SharpAssembler.Architectures.X86
     /// </summary>
     public sealed partial class EncodedInstruction : IEmittable
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="EncodedInstruction"/> class.
         /// </summary>
         public EncodedInstruction()
         {
         }
-        #endregion
 
-        #region Properties
-        private PrefixLockRepeat prefix1 = PrefixLockRepeat.None;
         /// <summary>
         /// Gets or sets the group 1 prefix used.
         /// </summary>
         /// <value>A member of the <see cref="PrefixLockRepeat"/> enumeration; or
         /// <see cref="PrefixLockRepeat.None"/> to specify no prefix.
         /// The default is <see cref="PrefixLockRepeat.None"/>.</value>
-        public PrefixLockRepeat Prefix1
-        {
-            get
-            {
-                return prefix1;
-            }
-            set
-            {
-                prefix1 = value;
-            }
-        }
+        public PrefixLockRepeat Prefix1 { get; set; } = PrefixLockRepeat.None;
 
-        private PrefixSegmentBranch prefix2 = PrefixSegmentBranch.None;
         /// <summary>
         /// Gets or sets the group 2 prefix used.
         /// </summary>
         /// <value>A member of the <see cref="PrefixSegmentBranch"/> enumeration; or
         /// <see cref="PrefixSegmentBranch.None"/> to specify no prefix.
         /// The default is <see cref="PrefixSegmentBranch.None"/>.</value>
-        public PrefixSegmentBranch Prefix2
-        {
-            get
-            {
-                return prefix2;
-            }
-            set
-            {
-                prefix2 = value;
-            }
-        }
+        public PrefixSegmentBranch Prefix2 { get; set; } = PrefixSegmentBranch.None;
 
-        private PrefixAddressSizeOverride prefix3 = PrefixAddressSizeOverride.None;
         /// <summary>
         /// Gets or sets the group 3 prefix used.
         /// </summary>
         /// <value>A member of the <see cref="PrefixAddressSizeOverride"/> enumeration; or
         /// <see cref="PrefixAddressSizeOverride.None"/> to specify no prefix.
         /// The default is <see cref="PrefixAddressSizeOverride.None"/>.</value>
-        public PrefixAddressSizeOverride Prefix3
-        {
-            get
-            {
-                return prefix3;
-            }
-            set
-            {
-                prefix3 = value;
-            }
-        }
+        public PrefixAddressSizeOverride Prefix3 { get; set; } = PrefixAddressSizeOverride.None;
 
-        private PrefixOperandSizeOverride prefix4 = PrefixOperandSizeOverride.None;
         /// <summary>
         /// Gets or sets the group 4 prefix used.
         /// </summary>
         /// <value>A member of the <see cref="PrefixOperandSizeOverride"/> enumeration; or
         /// <see cref="PrefixOperandSizeOverride.None"/> to specify no prefix.
         /// The default is <see cref="PrefixOperandSizeOverride.None"/>.</value>
-        public PrefixOperandSizeOverride Prefix4
-        {
-            get
-            {
-                return prefix4;
-            }
-            set
-            {
-                prefix4 = value;
-            }
-        }
+        public PrefixOperandSizeOverride Prefix4 { get; set; } = PrefixOperandSizeOverride.None;
 
-        private byte[] mandatoryPrefix = new byte[0];
         /// <summary>
         /// Gets or sets the mandatory prefix.
         /// </summary>
         /// <value>The mandatory prefix as an array of bytes. The default is an empty array.</value>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        public byte[] MandatoryPrefix
-        {
-            get
-            {
-                return mandatoryPrefix;
-            }
-            set
-            {
-                mandatoryPrefix = value;
-            }
-        }
+        public byte[] MandatoryPrefix { get; set; } = new byte[0];
 
-        private byte[] opcode = new byte[0];
         /// <summary>
         /// Gets or sets the opcode of the encoded instruction.
         /// </summary>
         /// <value>The opcode bytes of the instruction. The default is an empty array.</value>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        public byte[] Opcode
-        {
-            get
-            {
-                return opcode;
-            }
-            set
-            {
-                opcode = value;
-            }
-        }
+        public byte[] Opcode { get; set; } = new byte[0];
 
         private byte opcodeReg = 0;
         /// <summary>
@@ -167,10 +98,7 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public byte OpcodeReg
         {
-            get
-            {
-                return opcodeReg;
-            }
+            get { return opcodeReg; }
             set
             {
                 if (value > 0xf)
@@ -179,7 +107,6 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private ModRMByte modRM = null;
         /// <summary>
         /// Gets the ModR/M byte to encode.
         /// </summary>
@@ -189,12 +116,8 @@ namespace SharpAssembler.Architectures.X86
         /// To ensure that a ModR/M byte will be created (i.e. that this property is not <see langword="null"/>), call
         /// the <see cref="SetModRMByte"/> method.
         /// </remarks>
-        public ModRMByte ModRM
-        {
-            get { return modRM; }
-        }
+        public ModRMByte ModRM { get; private set; }
 
-        private SibByte sib = null;
         /// <summary>
         /// Gets the SIB byte to encode.
         /// </summary>
@@ -204,10 +127,7 @@ namespace SharpAssembler.Architectures.X86
         /// To ensure that a ModR/M byte will be created (i.e. that this property is not <see langword="null"/>), call
         /// the <see cref="SetSIBByte"/> method.
         /// </remarks>
-        public SibByte Sib
-        {
-            get { return sib; }
-        }
+        public SibByte Sib { get; private set; }
 
         private byte fixedReg;
         /// <summary>
@@ -222,10 +142,7 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public byte FixedReg
         {
-            get
-            {
-                return fixedReg;
-            }
+            get { return fixedReg; }
             set
             {
                 if (value > 0x7)
@@ -234,7 +151,6 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private bool? use64BitOperands = null;
         /// <summary>
         /// Gets or sets whether 64-bit operands are used, and whether a REX prefix is used.
         /// </summary>
@@ -245,44 +161,22 @@ namespace SharpAssembler.Architectures.X86
         /// <see langword="null"/>, no REX byte is encoded, regardless of the fourth bit of the SIB byte's BASE o
         /// INDEX fields, or the fourth bit of the ModR/M byte's RM or REG fields.
         /// </remarks>
-        public bool? Use64BitOperands
-        {
-            get { return use64BitOperands; }
-            set { use64BitOperands = value; }
-        }
+        public bool? Use64BitOperands { get; set; } = null;
 
-        private ReferenceOffset displacement = null;
         /// <summary>
         /// Gets or sets the displacement value.
         /// </summary>
         /// <value>An <see cref="ReferenceOffset"/> specifying the displacement value or symbol;
         /// or <see langword="null"/> to use no displacement. The default is <see langword="null"/>.</value>
-        public ReferenceOffset Displacement
-        {
-            get { return displacement; }
-            set { displacement = value; }
-        }
+        public ReferenceOffset Displacement { get; set; } = null;
 
-        private DataSize displacementSize = DataSize.None;
         /// <summary>
         /// Gets or sets the actual size of the displacement value.
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration. The default is
         /// <see cref="DataSize.None"/>.</value>
-        public DataSize DisplacementSize
-        {
-            get
-            {
-                return displacementSize;
-            }
-            set
-            {
-                displacementSize = value;
-            }
-        }
+        public DataSize DisplacementSize { get; set; } = DataSize.None;
 
-        // FIXME: Where do AMD 3DNow! bytes go in here?
-        private ReferenceOffset immediate = null;
         /// <summary>
         /// Gets or sets the immediate value.
         /// </summary>
@@ -291,60 +185,28 @@ namespace SharpAssembler.Architectures.X86
         /// <remarks>
         /// The immediate value may be used as third opcode byte for AMD 3DNow! instructions.
         /// </remarks>
-        public ReferenceOffset Immediate
-        {
-            get { return immediate; }
-            set { immediate = value; }
-        }
+        public ReferenceOffset Immediate { get; set; }// FIXME: Where do AMD 3DNow! bytes go in here?
 
-        private DataSize immediateSize = DataSize.None;
         /// <summary>
         /// Gets or sets the actual size of the immediate value.
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration.
         /// The default is <see cref="DataSize.None"/>.</value>
-        public DataSize ImmediateSize
-        {
-            get
-            {
-                return immediateSize;
-            }
-            set
-            {
-                immediateSize = value;
-            }
-        }
+        public DataSize ImmediateSize { get; set; } = DataSize.None;
 
-        private ReferenceOffset extraImmediate = null;
         /// <summary>
         /// Gets or sets the immediate extra value.
         /// </summary>
         /// <value>An <see cref="ReferenceOffset"/> specifying the extra immediate value or symbol;
         /// or <see langword="null"/> to use no extra immediate. The default is <see langword="null"/>.</value>
-        public ReferenceOffset ExtraImmediate
-        {
-            get { return extraImmediate; }
-            set { extraImmediate = value; }
-        }
+        public ReferenceOffset ExtraImmediate { get; set; }
 
-        private DataSize extraImmediateSize = DataSize.None;
         /// <summary>
         /// Gets or sets the actual size of the extra immediate value.
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration.
         /// The default is <see cref="DataSize.None"/>.</value>
-        public DataSize ExtraImmediateSize
-        {
-            get
-            {
-                return extraImmediateSize;
-            }
-            set
-            {
-                extraImmediateSize = value;
-            }
-        }
-        #endregion
+        public DataSize ExtraImmediateSize { get; set; } = DataSize.None;
 
         #region Methods
         /// <summary>
@@ -356,43 +218,43 @@ namespace SharpAssembler.Architectures.X86
             int length = 0;
 
             // Legacy prefixes
-            if (prefix1 != PrefixLockRepeat.None)
+            if (Prefix1 != PrefixLockRepeat.None)
                 length++;
-            if (prefix2 != PrefixSegmentBranch.None)
+            if (Prefix2 != PrefixSegmentBranch.None)
                 length++;
-            if (prefix3 != PrefixAddressSizeOverride.None)
+            if (Prefix3 != PrefixAddressSizeOverride.None)
                 length++;
-            if (prefix4 != PrefixOperandSizeOverride.None)
+            if (Prefix4 != PrefixOperandSizeOverride.None)
                 length++;
 
             // Mandatory prefix
-            if (mandatoryPrefix != null)
-                length += mandatoryPrefix.Length;
+            if (MandatoryPrefix != null)
+                length += MandatoryPrefix.Length;
 
             // REX prefix
-            if (use64BitOperands.HasValue)
+            if (Use64BitOperands.HasValue)
                 length++;
 
             // Opcode
-            if (opcode != null)
-                length += opcode.Length;
+            if (Opcode != null)
+                length += Opcode.Length;
 
             // ModR/M byte
-            if (modRM != null)
+            if (ModRM != null)
                 length++;
 
             // SIB byte
-            if (sib != null)
+            if (Sib != null)
                 length++;
 
             // Displacement
-            length += (int)displacementSize;
+            length += (int)DisplacementSize;
 
             // Immediate
-            length += (int)immediateSize;
+            length += (int)ImmediateSize;
 
             // Extra Immediate
-            length += (int)extraImmediateSize;
+            length += (int)ExtraImmediateSize;
 
             return length;
         }
@@ -417,9 +279,9 @@ namespace SharpAssembler.Architectures.X86
             EmitModRMByte(writer);
             EmitSIBByte(writer);
 
-            EmitReferenceOffset(writer, instructionOffset, context, displacement, displacementSize);
-            EmitReferenceOffset(writer, instructionOffset, context, immediate, immediateSize);
-            EmitReferenceOffset(writer, instructionOffset, context, extraImmediate, extraImmediateSize);
+            EmitReferenceOffset(writer, instructionOffset, context, Displacement, DisplacementSize);
+            EmitReferenceOffset(writer, instructionOffset, context, Immediate, ImmediateSize);
+            EmitReferenceOffset(writer, instructionOffset, context, ExtraImmediate, ExtraImmediateSize);
 
             return checked((int)(writer.BaseStream.Position - instructionOffset));
         }
@@ -430,14 +292,14 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         private void EmitLegacyPrefixes(BinaryWriter writer)
         {
-            if (prefix1 != PrefixLockRepeat.None)
-                writer.Write((byte)prefix1);
-            if (prefix2 != PrefixSegmentBranch.None)
-                writer.Write((byte)prefix2);
-            if (prefix3 != PrefixAddressSizeOverride.None)
-                writer.Write((byte)prefix3);
-            if (prefix4 != PrefixOperandSizeOverride.None)
-                writer.Write((byte)prefix4);
+            if (Prefix1 != PrefixLockRepeat.None)
+                writer.Write((byte)Prefix1);
+            if (Prefix2 != PrefixSegmentBranch.None)
+                writer.Write((byte)Prefix2);
+            if (Prefix3 != PrefixAddressSizeOverride.None)
+                writer.Write((byte)Prefix3);
+            if (Prefix4 != PrefixOperandSizeOverride.None)
+                writer.Write((byte)Prefix4);
         }
 
         /// <summary>
@@ -446,7 +308,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         private void EmitMandatoryPrefix(BinaryWriter writer)
         {
-            writer.Write(mandatoryPrefix);
+            writer.Write(MandatoryPrefix);
         }
 
         /// <summary>
@@ -455,22 +317,22 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         private void EmitREXPrefix(BinaryWriter writer)
         {
-            if (!use64BitOperands.HasValue)
+            if (!Use64BitOperands.HasValue)
                 return;
 
             byte rex = 0x40;
-            if (use64BitOperands.Value)
+            if (Use64BitOperands.Value)
                 rex |= 0x08;
-            if (modRM != null && sib != null)
+            if (ModRM != null && Sib != null)
             {
-                rex |= (byte)((sib.Base & 0x08) >> 3);        // REX.B
-                rex |= (byte)((sib.Index & 0x08) >> 2);        // REX.X
-                rex |= (byte)((modRM.Reg & 0x08) >> 1);        // REX.R
+                rex |= (byte)((Sib.Base  & 0x08) >> 3);        // REX.B
+                rex |= (byte)((Sib.Index & 0x08) >> 2);        // REX.X
+                rex |= (byte)((ModRM.Reg & 0x08) >> 1);        // REX.R
             }
-            else if (modRM != null)
+            else if (ModRM != null)
             {
-                rex |= (byte)((modRM.RM & 0x08) >> 3);        // REX.B
-                rex |= (byte)((modRM.Reg & 0x08) >> 1);        // REX.R
+                rex |= (byte)((ModRM.RM  & 0x08) >> 3);        // REX.B
+                rex |= (byte)((ModRM.Reg & 0x08) >> 1);        // REX.R
             }
             else
             {
@@ -491,11 +353,11 @@ namespace SharpAssembler.Architectures.X86
             byte[] actualOpcode;
             if (opcodeReg > 0)
             {
-                actualOpcode = (byte[])opcode.Clone();
+                actualOpcode = (byte[])Opcode.Clone();
                 actualOpcode[actualOpcode.Length - 1] |= (byte)(opcodeReg & 0x7);
             }
             else
-                actualOpcode = opcode;
+                actualOpcode = Opcode;
 
             writer.Write(actualOpcode);
         }
@@ -506,13 +368,13 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         private void EmitModRMByte(BinaryWriter writer)
         {
-            if (modRM == null)
+            if (ModRM == null)
                 return;
 
             byte modrmbyte = 0;
-            modrmbyte |= (byte)((modRM.RM & 0x07));
-            modrmbyte |= (byte)((modRM.Reg & 0x07) << 3);
-            modrmbyte |= (byte)(modRM.Mod << 6);
+            modrmbyte |= (byte)((ModRM.RM  & 0x07));
+            modrmbyte |= (byte)((ModRM.Reg & 0x07) << 3);
+            modrmbyte |= (byte) (ModRM.Mod << 6);
 
             writer.Write(modrmbyte);
         }
@@ -523,13 +385,13 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         private void EmitSIBByte(BinaryWriter writer)
         {
-            if (sib == null)
+            if (Sib == null)
                 return;
 
             byte sibbyte = 0;
-            sibbyte |= (byte)((sib.Base & 0x07));
-            sibbyte |= (byte)((sib.Index & 0x07) << 3);
-            sibbyte |= (byte)(sib.Scale << 6);
+            sibbyte |= (byte)((Sib.Base  & 0x07));
+            sibbyte |= (byte)((Sib.Index & 0x07) << 3);
+            sibbyte |= (byte) (Sib.Scale << 6);
 
             writer.Write(sibbyte);
         }
@@ -557,7 +419,7 @@ namespace SharpAssembler.Architectures.X86
             {
                 relocation = new Relocation(
                     expression.Reference.Symbol,
-                    context.Section,
+                    //context.Section,
                     (Int128)context.Address,
                     actualValue,
                     RelocationType.Default32);
@@ -618,11 +480,8 @@ namespace SharpAssembler.Architectures.X86
         /// </summary>
         public void SetModRMByte()
         {
-            if (modRM == null)
-            {
-                modRM = new ModRMByte();
-                modRM.Reg = fixedReg;
-            }
+            if (ModRM == null)
+                ModRM = new ModRMByte(0, fixedReg, 0);
         }
 
         /// <summary>
@@ -630,8 +489,8 @@ namespace SharpAssembler.Architectures.X86
         /// </summary>
         public void SetSIBByte()
         {
-            if (sib == null)
-                sib = new SibByte();
+            if (Sib == null)
+                Sib = new SibByte();
         }
 
         /// <summary>
@@ -709,7 +568,7 @@ namespace SharpAssembler.Architectures.X86
                     else
                         return DataSize.Bit32;
                 case DataSize.Bit64:
-                    if (use64BitOperands.HasValue && use64BitOperands.Value)
+                    if (Use64BitOperands.HasValue && Use64BitOperands.Value)
                         return DataSize.Bit64;
                     else if (Prefix4 == PrefixOperandSizeOverride.OperandSizeOverride)
                         return DataSize.Bit16;
@@ -739,7 +598,7 @@ namespace SharpAssembler.Architectures.X86
                 operandSize == DataSize.Bit64)
             {
                 // Setting this to anything other than null causes a REX prefix to be encoded.
-                use64BitOperands = true;
+                Use64BitOperands = true;
             }
         }
         #endregion

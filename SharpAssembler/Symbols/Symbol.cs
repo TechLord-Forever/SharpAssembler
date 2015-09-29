@@ -32,7 +32,7 @@ namespace SharpAssembler.Symbols
     /// A symbol reference or definition.
     /// </summary>
     [Serializable]
-    public sealed class Symbol : IAnnotatable
+    public sealed class Symbol
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Symbol"/> class.
@@ -95,25 +95,6 @@ namespace SharpAssembler.Symbols
         public SymbolType SymbolType { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="IFile"/> in which this symbol is defined.
-        /// </summary>
-        /// <value>The <see cref="IFile"/> in which this symbol is defined; or <see langword="null"/>.</value>
-        /// <remarks>
-        /// When <see cref="DefiningSection"/> is not <see langword="null"/>, this member should be the
-        /// <see cref="ObjectFile"/> in which the section is defined.
-        /// </remarks>
-        public IFile DefiningFile { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="Section"/> in which this symbol is
-        /// defined.
-        /// </summary>
-        /// <value>The <see cref="Section"/> in which this symbol is defined; or <see langword="null"/> when
-        /// <see cref="IsAbsolute"/> is <see langword="true"/> or when the symbol is not defined in this object file
-        /// (i.e. it is extern, <see cref="IsExtern"/> is <see langword="true"/>).</value>
-        public Section DefiningSection { get; set; }
-
-        /// <summary>
         /// Gets or sets whether the address of this symbol is an absolute value.
         /// </summary>
         /// <value><see langword="true"/> when the symbol is defined and its <see cref="Value"/> is an absolute
@@ -121,21 +102,11 @@ namespace SharpAssembler.Symbols
         public bool IsAbsolute { get; set; }
 
         /// <summary>
-        /// Gets whether this symbol is defined in another file.
-        /// </summary>
-        /// <value><see langword="true"/> when the symbol is not defined in this file;
-        /// otherwise, <see langword="false"/>.</value>
-        public bool IsExtern
-        {
-            get { return DefiningSection == null && IsAbsolute == false; }
-        }
-
-        /// <summary>
         /// Gets or sets the value of the symbol.
         /// </summary>
         /// <value>The value of the symbol, which may be an absolute (when <see cref="IsAbsolute"/> is
         /// <see langword="true"/>) or relative address, or any other value.
-        /// Otherwise, 0 when <see cref="IsExtern"/> is <see langword="true"/>.</value>
+        /// Otherwise, 0 when is <see langword="true"/>.</value>
         public Int128 Value { get; set; }
 
         /// <summary>
@@ -158,8 +129,8 @@ namespace SharpAssembler.Symbols
         public void Define(Context context, Int128 value)
         {
             Value = value;
-            DefiningSection = context.Section;
-            DefiningFile = context.Section.Parent;
+            //DefiningSection = context.Section;
+            //DefiningFile = context.Section.Parent;
             context.SymbolTable.Add(this);
         }
 
@@ -225,10 +196,10 @@ namespace SharpAssembler.Symbols
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="Object"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="object"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="string"/> that represents the current <see cref="Object"/>.
+        /// A <see cref="string"/> that represents the current <see cref="object"/>.
         /// </returns>
         public override string ToString()
         {

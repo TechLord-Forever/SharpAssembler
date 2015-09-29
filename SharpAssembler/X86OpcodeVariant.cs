@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using SharpAssembler.Architectures.X86.Operands;
@@ -105,7 +104,8 @@ namespace SharpAssembler.Architectures.X86
         public X86OpcodeVariant(byte[] opcodeBytes, byte fixedReg, params OperandDescriptor[] descriptors)
             : this(opcodeBytes, fixedReg, DataSize.None, descriptors)
         {
-            Contract.Requires<ArgumentOutOfRangeException>(fixedReg <= 0x07, "Only the least significant 3 bits may be set.");
+            if (fixedReg > 0x07)
+                throw new ArgumentOutOfRangeException("fixedReg", "Only the least significant 3 bits may be set.");
         }
 
         /// <summary>
@@ -125,8 +125,10 @@ namespace SharpAssembler.Architectures.X86
 
             OpcodeBytes = opcodeBytes;
             FixedReg = fixedReg;
-            Descriptors.AddRange(descriptors);
             OperandSize = operandSize;
+
+            foreach (var descriptor in descriptors)
+                Descriptors.Add(descriptor);
         }
         #endregion
 
@@ -179,7 +181,7 @@ namespace SharpAssembler.Architectures.X86
 
             // When the operand size has been explicitly set, set it on the encoded instruction.
             if (OperandSize != DataSize.None)
-                instr.SetOperandSize(context.Representation.Architecture.OperandSize, OperandSize);
+                instr.SetOperandSize(context.Architecture.OperandSize, OperandSize);
             if (NoRexPrefix)
                 // SetOperandSize() will cause the instruction to encode a REX prefix, which is not required in
                 // this particular case. So reset it back to null to encode no REX prefix.
@@ -202,7 +204,7 @@ namespace SharpAssembler.Architectures.X86
         public bool Match(DataSize explicitOperandSize, Context context, IList<Operand> operands)
         {
             // Check whether the variant is valid in the current mode.
-            if (!SupportedModes.HasFlag(ProcessorModes.Long) && context.Representation.Architecture.OperandSize == DataSize.Bit64)
+            if (!SupportedModes.HasFlag(ProcessorModes.Long) && context.Architecture.OperandSize == DataSize.Bit64)
                 return false;
             //if (this.operandSize != DataSize.None && this.operandSize != operandSize)
             //    return false;

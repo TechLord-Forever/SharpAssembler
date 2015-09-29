@@ -70,9 +70,9 @@ namespace SharpAssembler.Instructions
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> that represents the current <see cref="Object"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="object"/>.
         /// </summary>
-        /// <returns>A <see cref="string"/> that represents the current <see cref="Object"/>.</returns>
+        /// <returns>A <see cref="string"/> that represents the current <see cref="object"/>.</returns>
         public override string ToString()
         {
             return base.ToString();

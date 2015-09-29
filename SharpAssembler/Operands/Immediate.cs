@@ -32,15 +32,13 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// <summary>
     /// An immediate value.
     /// </summary>
-    public class Immediate : Operand,
-        ISourceOperand
+    public class Immediate : Operand, IOperand
     {
         /// <summary>
         /// Whether this <see cref="Immediate"/> is encoded as the 'extra' immediate value.
         /// </summary>
         private bool asExtraImmediate = false;
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Immediate"/> class.
         /// </summary>
@@ -98,7 +96,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             Expression = expression;
         }
-        #endregion
 
         /// <summary>
         /// Gets or sets the expression evaluating to the immediate value.
@@ -124,7 +121,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                 // Does the result have a (resolved or not resolved) reference?
                 if (result.Reference != null)
                     // When the result has a reference, use the architecture's operand size.
-                    size = context.Representation.Architecture.OperandSize;
+                    size = context.Architecture.OperandSize;
                 else
                     // Otherwise, use the most efficient word size.
                     size = MathExt.GetSizeOfValue(result.Constant);
@@ -145,7 +142,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                 instr.ExtraImmediate = result;
                 instr.ExtraImmediateSize = size;
             }
-            instr.SetOperandSize(context.Representation.Architecture.OperandSize, size);
+            instr.SetOperandSize(context.Architecture.OperandSize, size);
         }
 
         /// <summary>
@@ -177,8 +174,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         internal override void Adjust(OperandDescriptor descriptor)
         {
             asExtraImmediate = (descriptor.OperandEncoding == OperandEncoding.ExtraImmediate);
-
-            Contract.Assume(PreferredSize == DataSize.None || PreferredSize <= descriptor.Size);
             PreferredSize = descriptor.Size;
         }
 
