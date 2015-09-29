@@ -25,26 +25,26 @@
 
 namespace SharpAssembler
 {
-	/// <summary>
-	/// Specifies the type of section.
-	/// </summary>
-	public enum SectionType
-	{
-		/// <summary>
-		/// No specific type.
-		/// </summary>
-		None,
-		/// <summary>
-		/// An allocated section containing executable, non-writable data.
-		/// </summary>
-		Program,
-		/// <summary>
-		/// An allocated section containing writable, non-executable initialized data.
-		/// </summary>
-		Data,
-		/// <summary>
-		/// An allocated section containing writable, non-executable uninitialized data.
-		/// </summary>
-		Bss,
-	}
+    /// <summary>
+    /// Specifies the type of section.
+    /// </summary>
+    public enum SectionType
+    {
+        /// <summary>
+        /// No specific type.
+        /// </summary>
+        None,
+        /// <summary>
+        /// An allocated section containing executable, non-writable data.
+        /// </summary>
+        Program,
+        /// <summary>
+        /// An allocated section containing writable, non-executable initialized data.
+        /// </summary>
+        Data,
+        /// <summary>
+        /// An allocated section containing writable, non-executable uninitialized data.
+        /// </summary>
+        Bss,
+    }
 }

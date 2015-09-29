@@ -29,11 +29,11 @@ namespace SharpAssembler.Instructions
     /// A platform-specific instruction.
     /// </summary>
     public abstract class Instruction : Constructable
-	{
-		/// <inheritdoc />
-		public override void Accept(IObjectFileVisitor visitor)
-		{
-			visitor.VisitInstruction(this);
-		}
-	}
+    {
+        /// <inheritdoc />
+        public override void Accept(IObjectFileVisitor visitor)
+        {
+            visitor.VisitInstruction(this);
+        }
+    }
 }

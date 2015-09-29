@@ -1,0 +1,20 @@
+﻿include "amdsyntax";
+
+[ShortDescription = "Pop a Value from the Stack"]
+opcode x86 pop
+{
+	[FixedReg = 0] var `8F` (reg/mem16 destanation);
+	[FixedReg = 0] var `8F` (reg/mem32 destanation);
+	[FixedReg = 0] var `8F` (reg/mem64 destanation);
+
+	var `58`    ([Encoding = OpcodeAdd] reg16 destanation);
+	var `58`    ([Encoding = OpcodeAdd] reg32 destanation);
+	var `58`    ([Encoding = OpcodeAdd] reg64 destanation);
+
+	var `1F`    (DS destanation);
+	var `07`    (ES destanation);
+	var `17`    (SS destanation);
+
+	var `0F A1` (FS destanation);
+	var `0F A9` (GS destanation);
+}

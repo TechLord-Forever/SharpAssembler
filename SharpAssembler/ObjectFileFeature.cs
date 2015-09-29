@@ -25,18 +25,18 @@
 
 namespace SharpAssembler
 {
-	/// <summary>
-	/// Specifies a feature of the <see cref="ObjectFile"/>.
-	/// </summary>
-	public enum ObjectFileFeature
-	{
-		/// <summary>
-		/// No feature.
-		/// </summary>
-		None,
-		/// <summary>
-		/// The section can specify an arbitrary start position in the resulting object file.
-		/// </summary>
-		ArbitraryPhysicalStart,
-	}
+    /// <summary>
+    /// Specifies a feature of the <see cref="ObjectFile"/>.
+    /// </summary>
+    public enum ObjectFileFeature
+    {
+        /// <summary>
+        /// No feature.
+        /// </summary>
+        None,
+        /// <summary>
+        /// The section can specify an arbitrary start position in the resulting object file.
+        /// </summary>
+        ArbitraryPhysicalStart,
+    }
 }

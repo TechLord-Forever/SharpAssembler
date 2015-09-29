@@ -1,3 +1,5 @@
+/OpcodeWriter/Scripts/OpcodeWriter*.pdb
+/OpcodeWriter/Scripts/OpcodeWriter.exe
 *.suo
 *.user
 .vs/*
@@ -15,3 +17,4 @@ obj/*
 *.sdf
 *.rar
 *.bak
+*.vshost.exe

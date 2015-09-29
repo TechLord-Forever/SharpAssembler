@@ -1,0 +1,25 @@
+﻿include "amdsyntax";
+
+[ShortDescription = "Push a Value to the Stack"]
+opcode x86 push
+{
+	[FixedReg = 6] var `FF` (reg/mem16 source);
+	[FixedReg = 6] var `FF` (reg/mem32 source);
+	[FixedReg = 6] var `FF` (reg/mem64 source);
+
+	var `50`    ([Encoding = OpcodeAdd] reg16 source);
+	var `50`    ([Encoding = OpcodeAdd] reg32 source);
+	var `50`    ([Encoding = OpcodeAdd] reg64 source);
+
+	var `6A`    (i8  source);
+	var `68`    (i16 source);
+	var `68`    (i62 source);
+
+	var `0E`    (CS source);
+	var `16`    (SS source);
+	var `1E`    (DS source);
+	var `06`    (ES source);
+
+	var `0F A0` (FS source);
+	var `0F A8` (GS source);
+}
