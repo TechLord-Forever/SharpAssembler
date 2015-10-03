@@ -274,7 +274,7 @@ namespace SharpAssembler.Architectures.X86
         [CLSCompliant(false)]
         public static X86Instruction Mov(Register destination, ulong source)
         {
-            return X86Opcode.Mov.CreateInstruction(new RegisterOperand(destination), new Immediate(source, DataSize.Bit64));
+            return X86Opcode.Mov.CreateInstruction(new RegisterOperand(destination), new Immediate((long)source, DataSize.Bit64));
         }
 
         /// <summary>

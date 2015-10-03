@@ -107,7 +107,7 @@ namespace SharpAssembler.Symbols
         /// <value>The value of the symbol, which may be an absolute (when <see cref="IsAbsolute"/> is
         /// <see langword="true"/>) or relative address, or any other value.
         /// Otherwise, 0 when is <see langword="true"/>.</value>
-        public Int128 Value { get; set; }
+        public long Value { get; set; }
 
         /// <summary>
         /// Gets or sets the size of the symbol's associated object.
@@ -126,7 +126,7 @@ namespace SharpAssembler.Symbols
         /// </summary>
         /// <param name="context">The current <see cref="Context"/>.</param>
         /// <param name="value">The value of the symbol.</param>
-        public void Define(Context context, Int128 value)
+        public void Define(Context context, long value)
         {
             Value = value;
             //DefiningSection = context.Section;
@@ -139,9 +139,10 @@ namespace SharpAssembler.Symbols
         /// </summary>
         /// <param name="context">The current <see cref="Context"/>.</param>
         /// <param name="value">The value of the symbol.</param>
-        public void Define(Context context, UInt128 value)
+        [CLSCompliant(false)]
+        public void Define(Context context, ulong value)
         {
-            Define(context, (Int128)value);
+            Define(context, (long)value);
         }
 
         /// <summary>

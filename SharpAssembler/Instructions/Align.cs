@@ -90,7 +90,7 @@ namespace SharpAssembler.Instructions
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)
         {
-            int padding = (int)context.Address.GetPadding(Boundary);
+            int padding = (int)MathExt.CalculatePadding(context.Address, Boundary);
             return new IEmittable[]{ new RawEmittable(GeneratePadding(context, padding)) };
         }
     }

@@ -53,7 +53,8 @@ namespace SharpAssembler
         /// Gets or sets the current virtual address.
         /// </summary>
         /// <value>The current virtual address.</value>
-        public UInt128 Address { get; set; }
+        [System.CLSCompliant(false)]
+        public ulong Address { get; set; }
 
         /// <summary>
         /// Gets a collection of relocations in the current context.

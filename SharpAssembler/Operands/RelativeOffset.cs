@@ -91,7 +91,7 @@ namespace SharpAssembler.Architectures.X86.Operands
 
             // Let's evaluate the expression.
             ReferenceOffset result = Expression?.Compile()(context);
-            result = new ReferenceOffset(result.Reference, result.Constant - ((Int128)context.Address + instr.GetLength()));
+            result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instr.GetLength()));
             instr.Immediate = result;
 
             // FIXME: Remove this:

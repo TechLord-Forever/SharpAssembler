@@ -127,17 +127,7 @@ namespace SharpAssembler.Instructions
         /// <param name="value">A 64-bit unsigned integer value.</param>
         [CLSCompliant(false)]
         public DeclareData(ulong value)
-            : this(c => new ReferenceOffset(value), DataSize.Bit64)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DeclareData"/> class.
-        /// </summary>
-        /// <param name="value">A 128-bit signed integer value.</param>
-        [CLSCompliant(false)]
-        public DeclareData(Int128 value)
-            : this(c => new ReferenceOffset(value), DataSize.Bit128)
+            : this(c => new ReferenceOffset((long)value), DataSize.Bit64)
         {
         }
 

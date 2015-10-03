@@ -38,7 +38,7 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="reference">The reference whose address is used.</param>
         /// <param name="constant">A constant value added to the reference address.</param>
-        public ReferenceOffset(Reference reference, Int128 constant)
+        public ReferenceOffset(Reference reference, long constant)
         {
             Reference = reference;
             Constant = constant;
@@ -49,7 +49,7 @@ namespace SharpAssembler
         /// with the specified value.
         /// </summary>
         /// <param name="constant">A constant value.</param>
-        public ReferenceOffset(Int128 constant)
+        public ReferenceOffset(long constant)
             : this(null, constant)
         {
         }
@@ -73,8 +73,8 @@ namespace SharpAssembler
         /// <summary>
         /// Gets the constant added to reference address value (or 0 when no reference is provided).
         /// </summary>
-        /// <value>An <see cref="Int128"/>.</value>
-        public Int128 Constant { get; private set; }
+        /// <value>An <see cref="long"/>.</value>
+        public long Constant { get; private set; }
 
         /// <summary>
         /// Resolves any unresolved symbol references and returns the actual value of the expression.
@@ -85,13 +85,13 @@ namespace SharpAssembler
         /// <exception cref="InvalidOperationException">
         /// The symbol referenced could not be resolved.
         /// </exception>
-        public Int128 Evaluate(Context context)
+        public long Evaluate(Context context)
         {
             // Attempts to resolve any unresolved symbol references.
             if (Reference != null && !Reference.Resolve(context))
                 throw new InvalidOperationException("The expression still contains an unresolved symbol reference.");
 
-            Int128 value = Constant;
+            long value = Constant;
             if (Reference != null)
                 value += Reference.Symbol.Value;
 
@@ -199,53 +199,7 @@ namespace SharpAssembler
         [CLSCompliant(false)]
         public static implicit operator ReferenceOffset(ulong value)
         {
-            return new ReferenceOffset(value);
-        }
-
-        /// <summary>
-        /// Converts the specified constant to a simple expression.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        public static implicit operator ReferenceOffset(Int128 value)
-        {
-            return new ReferenceOffset(value);
-        }
-
-        /// <summary>
-        /// Converts the specified constant to a simple expression.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        public static implicit operator ReferenceOffset(Int128? value)
-        {
-            if (value.HasValue)
-                throw new ArgumentException("The specified variable is not assigned a value.");
-
-            return new ReferenceOffset(value.Value);
-        }
-
-        /// <summary>
-        /// Converts the specified constant to a simple expression.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        public static implicit operator ReferenceOffset(UInt128 value)
-        {
-            return new ReferenceOffset((Int128)value);
-        }
-
-        /// <summary>
-        /// Converts the specified constant to a simple expression.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        public static implicit operator ReferenceOffset(UInt128? value)
-        {
-            if (value.HasValue)
-                throw new ArgumentException("The specified variable is not assigned a value.");
-
-            return new ReferenceOffset((Int128)value.Value);
+            return new ReferenceOffset((long)value);
         }
 
         /// <summary>

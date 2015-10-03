@@ -311,12 +311,10 @@
     <Compile Include="Operands\RegisterOperand.cs" />
     <Compile Include="Operands\RegisterOperand.OperandEncoding.cs" />
     <Compile Include="Operands\RelativeOffset.cs" />
-    <Compile Include="Extra\UInt128.cs" />
     <Compile Include="Extra\BinaryWriterExtensions.cs" />
     <Compile Include="Instructions\CustomConstructable.cs" />
     <Compile Include="Instructions\Group.cs" />
     <Compile Include="Instructions\DeclareString.cs" />
-    <Compile Include="Extra\Int128.cs" />
     <Compile Include="Extra\MathExt.cs" />
     <Compile Include="Instructions\Align.cs" />
     <Compile Include="Instructions\DeclareData.cs" />

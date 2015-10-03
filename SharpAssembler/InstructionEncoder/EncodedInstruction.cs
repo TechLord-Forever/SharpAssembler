@@ -414,13 +414,13 @@ namespace SharpAssembler.Architectures.X86
             ulong relocationDiff = (ulong)(writer.BaseStream.Position - instructionOffset);
             Relocation relocation = null;
 
-            Int128 actualValue = expression.Evaluate(context);
+            var actualValue = expression.Evaluate(context);
             if (expression.Reference != null)
             {
                 relocation = new Relocation(
                     expression.Reference.Symbol,
                     //context.Section,
-                    (Int128)context.Address,
+                    (long)context.Address,
                     actualValue,
                     RelocationType.Default32);
             }
@@ -431,7 +431,7 @@ namespace SharpAssembler.Architectures.X86
             // Add the relocation to the context.
             if (relocation != null)
             {
-                relocation.Offset += relocationDiff;
+                relocation.Offset += (long)relocationDiff;
                 context.RelocationTable.Add(relocation);
             }
         }
@@ -442,7 +442,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         /// <param name="size">The size of the constant to emit.</param>
         /// <param name="constant">The constant value to emit.</param>
-        private void EmitConstant(BinaryWriter writer, DataSize size, Int128 constant)
+        private void EmitConstant(BinaryWriter writer, DataSize size, long constant)
         {
             try
             {
@@ -460,9 +460,9 @@ namespace SharpAssembler.Architectures.X86
                     case DataSize.Bit64:
                         writer.Write(checked((ulong)constant));
                         break;
-                    case DataSize.Bit128:
-                        writer.Write(checked(constant));
-                        break;
+                    //case DataSize.Bit128:
+                    //    writer.Write(checked(constant));
+                    //    break;
                     case DataSize.None:
                     default:
                         throw new InvalidOperationException();

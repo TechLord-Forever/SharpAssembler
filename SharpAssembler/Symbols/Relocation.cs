@@ -40,7 +40,7 @@ namespace SharpAssembler.Symbols
         /// unit to be relocated resides.</param>
         /// <param name="addend">The constant used to compute the value of the relocatable field.</param>
         /// <param name="type">The type of relocation compution to perform.</param>
-        public Relocation(Symbol symbol, Int128 offset, Int128 addend, RelocationType type)
+        public Relocation(Symbol symbol, long offset, long addend, RelocationType type)
         {
             TargetSymbol = symbol;
             Offset = offset;
@@ -64,7 +64,7 @@ namespace SharpAssembler.Symbols
         /// Gets or sets the offset of the storage unit to be relocated, relative to the start of the section
         /// containing the storage unit.
         /// </summary>
-        public Int128 Offset { get; set; }
+        public long Offset { get; set; }
 
         /// <summary>
         ///
@@ -75,7 +75,7 @@ namespace SharpAssembler.Symbols
         /// Gets or sets a constant addend used to compute the value to be stored into the relocatable field.
         /// </summary>
         /// <value>The addend.</value>
-        public Int128 Addend { get; set; }
+        public long Addend { get; set; }
 
         /// <summary>
         /// Gets or sets the relocation type.

@@ -98,28 +98,6 @@ namespace SharpAssembler
             return Align(value, boundary) - value;
         }
 
-        /// <summary>
-        /// Calculates the padding from the specified value to the next boundary.
-        /// </summary>
-        /// <param name="value">The value from which to calculate the padding.</param>
-        /// <param name="boundary">The boundary, which is a power of two.</param>
-        /// <returns>The padding from the value to the next boundary.</returns>
-        public static Int128 CalculatePadding(Int128 value, int boundary)
-        {
-            return Align(value, boundary) - value;
-        }
-
-        /// <summary>
-        /// Calculates the padding from the specified value to the next boundary.
-        /// </summary>
-        /// <param name="value">The value from which to calculate the padding.</param>
-        /// <param name="boundary">The boundary, which is a power of two.</param>
-        /// <returns>The padding from the value to the next boundary.</returns>
-        public static UInt128 CalculatePadding(UInt128 value, int boundary)
-        {
-            return Align(value, boundary) - value;
-        }
-
         #region CalculatePadding()
         /// <summary>
         /// Calculates the padding from the specified value to the next boundary.
@@ -168,28 +146,6 @@ namespace SharpAssembler
             return (boundary + ((value - 1) & ~(boundary - 1)));
         }
 
-        /// <summary>
-        /// Aligns the value to the next specified boundary.
-        /// </summary>
-        /// <param name="value">The value to align.</param>
-        /// <param name="boundary">The boundary, which is a power of two.</param>
-        /// <returns>The aligned value.</returns>
-        public static Int128 Align(Int128 value, int boundary)
-        {
-            return (boundary + ((value - 1) & ~(boundary - 1)));
-        }
-
-        /// <summary>
-        /// Aligns the value to the next specified boundary.
-        /// </summary>
-        /// <param name="value">The value to align.</param>
-        /// <param name="boundary">The boundary, which is a power of two.</param>
-        /// <returns>The aligned value.</returns>
-        public static UInt128 Align(UInt128 value, int boundary)
-        {
-            return (boundary + ((value - 1) & ~(boundary - 1)));
-        }
-
         #region Align()
         /// <summary>
         /// Aligns the value to the next specified boundary.
@@ -221,15 +177,15 @@ namespace SharpAssembler
         /// <param name="value">The value to fit.</param>
         /// <param name="signed">Whether to fit the value signed or unsigned.</param>
         /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
-        public static DataSize GetSizeOfValue(Int128 value, bool signed)
+        public static DataSize GetSizeOfValue(long value, bool signed = true)
         {
             if (signed && value < 0)
                 value = -value;
 
-            if (value.High != 0) return DataSize.Bit128;
-            if ((value.Low & 0xFFFFFFFF00000000) != 0) return DataSize.Bit64;
-            if ((value.Low & 0x00000000FFFF0000) != 0) return DataSize.Bit32;
-            if ((value.Low & 0x000000000000FF00) != 0) return DataSize.Bit16;
+            if (value != 0) return DataSize.Bit128;
+            if ((value & 0x7FFFFFFF00000000) != 0) return DataSize.Bit64;
+            if ((value & 0x00000000FFFF0000) != 0) return DataSize.Bit32;
+            if ((value & 0x000000000000FF00) != 0) return DataSize.Bit16;
             return DataSize.Bit8;
         }
 
@@ -251,7 +207,7 @@ namespace SharpAssembler
         /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
         public static DataSize GetSizeOfValue(byte value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
+            return GetSizeOfValue((long)value, signed);
         }
 
         /// <summary>
@@ -274,7 +230,7 @@ namespace SharpAssembler
         [CLSCompliant(false)]
         public static DataSize GetSizeOfValue(sbyte value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
+            return GetSizeOfValue((long)value, signed);
         }
 
         /// <summary>
@@ -282,7 +238,7 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
-        public static DataSize GetSizeOfValue(Int16 value)
+        public static DataSize GetSizeOfValue(short value)
         {
             return GetSizeOfValue(value, true);
         }
@@ -293,9 +249,9 @@ namespace SharpAssembler
         /// <param name="value">The value.</param>
         /// <param name="signed">Whether to do a signed check.</param>
         /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
-        public static DataSize GetSizeOfValue(Int16 value, bool signed)
+        public static DataSize GetSizeOfValue(short value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
+            return GetSizeOfValue((long)value, signed);
         }
 
         /// <summary>
@@ -318,7 +274,7 @@ namespace SharpAssembler
         [CLSCompliant(false)]
         public static DataSize GetSizeOfValue(ushort value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
+            return GetSizeOfValue((long)value, signed);
         }
 
         /// <summary>
@@ -339,7 +295,7 @@ namespace SharpAssembler
         /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
         public static DataSize GetSizeOfValue(int value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
+            return GetSizeOfValue((long)value, signed);
         }
 
         /// <summary>
@@ -362,28 +318,7 @@ namespace SharpAssembler
         [CLSCompliant(false)]
         public static DataSize GetSizeOfValue(uint value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
-        }
-
-        /// <summary>
-        /// Returns the minimum size required to fit the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
-        public static DataSize GetSizeOfValue(long value)
-        {
-            return GetSizeOfValue(value, true);
-        }
-
-        /// <summary>
-        /// Returns the minimum size required to fit the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="signed">Whether to do a signed check.</param>
-        /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
-        public static DataSize GetSizeOfValue(long value, bool signed)
-        {
-            return GetSizeOfValue((Int128)value, signed);
+            return GetSizeOfValue((long)value, signed);
         }
 
         /// <summary>
@@ -406,17 +341,7 @@ namespace SharpAssembler
         [CLSCompliant(false)]
         public static DataSize GetSizeOfValue(ulong value, bool signed)
         {
-            return GetSizeOfValue((Int128)value, signed);
-        }
-
-        /// <summary>
-        /// Returns the minimum size required to fit the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>A member of the <see cref="DataSize"/> enumeration.</returns>
-        public static DataSize GetSizeOfValue(Int128 value)
-        {
-            return GetSizeOfValue(value, true);
+            return GetSizeOfValue((long)value, signed);
         }
     }
 }

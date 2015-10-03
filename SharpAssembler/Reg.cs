@@ -209,11 +209,6 @@ namespace SharpAssembler
         public static Register_ AH { get; } = new Register_(0x04, RegisterType.GeneralPurpose8Bit);
 
         /// <summary>
-        /// The lower 8-bits of the stack pointer register.
-        /// </summary>
-        //SPL = AH | 0x10,    // Required REX prefix.
-
-        /// <summary>
         /// The lower 16-bits of the stack pointer register.
         /// </summary>
         public static Register_ SP { get; } = new Register_(0x04, RegisterType.GeneralPurpose16Bit);
@@ -254,11 +249,6 @@ namespace SharpAssembler
         /// The higher 8-bits of the lower 16-bits of the counter register.
         /// </summary>
         public static Register_ CH { get; } = new Register_(0x05, RegisterType.GeneralPurpose8Bit);
-
-        /// <summary>
-        /// The lower 8-bits of the base pointer register.
-        /// </summary>
-        //BPL = CH | 0x10,    // Required REX prefix.
 
         /// <summary>
         /// The lower 16-bits of the base pointer register.
@@ -305,11 +295,6 @@ namespace SharpAssembler
         public static Register_ DH { get; } = new Register_(0x06, RegisterType.GeneralPurpose8Bit);
 
         /// <summary>
-        /// The lower 8-bits of the source index register.
-        /// </summary>
-        //SIL = DH | 0x10,    // Required REX prefix.
-
-        /// <summary>
         /// The lower 16-bits of the source index register.
         /// </summary>
         public static Register_ SI { get; } = new Register_(0x06, RegisterType.GeneralPurpose16Bit);
@@ -349,11 +334,6 @@ namespace SharpAssembler
         /// The higher 8-bits of the lower 16-bits of the base register.
         /// </summary>
         public static Register_ BH { get; } = new Register_(0x07, RegisterType.GeneralPurpose8Bit);
-
-        /// <summary>
-        /// The lower 8-bits of the destination index register.
-        /// </summary>
-        //DIL = BH | 0x10,    // Required REX prefix.
 
         /// <summary>
         /// The lower 16-bits of the destination index register.

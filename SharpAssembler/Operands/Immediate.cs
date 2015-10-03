@@ -43,7 +43,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Initializes a new instance of the <see cref="Immediate"/> class.
         /// </summary>
         /// <param name="constant">A constant.</param>
-        public Immediate(Int128 constant)
+        public Immediate(long constant)
             : this(constant, DataSize.None)
         {
         }
@@ -53,7 +53,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="constant">A constant.</param>
         /// <param name="size">The size of the resulting value.</param>
-        public Immediate(Int128 constant, DataSize size)
+        public Immediate(long constant, DataSize size)
             : this(c => new ReferenceOffset(constant), size)
         {
         }
@@ -191,15 +191,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         #endregion
 
         #region Conversions
-        /// <summary>
-        /// Converts a 128-bit signed integer to an <see cref="Immediate"/> value.
-        /// </summary>
-        /// <param name="value">The value to convert.</param>
-        /// <returns>The resulting <see cref="Immediate"/>.</returns>
-        public static implicit operator Immediate(Int128 value)
-        {
-            return new Immediate(value);
-        }
 
         /// <summary>
         /// Converts a 64-bit signed integer to an <see cref="Immediate"/> value.
@@ -219,7 +210,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         [CLSCompliant(false)]
         public static implicit operator Immediate(ulong value)
         {
-            return new Immediate(value);
+            return new Immediate((long)value);
         }
 
         /// <summary>
