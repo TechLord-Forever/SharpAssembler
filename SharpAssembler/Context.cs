@@ -14,13 +14,6 @@ namespace SharpAssembler
     public class Context
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Context"/> class.
-        /// </summary>
-        public Context()
-        {
-        }
-
-        /// <summary>
         /// Gets the architecture for which this object file was created.
         /// </summary>
         /// <value>An <see cref="IArchitecture"/>.</value>

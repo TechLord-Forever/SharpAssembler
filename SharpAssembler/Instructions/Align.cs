@@ -52,7 +52,7 @@ namespace SharpAssembler.Instructions
         /// </remarks>
         protected virtual byte[] GeneratePadding(Context context, int length)
         {
-            byte[] paddingbytes = new byte[length];
+            var paddingbytes = new byte[length];
             // Because an empty array is automatically initialized with 0x00 bytes,
             // we only need to extend the array with padding bytes for other values.
             if (PaddingByte != 0x00)

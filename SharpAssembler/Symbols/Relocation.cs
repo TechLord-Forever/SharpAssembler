@@ -24,7 +24,6 @@ namespace SharpAssembler.Symbols
             Type = type;
         }
 
-        #region Properties
         /// <summary>
         /// Gets or sets the target symbol of this relocation.
         /// </summary>
@@ -68,9 +67,6 @@ namespace SharpAssembler.Symbols
         /// </remarks>
         public IDictionary Annotations { get; private set; } = new Hashtable();
 
-        #endregion
-
-        #region Methods
         /// <summary>
         /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
@@ -79,12 +75,7 @@ namespace SharpAssembler.Symbols
         /// </returns>
         public override string ToString()
         {
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "<Relocation [0x{1:X} -> {3}>",
-                Offset,
-                TargetSymbol.Identifier);
+            return $"<Relocation [0x{Offset:X} -> {TargetSymbol.Identifier}>";
         }
-        #endregion
     }
 }

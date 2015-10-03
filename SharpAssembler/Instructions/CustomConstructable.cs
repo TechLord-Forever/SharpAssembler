@@ -8,14 +8,12 @@ namespace SharpAssembler.Instructions
     /// </summary>
     public abstract class CustomConstructable : Constructable
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomConstructable"/> class.
         /// </summary>
         protected CustomConstructable()
         {
         }
-        #endregion
 
         /// <summary>
         /// Gets all the constructables that represent this custom constructable.

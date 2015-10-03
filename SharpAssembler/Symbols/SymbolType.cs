@@ -18,7 +18,7 @@
         /// </summary>
         Public,
         /// <summary>
-        /// Similar to <see cref="SymbolType.Public"/> but with less precedence.
+        /// Similar to <see cref="Public"/> but with less precedence.
         /// </summary>
         Weak,
         /// <summary>
