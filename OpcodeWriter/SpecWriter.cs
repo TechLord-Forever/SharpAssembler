@@ -126,38 +126,6 @@ namespace OpcodeWriter
             writer.WriteLine("//////////////////////////////////////////////////////");
         }
 
-        /// <summary>
-        /// Writes the copyright notice and license information.
-        /// </summary>
-        /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        protected void WriteLicense(TextWriter writer)
-        {
-            writer.WriteLine("#region Copyright and License");
-            writer.WriteLine("/*");
-            writer.WriteLine(" * SharpAssembler");
-            writer.WriteLine(" * Library for .NET that assembles a predetermined list of");
-            writer.WriteLine(" * instructions into machine code.");
-            writer.WriteLine(" * ");
-            writer.WriteLine(" * Copyright (C) 2011-2012 Daniël Pelsmaeker");
-            writer.WriteLine(" * ");
-            writer.WriteLine(" * This file is part of SharpAssembler.");
-            writer.WriteLine(" * ");
-            writer.WriteLine(" * SharpAssembler is free software: you can redistribute it and/or modify");
-            writer.WriteLine(" * it under the terms of the GNU General Public License as published by");
-            writer.WriteLine(" * the Free Software Foundation, either version 3 of the License, or");
-            writer.WriteLine(" * (at your option) any later version.");
-            writer.WriteLine(" * ");
-            writer.WriteLine(" * SharpAssembler is distributed in the hope that it will be useful,");
-            writer.WriteLine(" * but WITHOUT ANY WARRANTY; without even the implied warranty of");
-            writer.WriteLine(" * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the");
-            writer.WriteLine(" * GNU General Public License for more details.");
-            writer.WriteLine(" * ");
-            writer.WriteLine(" * You should have received a copy of the GNU General Public License");
-            writer.WriteLine(" * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.");
-            writer.WriteLine(" */");
-            writer.WriteLine("#endregion");
-        }
-
         protected static readonly Regex IdentifierValidation = new Regex(@"[^\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Nd}\p{Nl}\p{Mn}\p{Mc}\p{Cf}\p{Pc}\p{Lm}]", RegexOptions.Compiled);
 
         private static readonly System.CodeDom.Compiler.CodeDomProvider CSharpCodeCompiler = System.CodeDom.Compiler.CodeDomProvider.CreateProvider("C#");

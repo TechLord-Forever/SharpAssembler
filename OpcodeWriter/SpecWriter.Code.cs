@@ -12,7 +12,6 @@ namespace OpcodeWriter
         protected virtual void WriteCode(OpcodeSpec spec, TextWriter writer)
         {
             WriteWarning(writer);
-            WriteLicense(writer);
             WriteCodeUsingDirectives(writer);
             writer.WriteLine();
             WriteCodeOpcodeClassStart(spec, writer);

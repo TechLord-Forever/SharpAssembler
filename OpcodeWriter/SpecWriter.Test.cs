@@ -12,7 +12,6 @@ namespace OpcodeWriter
         protected virtual void WriteTest(OpcodeSpec spec, TextWriter writer)
         {
             WriteWarning(writer);
-            WriteLicense(writer);
             WriteTestUsingDirectives(writer);
             writer.WriteLine();
             WriteTestClassStart(spec, writer);
