@@ -49,8 +49,8 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Constructs the operand's representation.
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
-        /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instr)
+        /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
+        internal override void Construct(Context context, EncodedInstruction instruction)
         {
             // Determine the size of the immediate operand. Otherwise the length is not calculated correctly.
             DataSize size = PreferredSize;
@@ -62,13 +62,13 @@ namespace SharpAssembler.Architectures.X86.Operands
                     ((int)size) << 3));
             else if (size == DataSize.None)
                 throw new AssemblerException("The operand size is not specified.");
-            instr.SetOperandSize(context.Architecture.OperandSize, size);
-            instr.ImmediateSize = size;
+            instruction.SetOperandSize(context.Architecture.OperandSize, size);
+            instruction.ImmediateSize = size;
 
             // Let's evaluate the expression.
             ReferenceOffset result = Expression?.Compile()(context);
-            result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instr.GetLength()));
-            instr.Immediate = result;
+            result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instruction.GetLength()));
+            instruction.Immediate = result;
 
             // FIXME: Remove this:
 #if false

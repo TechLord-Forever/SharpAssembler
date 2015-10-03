@@ -2,6 +2,8 @@
 
 namespace SharpAssembler
 {
+    partial class Assembler { /* stuff */ }
+
     /// <summary>
     ///
     /// </summary>

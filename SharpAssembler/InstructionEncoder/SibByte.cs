@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace SharpAssembler.Architectures.X86
 {
@@ -44,7 +43,8 @@ namespace SharpAssembler.Architectures.X86
             get { return @base; }
             set
             {
-                Contract.Requires<ArgumentOutOfRangeException>(value <= 0x0F, "Only the first 4 bits may be set.");
+                if (value > 0x0F)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Only the first 4 bits may be set.");
                 @base = value;
             }
         }
@@ -63,7 +63,8 @@ namespace SharpAssembler.Architectures.X86
             get { return index; }
             set
             {
-                Contract.Requires<ArgumentOutOfRangeException>(value <= 0x0F, "Only the first 4 bits may be set.");
+                if (value > 0x0F)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Only the first 4 bits may be set.");
                 index = value;
             }
         }
@@ -82,7 +83,8 @@ namespace SharpAssembler.Architectures.X86
             get { return scale; }
             set
             {
-                Contract.Requires<ArgumentOutOfRangeException>(value <= 0x03, "Only the first 2 bits may be set.");
+                if (value > 0x03)
+                    throw new ArgumentOutOfRangeException(nameof(value), "Only the first 2 bits may be set.");
                 scale = value;
             }
         }

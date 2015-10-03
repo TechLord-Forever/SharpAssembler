@@ -127,12 +127,12 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Constructs the operand's representation.
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
-        /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instr)
+        /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
+        internal override void Construct(Context context, EncodedInstruction instruction)
         {
             DataSize addressSize = GetAddressSize(context);
 
-            instr.SetOperandSize(context.Architecture.OperandSize, Size);
+            instruction.SetOperandSize(context.Architecture.OperandSize, Size);
 
             if (context.Architecture.OperandSize != DataSize.Bit64 &&
                 Size == DataSize.Bit64)
@@ -141,18 +141,18 @@ namespace SharpAssembler.Architectures.X86.Operands
                 addressSize == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit effective address cannot be used with non-64-bit address sizes.");
 
-            EncodeDisplacement(context, instr, addressSize);
+            EncodeDisplacement(context, instruction, addressSize);
 
             switch(addressSize)
             {
                 case DataSize.Bit16:
-                    Encode16BitEffectiveAddress(instr);
+                    Encode16BitEffectiveAddress(instruction);
                     break;
                 case DataSize.Bit32:
-                    Encode32BitEffectiveAddress(instr);
+                    Encode32BitEffectiveAddress(instruction);
                     break;
                 case DataSize.Bit64:
-                    Encode64BitEffectiveAddress(context, instr);
+                    Encode64BitEffectiveAddress(context, instruction);
                     break;
                 default:
                     throw new NotSupportedException();
@@ -162,7 +162,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             // When the registers have a width different from the current
             // operating mode width, then we have to add an address size prefix.
             // At this point, we know that the widths are valid.
-            instr.SetAddressSize(context.Architecture.AddressSize, addressSize);
+            instruction.SetAddressSize(context.Architecture.AddressSize, addressSize);
         }
 
         /// <summary>

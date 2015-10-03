@@ -82,8 +82,8 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Constructs the operand's representation.
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
-        /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instr)
+        /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
+        internal override void Construct(Context context, EncodedInstruction instruction)
         {
             // Let's evaluate the expression.
             var result = Expression?.Compile()(context);
@@ -108,15 +108,15 @@ namespace SharpAssembler.Architectures.X86.Operands
             // Set the parameters.
             if (!asExtraImmediate)
             {
-                instr.Immediate = result;
-                instr.ImmediateSize = size;
+                instruction.Immediate = result;
+                instruction.ImmediateSize = size;
             }
             else
             {
-                instr.ExtraImmediate = result;
-                instr.ExtraImmediateSize = size;
+                instruction.ExtraImmediate = result;
+                instruction.ExtraImmediateSize = size;
             }
-            instr.SetOperandSize(context.Architecture.OperandSize, size);
+            instruction.SetOperandSize(context.Architecture.OperandSize, size);
         }
 
         /// <summary>

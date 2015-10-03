@@ -117,8 +117,8 @@
     <Compile Include="OperandEncoding.cs" />
     <Compile Include="OperandType.cs" />
     <Compile Include="ProcessorModes.cs" />
-    <Compile Include="Reg.cs" />
     <Compile Include="Register.cs" />
+    <Compile Include="old\Register.cs" />
     <Compile Include="RegisterType.cs" />
     <Compile Include="X86Architecture.cs" />
     <Compile Include="X86Instruction.cs" />

@@ -60,11 +60,11 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="encoding">Specifies how the operand is encoded.</param>
         OperandDescriptor(OperandType operandType, RegisterType registerType, DataSize size, OperandEncoding encoding)
         {
-            this.operandType = operandType;
-            this.registerType = registerType;
-            this.size = (size != DataSize.None ? size : registerType.GetSize());
-            fixedRegister = Register.None;
-            operandEncoding = encoding;
+            OperandType = operandType;
+            RegisterType = registerType;
+            Size = (size != DataSize.None ? size : registerType.GetSize());
+            FixedRegister = Register.None;
+            OperandEncoding = encoding;
         }
 
         /// <summary>
@@ -73,28 +73,19 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="register">The fixed <see cref="Register"/> value of the operand.</param>
         public OperandDescriptor(Register register)
         {
-            operandType = OperandType.FixedRegister;
-            registerType = register.GetRegisterType();
-            size = register.GetSize();
-            fixedRegister = register;
-            operandEncoding = OperandEncoding.Default;
+            OperandType = OperandType.FixedRegister;
+            RegisterType = register.GetRegisterType();
+            Size = register.GetSize();
+            FixedRegister = register;
+            OperandEncoding = OperandEncoding.Default;
         }
 
-        #region Properties
-        OperandType operandType;
         /// <summary>
         /// Gets the type of operand.
         /// </summary>
         /// <value>A member of the <see cref="OperandType"/> enumeration.</value>
-        public OperandType OperandType
-        {
-            get
-            {
-                return operandType;
-            }
-        }
+        public OperandType OperandType { get; private set; }
 
-        RegisterType registerType;
         /// <summary>
         /// Gets the type of registers allowed for this operand.
         /// </summary>
@@ -103,25 +94,14 @@ namespace SharpAssembler.Architectures.X86
         /// <remarks>
         /// This property is only valid for operands which take a register.
         /// </remarks>
-        public RegisterType RegisterType
-        {
-            get { return registerType; }
-        }
+        public RegisterType RegisterType { get; private set; }
 
-        OperandEncoding operandEncoding;
         /// <summary>
         /// Gets how the operand is encoded.
         /// </summary>
         /// <value>A member of the <see cref="OperandEncoding"/> enumeration.</value>
-        public OperandEncoding OperandEncoding
-        {
-            get
-            {
-                return operandEncoding;
-            }
-        }
+        public OperandEncoding OperandEncoding { get; private set; }
 
-        DataSize size;
         /// <summary>
         /// Gets the size of the operand.
         /// </summary>
@@ -131,37 +111,15 @@ namespace SharpAssembler.Architectures.X86
         /// This property returns the size of <see cref="FixedRegister"/> when <see cref="OperandType"/> equals
         /// <see cref="OperandType.FixedRegister"/>.
         /// </remarks>
-        public DataSize Size
-        {
-            get
-            {
-                return size;
-            }
-        }
+        public DataSize Size { get; private set; }
 
-        Register fixedRegister;
         /// <summary>
         /// Gets the <see cref="Register"/> which must be set when <see cref="OperandType"/> equals
         /// <see cref="OperandType.FixedRegister"/>.
         /// </summary>
         /// <value>A <see cref="Register"/>; or <see cref="Register.None"/> when it does not apply.</value>
-        public Register FixedRegister
-        {
-            get
-            {
-                #region Contract
-                Contract.Ensures(Enum.IsDefined(typeof(Register), Contract.Result<Register>()));
-                Contract.Ensures(
-                    (Contract.Result<Register>() == Register.None)
-                    ==
-                    (OperandType != OperandType.FixedRegister));
-                #endregion
-                return fixedRegister;
-            }
-        }
-        #endregion
+        public Register FixedRegister { get; private set; }
 
-        #region Methods
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
@@ -170,10 +128,10 @@ namespace SharpAssembler.Architectures.X86
         /// otherwise, <see langword="false"/>.</returns>
         public bool Equals(OperandDescriptor other)
         {
-            return other.operandType == operandType
-                && other.registerType == registerType
-                && other.size == size
-                && other.fixedRegister == fixedRegister;
+            return other.OperandType == OperandType
+                && other.RegisterType == RegisterType
+                && other.Size == Size
+                && other.FixedRegister == FixedRegister;
         }
 
         /// <summary>
@@ -196,7 +154,7 @@ namespace SharpAssembler.Architectures.X86
         public override int GetHashCode()
         {
             // TODO: Better GetHashCode() method implementation.
-            return operandType.GetHashCode() ^ registerType.GetHashCode() ^ size.GetHashCode() ^ fixedRegister.GetHashCode();
+            return OperandType.GetHashCode() ^ RegisterType.GetHashCode() ^ Size.GetHashCode() ^ FixedRegister.GetHashCode();
         }
 
         // TODO: Implement these in the operand types.
@@ -386,20 +344,20 @@ namespace SharpAssembler.Architectures.X86
         /// <returns>A string.</returns>
         public override string ToString()
         {
-            switch (operandType)
+            switch (OperandType)
             {
                 case OperandType.FixedRegister:
-                    return Enum.GetName(typeof(Register), fixedRegister);
+                    return Enum.GetName(typeof(Register), FixedRegister);
                 case OperandType.Immediate:
-                    return "imm" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                    return "imm" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                 case OperandType.MemoryOperand:
-                    return "mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "");
+                    return "mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "");
                 case OperandType.MemoryOffset:
-                    return "moffset" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                    return "moffset" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                 case OperandType.FarPointer:
-                    return "pntr16:" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                    return "pntr16:" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                 case OperandType.RegisterOperand:
-                    switch (registerType)
+                    switch (RegisterType)
                     {
                         case RegisterType.FloatingPoint:
                             return "ST(i)";
@@ -419,33 +377,33 @@ namespace SharpAssembler.Architectures.X86
                         //case RegisterType.GeneralPurpose64Bit:
                         //case RegisterType.None:
                         default:
-                            return "reg" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "reg" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                     }
                 case OperandType.RegisterOrMemoryOperand:
-                    switch (registerType)
+                    switch (RegisterType)
                     {
                         case RegisterType.FloatingPoint:
-                            return "ST(i)/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "ST(i)/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         case RegisterType.Simd64Bit:
-                            return "mmx/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "mmx/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         case RegisterType.Simd128Bit:
-                            return "xmm/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "xmm/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         case RegisterType.Segment:
-                            return "segReg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "segReg/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         case RegisterType.Control:
-                            return "cReg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "cReg/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         case RegisterType.Debug:
-                            return "dReg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "dReg/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         //case RegisterType.GeneralPurpose8Bit:
                         //case RegisterType.GeneralPurpose16Bit:
                         //case RegisterType.GeneralPurpose32Bit:
                         //case RegisterType.GeneralPurpose64Bit:
                         //case RegisterType.None:
                         default:
-                            return "reg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
+                            return "reg/mem" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                     }
                 case OperandType.RelativeOffset:
-                    return "rel" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?") + "off";
+                    return "rel" + (Size != DataSize.None ? ((int)Size * 8).ToString(CultureInfo.InvariantCulture) : "?") + "off";
                 case OperandType.None:
                     // Nothing to do.
                     return string.Empty;
@@ -453,9 +411,7 @@ namespace SharpAssembler.Architectures.X86
                     return string.Empty;
             }
         }
-        #endregion
 
-        #region Operators
         /// <summary>
         /// Determines whether two specified <see cref="OperandDescriptor"/> objects have the same value.
         /// </summary>
@@ -479,6 +435,5 @@ namespace SharpAssembler.Architectures.X86
         {
             return !(first == second);
         }
-        #endregion
     }
 }

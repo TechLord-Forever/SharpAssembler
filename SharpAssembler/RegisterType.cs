@@ -17,18 +17,17 @@ namespace SharpAssembler.Architectures.X86
     /// register.</description></item>
     /// </list>
     /// </remarks>
+    [Flags]
     public enum RegisterType
     {
         /// <summary>
         /// No register type.
         /// </summary>
         None = 0,
-#if false
         /// <summary>
         /// A general purpose register.
         /// </summary>
         GeneralPurpose = GeneralPurpose8Bit | GeneralPurpose16Bit | GeneralPurpose32Bit | GeneralPurpose64Bit,
-#endif
         /// <summary>
         /// An 8-bit general purpose register.
         /// </summary>
