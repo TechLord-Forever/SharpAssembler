@@ -14,11 +14,11 @@
             // and reg2 has the register with the lowest number. When a register is not provided, it is put in reg2.
             // This simplifies the following tests, for which the order does not matter.
             var baseReg = BaseRegister;
-            var indexReg = (scale == 1 ? IndexRegister : Register.None);
-            Register reg1 = (baseReg.GetValue() >= indexReg.GetValue() ? baseReg : indexReg);
-            Register reg2 = (baseReg.GetValue() < indexReg.GetValue() ? baseReg : indexReg);
+            var indexReg = (Scale == 1 ? IndexRegister : Register.None);
+            Register reg1 = (baseReg.Value >= indexReg.Value ? baseReg : indexReg);
+            Register reg2 = (baseReg.Value < indexReg.Value ? baseReg : indexReg);
 
-            if (scale != 1 && scale != 0)
+            if (Scale != 1 && Scale != 0)
                 throw new AssemblerException("The specified scaling factor is not supported in a 16-bit effective address.");
 
             // Two cases together deviate from the standard MOD encoding.
@@ -69,7 +69,6 @@
                     case DataSize.Bit8:
                         instr.ModRM.Mod = 0x01;
                         break;
-                    case DataSize.Bit16:
                     default:
                         // The default is 16-bit, so larger values get truncated.
                         instr.ModRM.Mod = 0x02;

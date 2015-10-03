@@ -88,18 +88,5 @@ namespace SharpAssembler.Architectures.X86
                 scale = value;
             }
         }
-
-        /// <summary>
-        /// Returns a byte array representation of this sub structure.
-        /// </summary>
-        /// <returns>A byte array.</returns>
-        public byte[] ToBytes()
-        {
-            byte result = 0x00;
-            result |= (byte)((@base & 0x07));
-            result |= (byte)((index & 0x07) << 3);
-            result |= (byte)((scale & 0x03) << 6);
-            return new byte[] { result };
-        }
     }
 }

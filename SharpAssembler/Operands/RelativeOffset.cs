@@ -55,14 +55,14 @@ namespace SharpAssembler.Architectures.X86.Operands
             // Determine the size of the immediate operand. Otherwise the length is not calculated correctly.
             DataSize size = PreferredSize;
             if (size == DataSize.None)
-                size = context.Architecture.OperandSize;
+                size = context.AddressingMode;
             if (size >= DataSize.Bit64)
                 throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
                     "{0}-bit operands cannot be encoded.",
                     ((int)size) << 3));
             else if (size == DataSize.None)
                 throw new AssemblerException("The operand size is not specified.");
-            instruction.SetOperandSize(context.Architecture.OperandSize, size);
+            instruction.SetOperandSize(context.AddressingMode, size);
             instruction.ImmediateSize = size;
 
             // Let's evaluate the expression.
@@ -125,10 +125,10 @@ namespace SharpAssembler.Architectures.X86.Operands
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

@@ -71,16 +71,14 @@ namespace SharpAssembler.Architectures.X86
         /// <inheritdoc />
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}({1})",
-                Opcode.Mnemonic,
-                string.Join(", ", Operands));
+            return $"{Opcode.Mnemonic}({Operands})";
         }
 
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)
         {
             // Get the most efficient instruction variant.
-            X86OpcodeVariant variant = GetVariant(context);
+            var variant = GetVariant(context);
             if (variant == null)
                 throw new AssemblerException("No matching instruction variant was found.");
 
@@ -98,12 +96,9 @@ namespace SharpAssembler.Architectures.X86
         /// or <see langword="null"/> when none was found.</returns>
         X86OpcodeVariant GetVariant(Context context)
         {
-            var variants =
-                from v in Opcode.Variants
-                where v.Match(ExplicitOperandSize, context, Operands.ToList())
-                select v;
-            var variant = variants.FirstOrDefault();
-
+            var variant = Opcode.Variants
+                .Where(v => v.Match(ExplicitOperandSize, context, Operands))
+                .FirstOrDefault();
             return variant;
         }
     }

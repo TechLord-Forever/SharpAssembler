@@ -55,37 +55,20 @@ namespace SharpAssembler.Instructions
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)
         {
-            int totallength = 0;
-            foreach (T value in Data)
-            {
-                totallength += Marshal.SizeOf(value);
-            }
-
-            byte[] databytes = new byte[totallength];
             int offset = 0;
+            int size = Marshal.SizeOf(typeof(T));
+            var array = new byte[size * Data.Count];
+
             foreach (T value in Data)
             {
-                offset += CopyBytes(value, databytes, offset);
+                IntPtr ptr = Marshal.AllocHGlobal(size);
+                Marshal.StructureToPtr(value, ptr, true);
+                Marshal.Copy(ptr, array, offset, size);
+                Marshal.FreeHGlobal(ptr);
+                offset += size;
             }
 
-            yield return new RawEmittable(databytes);
-        }
-
-        /// <summary>
-        /// Copies the byte representation of the value to the specified array at the specified location.
-        /// </summary>
-        /// <param name="value">The value to convert.</param>
-        /// <param name="array">The array to copy the representation to.</param>
-        /// <param name="offset">The offset in <paramref name="array"/> where to start copying.</param>
-        /// <returns>The number of bytes copied.</returns>
-        int CopyBytes(T value, byte[] array, int offset)
-        {
-            int length = Marshal.SizeOf(value);
-            IntPtr ptr = Marshal.AllocHGlobal(length);
-            Marshal.StructureToPtr(value, ptr, true);
-            Marshal.Copy(ptr, array, offset, length);
-            Marshal.FreeHGlobal(ptr);
-            return length;
+            yield return new RawEmittable(array);
         }
     }
 }

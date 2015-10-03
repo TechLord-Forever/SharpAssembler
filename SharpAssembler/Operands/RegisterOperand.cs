@@ -8,8 +8,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// <remarks>
     /// In the Intel manuals, a register operand is denoted as <c>r8</c>, <c>r16</c>, <c>r32</c> or <c>r64</c>.
     /// </remarks>
-    public partial class RegisterOperand : Operand,
-        IOperand
+    public partial class RegisterOperand : Operand, IOperand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterOperand"/> class.
@@ -47,7 +46,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <value>A member of the <see cref="DataSize"/> enumeration; or <see cref="DataSize.None"/>.</value>
         public override DataSize Size
         {
-            get { return Register.GetSize(); }
+            get { return Register.Size; }
         }
 
         /// <summary>
@@ -64,28 +63,23 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
         internal override void Construct(Context context, EncodedInstruction instruction)
         {
-            if (context.Architecture.OperandSize != DataSize.Bit64 &&
-                Register.GetSize() == DataSize.Bit64)
-            {
-                throw new AssemblerException(string.Format(
-                    "The 64-bit register {0} cannot be used with non-64-bit operand sizes.",
-                    Enum.GetName(typeof(Register), Register)));
-            }
+            if (context.AddressingMode != DataSize.Bit64 && Register.Size == DataSize.Bit64)
+                throw new AssemblerException($"The 64-bit register {Register} cannot be used with non-64-bit operand sizes.");
 
             // Encode the register as part of the opcode or ModRM byte.
             switch (Encoding)
             {
                 case OperandEncoding.Default:
                     instruction.SetModRMByte();
-                    instruction.ModRM.Reg = Register.GetValue();
+                    instruction.ModRM.Reg = Register.Value;
                     break;
                 case OperandEncoding.AddToOpcode:
-                    instruction.OpcodeReg = Register.GetValue();
+                    instruction.OpcodeReg = Register.Value;
                     break;
                 case OperandEncoding.ModRm:
                     instruction.SetModRMByte();
                     instruction.ModRM.Mod = 0x03;
-                    instruction.ModRM.RM = Register.GetValue();
+                    instruction.ModRM.RM = Register.Value;
                     break;
                 case OperandEncoding.Ignore:
                     // The operand is ignored.
@@ -93,7 +87,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             }
 
             // Set the operand size to the size of the register.
-            instruction.SetOperandSize(context.Architecture.OperandSize, Register.GetSize());
+            instruction.SetOperandSize(context.AddressingMode, Register.Size);
         }
 
         /// <summary>
@@ -109,7 +103,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             {
                 case OperandType.RegisterOrMemoryOperand:
                 case OperandType.RegisterOperand:
-                    return descriptor.RegisterType.HasFlag(Register.GetRegisterType());
+                    return descriptor.RegisterType.HasFlag(Register.Type);
                 case OperandType.FixedRegister:
                     return Register == descriptor.FixedRegister;
                 default:
@@ -141,10 +135,10 @@ namespace SharpAssembler.Architectures.X86.Operands
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

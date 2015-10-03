@@ -19,7 +19,7 @@ namespace SharpAssembler
         /// </summary>
         public Assembler()
         {
-            Context = new Context();
+            Context = new Context(DataSize.Bit64, 0, true);
         }
 
         /// <summary>

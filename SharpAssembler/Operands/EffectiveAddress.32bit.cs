@@ -27,7 +27,8 @@ namespace SharpAssembler.Architectures.X86.Operands
             else if (BaseRegister != Register.ESP && IndexRegister == Register.None)
             {
                 // R/M
-                instr.ModRM.RM = (byte)((int)BaseRegister & 0x07);
+//#warning instr.ModRM.RM = (byte)((int)BaseRegister & 0x07);
+                instr.ModRM.RM = (byte)(BaseRegister.Full & 0x07);
 
                 // Displacement.
                 if (instr.Displacement == null && BaseRegister == Register.EBP)
@@ -70,17 +71,19 @@ namespace SharpAssembler.Architectures.X86.Operands
                     instr.ModRM.Mod = 0x02;
 
                 // Base
-                instr.Sib.Base = (byte)((int)BaseRegister & 0x07);
+//#warning instr.Sib.Base = (byte)((int)BaseRegister & 0x07);
+                instr.Sib.Base = (byte)(BaseRegister.Full & 0x07);
                 if (BaseRegister == Register.None)
                     instr.Sib.Base = 0x05;
 
                 // Index
-                instr.Sib.Index = (byte)((int)IndexRegister & 0x07);
+//#warning instr.Sib.Index = (byte)((int)IndexRegister & 0x07);
+                instr.Sib.Index = (byte)(IndexRegister.Full & 0x07);
                 if (IndexRegister == Register.None)
                     instr.Sib.Index = 0x20;
 
                 // Scale
-                instr.Sib.Scale = (byte)((int)Math.Log(scale, 2));
+                instr.Sib.Scale = (byte)((int)Math.Log(Scale, 2));
             }
         }
     }

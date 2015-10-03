@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace SharpAssembler.Architectures.X86
 {
@@ -69,9 +68,6 @@ namespace SharpAssembler.Architectures.X86
         /// </summary>
         Debug = 0x4000 | DataSize.Bit32,
     }
-
-
-
 
     /// <summary>
     /// Extensions for the <see cref="RegisterType"/> type.

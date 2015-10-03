@@ -50,12 +50,6 @@ namespace SharpAssembler.Architectures.X86
         public bool NoRexPrefix { get; set; } = false;
 
         /// <summary>
-        /// Gets or sets the CPU features which are required for this opcode variant to be valid.
-        /// </summary>
-        /// <value>A bitwise combination of members of the <see cref="CpuFeatures"/> enumeration.</value>
-        public CpuFeatures RequiredFeatures { get; set; } = CpuFeatures.None;
-
-        /// <summary>
         /// Gets a collection of operand descriptors.
         /// </summary>
         /// <value>A collection of <see cref="OperandDescriptor"/> objects.</value>
@@ -162,7 +156,7 @@ namespace SharpAssembler.Architectures.X86
 
             // When the operand size has been explicitly set, set it on the encoded instruction.
             if (OperandSize != DataSize.None)
-                instr.SetOperandSize(context.Architecture.OperandSize, OperandSize);
+                instr.SetOperandSize(context.AddressingMode, OperandSize);
             if (NoRexPrefix)
                 // SetOperandSize() will cause the instruction to encode a REX prefix, which is not required in
                 // this particular case. So reset it back to null to encode no REX prefix.
@@ -185,7 +179,7 @@ namespace SharpAssembler.Architectures.X86
         public bool Match(DataSize explicitOperandSize, Context context, IList<Operand> operands)
         {
             // Check whether the variant is valid in the current mode.
-            if (!SupportedModes.HasFlag(ProcessorModes.Long) && context.Architecture.OperandSize == DataSize.Bit64)
+            if (!SupportedModes.HasFlag(ProcessorModes.Long) && context.AddressingMode == DataSize.Bit64)
                 return false;
             //if (this.operandSize != DataSize.None && this.operandSize != operandSize)
             //    return false;
@@ -222,7 +216,7 @@ namespace SharpAssembler.Architectures.X86
                         variantOperandSize = Descriptors[i].RegisterType.GetSize();
                         break;
                     case OperandType.FixedRegister:
-                        variantOperandSize = Descriptors[i].FixedRegister.GetSize();
+                        variantOperandSize = Descriptors[i].FixedRegister.Size;
                         break;
                     default:
                         variantOperandSize = Descriptors[i].Size;
@@ -248,22 +242,6 @@ namespace SharpAssembler.Architectures.X86
 
             // All tests passed. It's a match.
             return true;
-        }
-
-        /// <summary>
-        /// Checks whether the instruction variant is supported in the specified architecture (depending 64-bit
-        /// mode or CPU features).
-        /// </summary>
-        /// <param name="architecture">The architecture.</param>
-        /// <returns><see langword="true"/> when the instruction variant is valid for the
-        /// specified architecture; otherwise, <see langword="false"/>.</returns>
-        public bool IsValid(X86Architecture architecture)
-        {
-            if ((architecture.Features & RequiredFeatures) != RequiredFeatures)
-                return false;
-            // TODO: Implement.
-            //if (architecture.AddressSize
-            throw new NotImplementedException();
         }
 
         /// <summary>

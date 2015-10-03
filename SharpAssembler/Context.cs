@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using SharpAssembler.Symbols;
+﻿using SharpAssembler.Symbols;
 using System;
+using System.Collections.ObjectModel;
 
 namespace SharpAssembler
 {
@@ -14,10 +14,19 @@ namespace SharpAssembler
     public class Context
     {
         /// <summary>
-        /// Gets the architecture for which this object file was created.
+        /// Gets or sets whether to use RIP-relative addressing by default.
         /// </summary>
-        /// <value>An <see cref="IArchitecture"/>.</value>
-        public IArchitecture Architecture { get; private set; }
+        /// <value><see langword="true"/> to use RIP-relative addressing by default;
+        /// otherwise, <see langword="false"/>.</value>
+        /// <remarks>
+        /// This property's value may only be <see langword="true"/> in 64-bit addressing mode.
+        /// </remarks>
+        public bool UseRIPRelativeAddressing { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DataSize AddressingMode { get; set; }
 
         /// <summary>
         /// Gets or sets the current virtual address.
@@ -39,17 +48,14 @@ namespace SharpAssembler
         public SymbolTable SymbolTable { get; private set; } = new SymbolTable();
 
         /// <summary>
-        /// Resets this context without clearing the symbol or relocation tables.
+        /// 
         /// </summary>
-        /// <remarks>
-        /// The context's address is reset to zero, the curent section is set to <see langword="null"/>. Derived
-        /// classes may override this method and reset other fields and properties. The symbol and relocation tables
-        /// are never cleared.
-        /// </remarks>
-        public virtual void Reset()
+        [CLSCompliant(false)]
+        public Context(DataSize addressingMode, ulong address, bool useRIPRelativeAddressing)
         {
-            Address = 0;
+            AddressingMode = addressingMode;
+            Address = address;
+            UseRIPRelativeAddressing = useRIPRelativeAddressing;
         }
     }
 }
-

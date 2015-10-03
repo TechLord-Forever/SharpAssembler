@@ -10,7 +10,6 @@ namespace SharpAssembler.Architectures.X86.Operands
     public partial class EffectiveAddress : Operand,
         IOperand
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="EffectiveAddress"/> class.
         /// </summary>
@@ -25,10 +24,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="operandSize">The <see cref="DataSize"/> of the operand.</param>
         /// <param name="addressSize">The address size.</param>
         /// <param name="displacement">The displacement expression.</param>
-        public EffectiveAddress(
-            DataSize operandSize,
-            DataSize addressSize,
-            Expression<Func<Context, ReferenceOffset>> displacement)
+        public EffectiveAddress(DataSize operandSize, DataSize addressSize, Expression<Func<Context, ReferenceOffset>> displacement)
             : this(operandSize, Register.None, Register.None, 0, displacement)
         {
             AddressSize = addressSize;
@@ -42,22 +38,19 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="indexRegister">The index <see cref="Register"/>; or <see langword="Register.None"/>.</param>
         /// <param name="scale">The scale.</param>
         /// <param name="displacement">The displacement expression.</param>
-        public EffectiveAddress(
-            DataSize operandSize,
-            Register baseRegister,
-            Register indexRegister,
-            int scale,
+        public EffectiveAddress(DataSize operandSize, Register baseRegister, Register indexRegister, int scale,
             Expression<Func<Context, ReferenceOffset>> displacement)
             : base(operandSize)
         {
+            if (scale > 8)
+                throw new ArgumentOutOfRangeException(nameof(scale));
+
             BaseRegister = baseRegister;
             IndexRegister = indexRegister;
-            this.scale = scale;
+            Scale = scale;
             Displacement = displacement;
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets the base register.
         /// </summary>
@@ -70,21 +63,11 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <value>A <see cref="Register"/>.</value>
         public Register IndexRegister { get; set; }
 
-        private int scale;
         /// <summary>
         /// Gets or sets the scaling factor.
         /// </summary>
         /// <value>The scaling factor, which must be zero, or a positive power of two less than or equal to 8.</value>
-        public int Scale
-        {
-            get { return scale; }
-            set
-            {
-                if (value > 8)
-                    throw new IndexOutOfRangeException();
-                scale = value;
-            }
-        }
+        public int Scale { get; private set; }
 
         /// <summary>
         /// Gets or sets the expression specifying the displacement of the effective address.
@@ -110,7 +93,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Gets or sets whether the effective address is RIP-relative.
         /// </summary>
         /// <value><see langword="true"/> to encode a RIP-relative address; <see langword="false"/> to encode an
-        /// absolute address; otherwise, <see langword="null"/> to use the <see cref="X86Architecture"/>'s default.
+        /// absolute address; otherwise, <see langword="null"/> to use the <see cref="Context"/>'s default.
         /// The default is <see langword="null"/>.</value>
         /// <remarks>
         /// <para>The value of this property may only be <see langword="true"/> in 64-bit addressing mode.</para>
@@ -120,9 +103,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </remarks>
         public bool? RelativeAddress { get; set; }
 
-        #endregion
-
-        #region Methods
         /// <summary>
         /// Constructs the operand's representation.
         /// </summary>
@@ -132,12 +112,12 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             DataSize addressSize = GetAddressSize(context);
 
-            instruction.SetOperandSize(context.Architecture.OperandSize, Size);
+            instruction.SetOperandSize(context.AddressingMode, Size);
 
-            if (context.Architecture.OperandSize != DataSize.Bit64 &&
+            if (context.AddressingMode != DataSize.Bit64 &&
                 Size == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit operand cannot be used with non-64-bit operand sizes.");
-            if (context.Architecture.AddressSize != DataSize.Bit64 &&
+            if (context.AddressingMode != DataSize.Bit64 &&
                 addressSize == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit effective address cannot be used with non-64-bit address sizes.");
 
@@ -162,7 +142,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             // When the registers have a width different from the current
             // operating mode width, then we have to add an address size prefix.
             // At this point, we know that the widths are valid.
-            instruction.SetAddressSize(context.Architecture.AddressSize, addressSize);
+            instruction.SetAddressSize(context.AddressingMode, addressSize);
         }
 
         /// <summary>
@@ -173,9 +153,9 @@ namespace SharpAssembler.Architectures.X86.Operands
         DataSize GetAddressSize(Context context)
         {
             DataSize addressSize = AddressSize;
-            DataSize baseWidth = BaseRegister.GetSize();
-            DataSize indexWidth = IndexRegister.GetSize();
-            DataSize contextAddressSize = context.Architecture.AddressSize;
+            DataSize baseWidth = BaseRegister.Size;
+            DataSize indexWidth = IndexRegister.Size;
+            DataSize contextAddressSize = context.AddressingMode;
 
             if (addressSize == DataSize.None)
                 addressSize = baseWidth;
@@ -239,7 +219,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                     // Does the result have a (resolved or not resolved) reference?
                     if (displacementExpression.Reference != null && !displacementExpression.Reference.Resolved)
                         // When the result has a reference, use the architecture's address size.
-                        displacementSize = context.Architecture.AddressSize;
+                        displacementSize = context.AddressingMode;
                     else
                         // Otherwise, use the most efficient word size.
                         displacementSize = Extensions.GetSizeOfValue(displacementExpression.Evaluate(context));    //.Constant);
@@ -312,7 +292,5 @@ namespace SharpAssembler.Architectures.X86.Operands
         internal override void Adjust(OperandDescriptor descriptor)
         {
         }
-
-        #endregion
     }
 }

@@ -1,31 +1,36 @@
 ﻿using SharpAssembler.Architectures.X86;
 
-namespace SharpAssembler.Dev
+namespace SharpAssembler.Architectures.X86
 {
     /// <summary>
-    ///
+    /// An x86-64 register.
     /// </summary>
     public class Register
     {
         /// <summary>
-        /// Register name.
+        /// Return register name.
         /// </summary>
         public string Name { get; private set; }
 
         /// <summary>
-        /// Register value.
+        /// Return register value.
         /// </summary>
         public byte Value { get; private set; }
 
         /// <summary>
-        /// Register type <see cref="RegisterType"/>
+        /// Return register type <see cref="RegisterType"/>
         /// </summary>
         public RegisterType Type { get; private set; }
 
         /// <summary>
-        ///
+        /// Returns the register size <see cref="DataSize"/>.
         /// </summary>
         public DataSize Size { get { return (DataSize)((int)Type & 0x3F); } }
+
+        /// <summary>
+        /// Return full value.
+        /// </summary>
+        public int Full { get { return Value | (int)Type << 5; } }
 
         /// <summary>
         /// Cretae new instance of <see cref="Register"/>
@@ -88,6 +93,10 @@ namespace SharpAssembler.Dev
             get { return Type == RegisterType.Simd64Bit || Type == RegisterType.Simd128Bit; }
         }
 
+        /// <summary>
+        /// Empty register.
+        /// </summary>
+        public readonly static Register None = new Register("<none>", 0, RegisterType.None);
         /// <summary>
         /// The lower 8-bits of the accumulator register.
         /// </summary>

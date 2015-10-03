@@ -5,15 +5,8 @@ namespace SharpAssembler.Architectures.X86
     /// <summary>
     /// Represents the ModR/M byte.
     /// </summary>
-    public class ModRMByte : SubStructure
+    public class ModRMByte
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModRMByte"/> class.
-        /// </summary>
-        public ModRMByte()
-        {
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ModRMByte"/> class.
         /// </summary>
@@ -34,7 +27,6 @@ namespace SharpAssembler.Architectures.X86
             this.mod = mod;
         }
 
-        #region Properties
         byte rm;
         /// <summary>
         /// Gets or sets the value of the R/M part of the ModR/M byte.
@@ -46,7 +38,7 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public byte RM
         {
-            get    { return rm; }
+            get { return rm; }
             set
             {
                 if (value > 0x0F)
@@ -89,20 +81,6 @@ namespace SharpAssembler.Architectures.X86
                     throw new Exception("Only the first 2 bits may be set.");
                 mod = value;
             }
-        }
-        #endregion
-
-        /// <summary>
-        /// Returns a byte array representation of this sub structure.
-        /// </summary>
-        /// <returns>A byte array.</returns>
-        public override byte[] ToBytes()
-        {
-            byte result = 0x00;
-            result |= (byte)((rm  & 0x07));
-            result |= (byte)((reg & 0x07) << 3);
-            result |= (byte)((mod & 0x03) << 6);
-            return new[] { result };
         }
     }
 }

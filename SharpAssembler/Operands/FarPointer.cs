@@ -56,7 +56,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                 // Does the result have a (resolved or not resolved) reference?
                 if (offsetResult.Reference != null)
                     // When the result has a reference, use the architecture's operand size.
-                    size = context.Architecture.OperandSize;
+                    size = context.AddressingMode;
                 else
                     // Otherwise, use the most efficient word size.
                     size = Extensions.GetSizeOfValue(offsetResult.Constant);
@@ -76,7 +76,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             instruction.ImmediateSize = size;
             instruction.ExtraImmediate = selectorResult;
             instruction.ExtraImmediateSize = (DataSize)2;
-            instruction.SetOperandSize(context.Architecture.OperandSize, size);
+            instruction.SetOperandSize(context.AddressingMode, size);
         }
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace SharpAssembler.Architectures.X86.Operands
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

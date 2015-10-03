@@ -13,8 +13,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             instr.SetModRMByte();
 
-            bool ripRelative =
-                RelativeAddress ?? ((X86Architecture)context.Architecture).UseRIPRelativeAddressing;
+            bool ripRelative = RelativeAddress ?? context.UseRIPRelativeAddressing;
             bool forceRipRelative = RelativeAddress.HasValue && RelativeAddress == true;
 
             if (BaseRegister == Register.None && IndexRegister == Register.None)
@@ -53,7 +52,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                 {
                     // [REG+...]
 
-                    instr.ModRM.RM = BaseRegister.GetValue();
+                    instr.ModRM.RM = BaseRegister.Value;
                 }
                 else
                 {
@@ -67,18 +66,18 @@ namespace SharpAssembler.Architectures.X86.Operands
 
                     // Base
                     if (BaseRegister != Register.None)
-                        instr.Sib.Base = BaseRegister.GetValue();
+                        instr.Sib.Base = BaseRegister.Value;
                     else
                         instr.Sib.Base = 0x05;
 
                     // Index
                     if (IndexRegister != Register.None)
-                        instr.Sib.Index = IndexRegister.GetValue();
+                        instr.Sib.Index = IndexRegister.Value;
                     else
                         instr.Sib.Index = 0x20;
 
                     // Scale
-                    instr.Sib.Scale = (byte)((int)Math.Log(scale, 2));
+                    instr.Sib.Scale = (byte)((int)Math.Log(Scale, 2));
                 }
 
                 if (instr.Displacement == null && BaseRegister == Register.RBP)

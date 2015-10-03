@@ -74,8 +74,8 @@ namespace SharpAssembler.Architectures.X86
         public OperandDescriptor(Register register)
         {
             OperandType = OperandType.FixedRegister;
-            RegisterType = register.GetRegisterType();
-            Size = register.GetSize();
+            RegisterType = register.Type;
+            Size = register.Size;
             FixedRegister = register;
             OperandEncoding = OperandEncoding.Default;
         }
