@@ -112,9 +112,7 @@
     <Compile Include="InstructionEncoder\EncodedInstruction.Prefixes.cs" />
     <Compile Include="InstructionEncoder\SibByte.cs" />
     <Compile Include="InstructionEncoder\SubStructure.cs" />
-    <Compile Include="ILockInstruction.cs" />
     <Compile Include="Instr.cs" />
-    <Compile Include="LockInstruction.cs" />
     <Compile Include="OperandDescriptor.cs" />
     <Compile Include="OperandEncoding.cs" />
     <Compile Include="OperandType.cs" />
@@ -311,11 +309,10 @@
     <Compile Include="Operands\RegisterOperand.cs" />
     <Compile Include="Operands\RegisterOperand.OperandEncoding.cs" />
     <Compile Include="Operands\RelativeOffset.cs" />
-    <Compile Include="Extra\BinaryWriterExtensions.cs" />
     <Compile Include="Instructions\CustomConstructable.cs" />
     <Compile Include="Instructions\Group.cs" />
     <Compile Include="Instructions\DeclareString.cs" />
-    <Compile Include="Extra\MathExt.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Instructions\Align.cs" />
     <Compile Include="Instructions\DeclareData.cs" />
     <Compile Include="Instructions\DeclareData`1.cs" />

@@ -45,30 +45,4 @@ namespace SharpAssembler.Instructions
         /// </summary>
         Public,
     }
-
-    /// <summary>
-    /// Extensions for the <see cref="LabelType"/> enumeration.
-    /// </summary>
-    public static class LabelTypeExtensions
-    {
-        /// <summary>
-        /// Converts a <see cref="LabelType"/> to the corresponding <see cref="SymbolType"/>.
-        /// </summary>
-        /// <param name="type">The <see cref="LabelType"/> to convert.</param>
-        /// <returns>The resulting <see cref="SymbolType"/>.</returns>
-        public static SymbolType ToSymbolType(this LabelType type)
-        {
-            switch (type)
-            {
-                case LabelType.Private:
-                    return SymbolType.Private;
-                case LabelType.Weak:
-                    return SymbolType.Weak;
-                case LabelType.Public:
-                    return SymbolType.Public;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-    }
 }

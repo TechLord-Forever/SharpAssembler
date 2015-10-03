@@ -22,7 +22,6 @@
  * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #endregion
-using System.Globalization;
 
 namespace SharpAssembler.Architectures.X86
 {
@@ -113,11 +112,11 @@ namespace SharpAssembler.Architectures.X86
             if (addressingMode == DataSize.None)
                 addressingMode = GetDefaultAddressingMode(type);
 
-            cpuType = type;
+            CpuType = type;
             this.features = features;
-            addressSize = addressingMode;
-            operandSize = addressingMode;
-            useRIPRelativeAddressing = ripRelative;
+            AddressSize = addressingMode;
+            OperandSize = addressingMode;
+            UseRIPRelativeAddressing = ripRelative;
         }
 
         /// <summary>
@@ -126,16 +125,9 @@ namespace SharpAssembler.Architectures.X86
         /// <value>The short, human readable name of the architecture.</value>
         public string Name
         {
-            get
-            {
-                if (cpuType != null)
-                    return string.Format(CultureInfo.InvariantCulture, "{0} (x86-64)", cpuType.Name);
-                else
-                    return "x86-64 architecture";
-            }
+            get { return CpuType != null ? $"{CpuType.Name} (x86-64)" : "x86-64 architecture"; }
         }
 
-        private DataSize addressSize;
         /// <summary>
         /// Gets the default address size used by this architecture.
         /// </summary>
@@ -143,15 +135,8 @@ namespace SharpAssembler.Architectures.X86
         /// <remarks>
         /// The address size may be overridden by individual instructions.
         /// </remarks>
-        public DataSize AddressSize
-        {
-            get
-            {
-                return addressSize;
-            }
-        }
+        public DataSize AddressSize { get; private set; }
 
-        private DataSize operandSize;
         /// <summary>
         /// Gets the default operand size used by this architecture.
         /// </summary>
@@ -159,23 +144,13 @@ namespace SharpAssembler.Architectures.X86
         /// <remarks>
         /// The operand size may be overridden by individual instructions.
         /// </remarks>
-        public DataSize OperandSize
-        {
-            get
-            {
-                return operandSize;
-            }
-        }
+        public DataSize OperandSize { get; private set; }
 
-        private CpuType cpuType;
         /// <summary>
         /// Gets or sets the type of CPU represented by this architecture.
         /// </summary>
         /// <value>A <see cref="CpuType"/>; or <see langword="null"/> when no particular CPU type is used.</value>
-        public CpuType CpuType
-        {
-            get { return cpuType; }
-        }
+        public CpuType CpuType { get; private set; }
 
         private CpuFeatures features;
         /// <summary>
@@ -184,10 +159,9 @@ namespace SharpAssembler.Architectures.X86
         /// <value>A bitwise combination of members of the <see cref="CpuFeatures"/> enumeration.</value>
         public CpuFeatures Features
         {
-            get { return features | (cpuType != null ? cpuType.Features : CpuFeatures.None); }
+            get { return features | (CpuType != null ? CpuType.Features : CpuFeatures.None); }
         }
 
-        private bool useRIPRelativeAddressing;
         /// <summary>
         /// Gets or sets whether to use RIP-relative addressing by default.
         /// </summary>
@@ -196,12 +170,7 @@ namespace SharpAssembler.Architectures.X86
         /// <remarks>
         /// This property's value may only be <see langword="true"/> in 64-bit addressing mode.
         /// </remarks>
-        public bool UseRIPRelativeAddressing
-        {
-            get { return useRIPRelativeAddressing; }
-        }
-
-        #region Methods
+        public bool UseRIPRelativeAddressing { get; private set; }
 
         /// <summary>
         /// Gets the default size of the address.
@@ -242,29 +211,5 @@ namespace SharpAssembler.Architectures.X86
                     || addressSize == DataSize.Bit64;
             }
         }
-
-        /// <summary>
-        /// Checks whether the specified operand size is valid for the specified CPU type.
-        /// </summary>
-        /// <param name="type">The CPU type to test against.</param>
-        /// <param name="operandSize">The operand size to test.</param>
-        /// <returns><see langword="true"/> when <paramref name="operandSize"/> is valid for <paramref name="type"/>;
-        /// otherwise, <see langword="false"/>.</returns>
-        public static bool IsValidOperandSize(CpuType type, DataSize operandSize)
-        {
-            if (type != null)
-            {
-                // Test whether the specified operand size is part of the list
-                // of allowed operating modes for the CPU type.
-                return (type.OperatingModes & operandSize) != 0;
-            }
-            else
-            {
-                return operandSize == DataSize.Bit16
-                    || operandSize == DataSize.Bit32
-                    || operandSize == DataSize.Bit64;
-            }
-        }
-        #endregion
     }
 }

@@ -22,7 +22,6 @@
  * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #endregion
-using System.Diagnostics.Contracts;
 
 namespace SharpAssembler.Architectures.X86
 {

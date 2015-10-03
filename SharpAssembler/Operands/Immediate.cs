@@ -23,7 +23,6 @@
  */
 #endregion
 using System;
-using System.Diagnostics.Contracts;
 using SharpAssembler.Symbols;
 using System.Linq.Expressions;
 
@@ -124,7 +123,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                     size = context.Architecture.OperandSize;
                 else
                     // Otherwise, use the most efficient word size.
-                    size = MathExt.GetSizeOfValue(result.Constant);
+                    size = Extensions.GetSizeOfValue(result.Constant);
             }
             if (size > DataSize.Bit64)
                 throw new AssemblerException("Operands with more than 64 bits cannot be encoded.");

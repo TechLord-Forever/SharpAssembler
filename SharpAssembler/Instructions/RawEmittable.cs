@@ -22,7 +22,6 @@
  * along with SharpAssembler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #endregion
-using System;
 using System.IO;
 
 namespace SharpAssembler.Instructions

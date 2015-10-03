@@ -31,7 +31,7 @@ namespace SharpAssembler
     /// An interface for entities which can be contained can create a
     /// representation of themselves.
     /// </summary>
-    public abstract class Constructable// : IAnnotatable//, IObjectFileVisitable
+    public abstract class Constructable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Constructable"/> class.

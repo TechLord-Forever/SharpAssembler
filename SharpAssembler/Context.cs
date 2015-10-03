@@ -24,6 +24,7 @@
 #endregion
 using System.Collections.ObjectModel;
 using SharpAssembler.Symbols;
+using System;
 
 namespace SharpAssembler
 {
@@ -53,7 +54,7 @@ namespace SharpAssembler
         /// Gets or sets the current virtual address.
         /// </summary>
         /// <value>The current virtual address.</value>
-        [System.CLSCompliant(false)]
+        [CLSCompliant(false)]
         public ulong Address { get; set; }
 
         /// <summary>

@@ -266,7 +266,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                         displacementSize = context.Architecture.AddressSize;
                     else
                         // Otherwise, use the most efficient word size.
-                        displacementSize = MathExt.GetSizeOfValue(displacementExpression.Evaluate(context));    //.Constant);
+                        displacementSize = Extensions.GetSizeOfValue(displacementExpression.Evaluate(context));    //.Constant);
                 }
             }
 

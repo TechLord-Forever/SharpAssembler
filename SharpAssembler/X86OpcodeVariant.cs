@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Collections.ObjectModel;
 using SharpAssembler.Architectures.X86.Operands;
@@ -13,12 +12,7 @@ namespace SharpAssembler.Architectures.X86
     /// </summary>
     public sealed class X86OpcodeVariant
     {
-        /// <summary>
-        /// Gets or sets the opcode bytes emitted for this opcode variant.
-        /// </summary>
-        /// <value>An array of bytes. Use an empty array to specify no opcode bytes.</value>
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        public byte[] OpcodeBytes { get; set; }
+        private byte[] opcodeBytes;
 
         /// <summary>
         /// Gets or sets the fixed value of the REG part of the ModR/M byte.
@@ -55,7 +49,6 @@ namespace SharpAssembler.Architectures.X86
         /// otherwise, <see langword="false"/>. The default is <see langword="false"/>.</value>
         public bool NoRexPrefix { get; set; } = false;
 
-        private CpuFeatures requiredFeatures = CpuFeatures.None;
         /// <summary>
         /// Gets or sets the CPU features which are required for this opcode variant to be valid.
         /// </summary>
@@ -68,7 +61,6 @@ namespace SharpAssembler.Architectures.X86
         /// <value>A collection of <see cref="OperandDescriptor"/> objects.</value>
         public Collection<OperandDescriptor> Descriptors { get; private set; } = new Collection<OperandDescriptor>();
 
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="X86OpcodeVariant"/> class.
         /// </summary>
@@ -123,16 +115,14 @@ namespace SharpAssembler.Architectures.X86
             if (fixedReg > 0x7)
                 throw new ArgumentOutOfRangeException(nameof(fixedReg), "Only the least significant 3 bits may be set.");
 
-            OpcodeBytes = opcodeBytes;
+            this.opcodeBytes = opcodeBytes;
             FixedReg = fixedReg;
             OperandSize = operandSize;
 
             foreach (var descriptor in descriptors)
                 Descriptors.Add(descriptor);
         }
-        #endregion
 
-        #region Construction
         /// <summary>
         /// Constructs the representation of this instruction variant using the specified operands.
         /// </summary>
@@ -159,7 +149,7 @@ namespace SharpAssembler.Architectures.X86
             instr.SetLock(lockPrefix);
 
             // Set the opcode.
-            instr.Opcode = OpcodeBytes;
+            instr.Opcode = opcodeBytes;
 
             // Set the fixed REG value, if any.
             instr.FixedReg = FixedReg;
@@ -268,7 +258,6 @@ namespace SharpAssembler.Architectures.X86
             // All tests passed. It's a match.
             return true;
         }
-        #endregion
 
         /// <summary>
         /// Checks whether the instruction variant is supported in the specified architecture (depending 64-bit
@@ -279,7 +268,7 @@ namespace SharpAssembler.Architectures.X86
         /// specified architecture; otherwise, <see langword="false"/>.</returns>
         public bool IsValid(X86Architecture architecture)
         {
-            if ((architecture.Features & requiredFeatures) != requiredFeatures)
+            if ((architecture.Features & RequiredFeatures) != RequiredFeatures)
                 return false;
             // TODO: Implement.
             //if (architecture.AddressSize
@@ -294,13 +283,9 @@ namespace SharpAssembler.Architectures.X86
         {
             string operandSizeStr = "";
             if (OperandSize != DataSize.None)
-                operandSizeStr = string.Format("O{0}", (int)OperandSize << 3);
-
-            return string.Format(CultureInfo.InvariantCulture, "{0}{1} /{2} {3}",
-                operandSizeStr,
-                string.Join(" ", OpcodeBytes.Select(b => b.ToString("X2"))),
-                FixedReg,
-                string.Join(", ", Descriptors));
+                operandSizeStr = $"O{((int)OperandSize << 3)}";
+            var opcBytes = string.Join(" ", opcodeBytes.Select(b => b.ToString("X2")));
+            return $"{operandSizeStr}{opcBytes} /{FixedReg} {string.Join(", ", Descriptors)}";
         }
     }
 }

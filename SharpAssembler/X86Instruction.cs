@@ -54,6 +54,19 @@ namespace SharpAssembler.Architectures.X86
         public DataSize ExplicitOperandSize { get; set; } = DataSize.None;
 
         /// <summary>
+        /// Gets or sets whether the lock prefix is used.
+        /// </summary>
+        /// <value><see langword="true"/> to enable the lock prefix; otherwise, <see langword="false"/>.
+        /// The default is <see langword="false"/>.</value>
+        /// <remarks>
+        /// When this property is set to <see langword="true"/>, the lock signal is asserted before accessing the
+        /// specified memory location. When the lock signal has already been asserted, the instruction must wait for it
+        /// to be released. Instructions without the lock prefix do not check the lock signal, and will be executed
+        /// even when the lock signal is asserted by some other instruction.
+        /// </remarks>
+        public virtual bool Lock { get; set; } = false;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="X86Instruction"/> class.
         /// </summary>
         /// <param name="opcode">The opcode of this instruction.</param>
@@ -72,26 +85,20 @@ namespace SharpAssembler.Architectures.X86
             : base()
         {
             Opcode = opcode;
-            this.operands = operands.ToArray();
+            Operands = new ReadOnlyCollection<Operand>(operands);
         }
-
-        private Operand[] operands;
 
         /// <summary>
         /// Returns the operands to the instruction.
         /// </summary>
-        /// <returns>An ordered list of operands.</returns>
-        public ReadOnlyCollection<Operand> GetOperands()
-        {
-            return new ReadOnlyCollection<Operand>(operands);
-        }
+        public ReadOnlyCollection<Operand> Operands { get; private set; }
 
         /// <inheritdoc />
         public override string ToString()
         {
             return string.Format(CultureInfo.InvariantCulture, "{0}({1})",
                 Opcode.Mnemonic,
-                string.Join(", ", GetOperands()));
+                string.Join(", ", Operands));
         }
 
         /// <inheritdoc />
@@ -103,19 +110,9 @@ namespace SharpAssembler.Architectures.X86
                 throw new AssemblerException("No matching instruction variant was found.");
 
             // Construct the chosen variant.
-            var instr = variant.Construct(context, GetOperands(), GetLockPrefix());
+            var instr = variant.Construct(context, Operands, Lock);
 
             return new IEmittable[] { instr };
-        }
-
-        /// <summary>
-        /// Gets whether a lock prefix is used for this instruction.
-        /// </summary>
-        /// <returns><see langword="true"/> to use a lock prefix;
-        /// otherwise, <see langword="false"/>.</returns>
-        protected virtual bool GetLockPrefix()
-        {
-            return false;
         }
 
         /// <summary>
@@ -128,7 +125,7 @@ namespace SharpAssembler.Architectures.X86
         {
             var variants =
                 from v in Opcode.Variants
-                where v.Match(ExplicitOperandSize, context, GetOperands().ToList())
+                where v.Match(ExplicitOperandSize, context, Operands.ToList())
                 select v;
             var variant = variants.FirstOrDefault();
 

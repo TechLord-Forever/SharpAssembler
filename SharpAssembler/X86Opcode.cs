@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics.Contracts;
 using System.Collections.ObjectModel;
 using SharpAssembler.Architectures.X86.Operands;
 
@@ -13,8 +11,7 @@ namespace SharpAssembler.Architectures.X86
     public abstract partial class X86Opcode
     {
         /// <inheritdoc />
-        public virtual string Mnemonic { get; protected set; }
-
+        public string Mnemonic { get; protected set; }
 
         /// <summary>
         /// Gets a read-only ordered collection of opcode variants.
@@ -31,10 +28,7 @@ namespace SharpAssembler.Architectures.X86
         /// <remarks>
         /// The default implementation returns <see langword="false"/>.
         /// </remarks>
-        public virtual bool CanLock
-        {
-            get { return false; }
-        }
+        public virtual bool CanLock { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Opcode"/> class.
@@ -43,8 +37,6 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="variants">The opcode variants.</param>
         protected X86Opcode(string mnemonic, IEnumerable<X86OpcodeVariant> variants)
         {
-            Contract.Requires<ArgumentNullException>(mnemonic != null);
-            Contract.Requires<ArgumentNullException>(variants != null);
             Mnemonic = mnemonic;
             Variants = variants.ToList().AsReadOnly();
         }
@@ -56,25 +48,7 @@ namespace SharpAssembler.Architectures.X86
         /// <returns>The created instruction.</returns>
         public X86Instruction CreateInstruction(params Operand[] operands)
         {
-            Contract.Requires<ArgumentNullException>(operands != null);
-            return CreateInstruction((IList<Operand>)operands);
-        }
-
-        /// <summary>
-        /// Creates a new instruction for this opcode.
-        /// </summary>
-        /// <param name="operands">The operands of the instruction.</param>
-        /// <returns>The created instruction.</returns>
-        public virtual X86Instruction CreateInstruction(IList<Operand> operands)
-        {
-            Contract.Requires<ArgumentNullException>(operands != null);
-            X86Instruction instr;
-            if (CanLock)
-                instr = new LockInstruction(this, operands);
-            else
-                instr = new X86Instruction(this, operands);
-
-            return instr;
+            return new X86Instruction(this, operands) { Lock = CanLock };
         }
     }
 }

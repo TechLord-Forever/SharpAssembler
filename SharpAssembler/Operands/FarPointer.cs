@@ -83,7 +83,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                     size = context.Architecture.OperandSize;
                 else
                     // Otherwise, use the most efficient word size.
-                    size = MathExt.GetSizeOfValue(offsetResult.Constant);
+                    size = Extensions.GetSizeOfValue(offsetResult.Constant);
             }
             if (size <= DataSize.Bit8)
                 size = DataSize.Bit16;
