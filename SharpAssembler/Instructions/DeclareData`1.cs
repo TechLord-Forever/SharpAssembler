@@ -77,7 +77,7 @@ namespace SharpAssembler.Instructions
         /// </summary>
         /// <param name="value">The object whose size to determine.</param>
         /// <returns>The size, in bytes.</returns>
-        private int GetSize(T value)
+        int GetSize(T value)
         {
             return Marshal.SizeOf(value);
         }
@@ -89,7 +89,7 @@ namespace SharpAssembler.Instructions
         /// <param name="array">The array to copy the representation to.</param>
         /// <param name="offset">The offset in <paramref name="array"/> where to start copying.</param>
         /// <returns>The number of bytes copied.</returns>
-        private int CopyBytes(T value, byte[] array, int offset)
+        int CopyBytes(T value, byte[] array, int offset)
         {
             int length = GetSize(value);
             IntPtr ptr = Marshal.AllocHGlobal(length);

@@ -40,7 +40,7 @@ namespace SharpAssembler.Instructions
             ExternSymbol = symbol;
         }
 
-        private Symbol externSymbol;
+        Symbol externSymbol;
         /// <summary>
         /// Gets or sets the symbol that is referenced by this instruction.
         /// </summary>

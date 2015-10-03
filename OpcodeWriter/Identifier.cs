@@ -10,7 +10,7 @@ namespace OpcodeWriter
         /// <summary>
         /// The actual identifier.
         /// </summary>
-        private readonly string value;
+        readonly string value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Identifier"/> class.

@@ -9,7 +9,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        private void Encode64BitEffectiveAddress(Context context, EncodedInstruction instr)
+        void Encode64BitEffectiveAddress(Context context, EncodedInstruction instr)
         {
             instr.SetModRMByte();
 

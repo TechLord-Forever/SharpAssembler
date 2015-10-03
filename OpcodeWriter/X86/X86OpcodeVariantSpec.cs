@@ -7,7 +7,7 @@ namespace OpcodeWriter.X86
     /// </summary>
     public class X86OpcodeVariantSpec : OpcodeVariantSpec
     {
-        private byte fixedReg = 0;
+        byte fixedReg = 0;
         /// <summary>
         /// Gets or sets the fixed value of the REG part of the ModR/M byte.
         /// </summary>

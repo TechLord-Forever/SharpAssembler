@@ -10,7 +10,7 @@ namespace OpcodeWriter
         /// <summary>
         /// A dictionary with factories.
         /// </summary>
-        private Dictionary<string, SpecFactory> factories = new Dictionary<string, SpecFactory>();
+        Dictionary<string, SpecFactory> factories = new Dictionary<string, SpecFactory>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecFactoryDispenser"/> class.

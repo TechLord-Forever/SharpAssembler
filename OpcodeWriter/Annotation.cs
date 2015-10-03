@@ -51,7 +51,7 @@ namespace OpcodeWriter
         /// <param name="targetType">The target <see cref="Type"/>.</param>
         /// <param name="value">The value to convert.</param>
         /// <returns>The converted value.</returns>
-        private static object ConvertToType(Type targetType, object value)
+        static object ConvertToType(Type targetType, object value)
         {
             if (targetType.IsAssignableFrom(value.GetType()))
                 return value;

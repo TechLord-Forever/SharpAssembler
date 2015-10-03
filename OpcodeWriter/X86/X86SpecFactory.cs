@@ -102,7 +102,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="identifier">The register identifier.</param>
         /// <returns>The resulting <see cref="Register"/>.</returns>
-        private Register ToRegister(object identifier)
+        Register ToRegister(object identifier)
         {
             string id = identifier.ToString();
             Register reg;

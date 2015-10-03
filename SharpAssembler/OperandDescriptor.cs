@@ -58,7 +58,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="registerType">A bitwise combination of valid types of the register.</param>
         /// <param name="size">The size of the operand.</param>
         /// <param name="encoding">Specifies how the operand is encoded.</param>
-        private OperandDescriptor(OperandType operandType, RegisterType registerType, DataSize size, OperandEncoding encoding)
+        OperandDescriptor(OperandType operandType, RegisterType registerType, DataSize size, OperandEncoding encoding)
         {
             this.operandType = operandType;
             this.registerType = registerType;
@@ -81,7 +81,7 @@ namespace SharpAssembler.Architectures.X86
         }
 
         #region Properties
-        private OperandType operandType;
+        OperandType operandType;
         /// <summary>
         /// Gets the type of operand.
         /// </summary>
@@ -94,7 +94,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private RegisterType registerType;
+        RegisterType registerType;
         /// <summary>
         /// Gets the type of registers allowed for this operand.
         /// </summary>
@@ -108,7 +108,7 @@ namespace SharpAssembler.Architectures.X86
             get { return registerType; }
         }
 
-        private OperandEncoding operandEncoding;
+        OperandEncoding operandEncoding;
         /// <summary>
         /// Gets how the operand is encoded.
         /// </summary>
@@ -121,7 +121,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private DataSize size;
+        DataSize size;
         /// <summary>
         /// Gets the size of the operand.
         /// </summary>
@@ -139,7 +139,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private Register fixedRegister;
+        Register fixedRegister;
         /// <summary>
         /// Gets the <see cref="Register"/> which must be set when <see cref="OperandType"/> equals
         /// <see cref="OperandType.FixedRegister"/>.

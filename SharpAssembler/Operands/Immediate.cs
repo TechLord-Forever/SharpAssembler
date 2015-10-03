@@ -12,7 +12,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <summary>
         /// Whether this <see cref="Immediate"/> is encoded as the 'extra' immediate value.
         /// </summary>
-        private bool asExtraImmediate = false;
+        bool asExtraImmediate = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Immediate"/> class.

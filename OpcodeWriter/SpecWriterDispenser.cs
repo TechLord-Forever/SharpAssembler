@@ -10,7 +10,7 @@ namespace OpcodeWriter
         /// <summary>
         /// A dictionary with writers.
         /// </summary>
-        private Dictionary<string, SpecWriter> writers = new Dictionary<string, SpecWriter>();
+        Dictionary<string, SpecWriter> writers = new Dictionary<string, SpecWriter>();
 
         #region Constructors
         /// <summary>

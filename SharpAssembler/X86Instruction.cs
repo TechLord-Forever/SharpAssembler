@@ -121,7 +121,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="context">The <see cref="Context"/>.</param>
         /// <returns>The most efficient <see cref="X86OpcodeVariant"/>;
         /// or <see langword="null"/> when none was found.</returns>
-        private X86OpcodeVariant GetVariant(Context context)
+        X86OpcodeVariant GetVariant(Context context)
         {
             var variants =
                 from v in Opcode.Variants

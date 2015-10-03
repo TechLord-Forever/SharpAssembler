@@ -38,7 +38,7 @@
         }
 
         #region Properties
-        private string symbolIdentifier;
+        string symbolIdentifier;
         /// <summary>
         /// Gets the identifier of the referenced symbol.
         /// </summary>

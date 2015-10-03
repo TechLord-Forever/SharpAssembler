@@ -33,7 +33,7 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// The default CPU type.
         /// </summary>
-        private static readonly CpuType DefaultCpuType = CpuType.IntelSandyBridge;
+        static readonly CpuType DefaultCpuType = CpuType.IntelSandyBridge;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="X86Architecture"/> class.
@@ -152,7 +152,7 @@ namespace SharpAssembler.Architectures.X86
         /// <value>A <see cref="CpuType"/>; or <see langword="null"/> when no particular CPU type is used.</value>
         public CpuType CpuType { get; private set; }
 
-        private CpuFeatures features;
+        CpuFeatures features;
         /// <summary>
         /// Gets the features which are supported by the CPU.
         /// </summary>
@@ -177,7 +177,7 @@ namespace SharpAssembler.Architectures.X86
         /// </summary>
         /// <param name="type">The type of the CPU.</param>
         /// <returns>A <see cref="DataSize"/> other than <see cref="DataSize.None"/>.</returns>
-        private static DataSize GetDefaultAddressingMode(CpuType type)
+        static DataSize GetDefaultAddressingMode(CpuType type)
         {
             // By default: 32-bit.
             DataSize addressSize = DataSize.Bit32;

@@ -54,7 +54,7 @@ namespace SharpAssembler.Architectures.X86.Opcodes
         /// Returns the opcode variants of this opcode.
         /// </summary>
         /// <returns>An enumerable collection of <see cref="X86OpcodeVariant"/> objects.</returns>
-        private static IEnumerable<X86OpcodeVariant> GetOpcodeVariants()
+        static IEnumerable<X86OpcodeVariant> GetOpcodeVariants()
         {
             return new X86OpcodeVariant[]{
                 // FADD ST(0), ST(i)

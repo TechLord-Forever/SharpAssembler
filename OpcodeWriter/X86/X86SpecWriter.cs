@@ -50,7 +50,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="operand">The operand.</param>
         /// <returns>The operand name.</returns>
-        private string GetOperandManualName(X86OperandSpec operand)
+        string GetOperandManualName(X86OperandSpec operand)
         {
             switch (operand.Type)
             {

@@ -12,7 +12,7 @@ namespace SharpAssembler.Architectures.X86
     /// </summary>
     public sealed class X86OpcodeVariant
     {
-        private byte[] opcodeBytes;
+        byte[] opcodeBytes;
 
         /// <summary>
         /// Gets or sets the fixed value of the REG part of the ModR/M byte.

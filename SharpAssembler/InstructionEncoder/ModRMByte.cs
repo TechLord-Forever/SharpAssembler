@@ -35,7 +35,7 @@ namespace SharpAssembler.Architectures.X86
         }
 
         #region Properties
-        private byte rm;
+        byte rm;
         /// <summary>
         /// Gets or sets the value of the R/M part of the ModR/M byte.
         /// </summary>
@@ -55,7 +55,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private byte reg;
+        byte reg;
         /// <summary>
         /// Gets or sets the value of the REG part of the ModR/M byte.
         /// </summary>
@@ -75,7 +75,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private byte mod;
+        byte mod;
         /// <summary>
         /// Gets or sets the value of the MOD part of the ModR/M byte.
         /// </summary>

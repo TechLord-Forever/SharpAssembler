@@ -63,7 +63,7 @@ namespace SharpAssembler.Architectures.X86
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public byte[] Opcode { get; set; } = new byte[0];
 
-        private byte opcodeReg = 0;
+        byte opcodeReg = 0;
         /// <summary>
         /// Gets or sets a value which is added to the opcode byte.
         /// </summary>
@@ -105,7 +105,7 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public SibByte Sib { get; private set; }
 
-        private byte fixedReg;
+        byte fixedReg;
         /// <summary>
         /// Gets or sets the fixed value of the REG part of the ModR/M byte, when a ModR/M is used.
         /// </summary>
@@ -266,7 +266,7 @@ namespace SharpAssembler.Architectures.X86
         /// Emits the legacy prefixes.
         /// </summary>
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
-        private void EmitLegacyPrefixes(BinaryWriter writer)
+        void EmitLegacyPrefixes(BinaryWriter writer)
         {
             if (Prefix1 != PrefixLockRepeat.None)
                 writer.Write((byte)Prefix1);
@@ -282,7 +282,7 @@ namespace SharpAssembler.Architectures.X86
         /// Emits the mandatory prefix.
         /// </summary>
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
-        private void EmitMandatoryPrefix(BinaryWriter writer)
+        void EmitMandatoryPrefix(BinaryWriter writer)
         {
             writer.Write(MandatoryPrefix);
         }
@@ -291,7 +291,7 @@ namespace SharpAssembler.Architectures.X86
         /// Emits the REX-prefix, if used.
         /// </summary>
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
-        private void EmitREXPrefix(BinaryWriter writer)
+        void EmitREXPrefix(BinaryWriter writer)
         {
             if (!Use64BitOperands.HasValue)
                 return;
@@ -301,13 +301,13 @@ namespace SharpAssembler.Architectures.X86
                 rex |= 0x08;
             if (ModRM != null && Sib != null)
             {
-                rex |= (byte)((Sib.Base  & 0x08) >> 3);        // REX.B
+                rex |= (byte)((Sib.Base & 0x08) >> 3);        // REX.B
                 rex |= (byte)((Sib.Index & 0x08) >> 2);        // REX.X
                 rex |= (byte)((ModRM.Reg & 0x08) >> 1);        // REX.R
             }
             else if (ModRM != null)
             {
-                rex |= (byte)((ModRM.RM  & 0x08) >> 3);        // REX.B
+                rex |= (byte)((ModRM.RM & 0x08) >> 3);        // REX.B
                 rex |= (byte)((ModRM.Reg & 0x08) >> 1);        // REX.R
             }
             else
@@ -323,7 +323,7 @@ namespace SharpAssembler.Architectures.X86
         /// Emits the opcode of the instruction.
         /// </summary>
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
-        private void EmitOpcode(BinaryWriter writer)
+        void EmitOpcode(BinaryWriter writer)
         {
             // We OR the least siginificant 3 bits of the opcode REG with the last byte of the opcode, if necessary.
             byte[] actualOpcode;
@@ -342,15 +342,15 @@ namespace SharpAssembler.Architectures.X86
         /// Emits the MOD-R/M byte of the instruction, if any.
         /// </summary>
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
-        private void EmitModRMByte(BinaryWriter writer)
+        void EmitModRMByte(BinaryWriter writer)
         {
             if (ModRM == null)
                 return;
 
             byte modrmbyte = 0;
-            modrmbyte |= (byte)((ModRM.RM  & 0x07));
+            modrmbyte |= (byte)((ModRM.RM & 0x07));
             modrmbyte |= (byte)((ModRM.Reg & 0x07) << 3);
-            modrmbyte |= (byte) (ModRM.Mod << 6);
+            modrmbyte |= (byte)(ModRM.Mod << 6);
 
             writer.Write(modrmbyte);
         }
@@ -359,15 +359,15 @@ namespace SharpAssembler.Architectures.X86
         /// Emits the SIB byte of the instruction, if any.
         /// </summary>
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
-        private void EmitSIBByte(BinaryWriter writer)
+        void EmitSIBByte(BinaryWriter writer)
         {
             if (Sib == null)
                 return;
 
             byte sibbyte = 0;
-            sibbyte |= (byte)((Sib.Base  & 0x07));
+            sibbyte |= (byte)((Sib.Base & 0x07));
             sibbyte |= (byte)((Sib.Index & 0x07) << 3);
-            sibbyte |= (byte) (Sib.Scale << 6);
+            sibbyte |= (byte)(Sib.Scale << 6);
 
             writer.Write(sibbyte);
         }
@@ -381,7 +381,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="context">The <see cref="Context"/> of the instruction.</param>
         /// <param name="expression">The <see cref="ReferenceOffset"/> to emit.</param>
         /// <param name="size">The size of the value to emit.</param>
-        private void EmitReferenceOffset(BinaryWriter writer, long instructionOffset, Context context, ReferenceOffset expression, DataSize size)
+        void EmitReferenceOffset(BinaryWriter writer, long instructionOffset, Context context, ReferenceOffset expression, DataSize size)
         {
             if (expression == null)
                 return;
@@ -418,7 +418,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="writer">The <see cref="BinaryWriter"/> to which the encoded instruction is written.</param>
         /// <param name="size">The size of the constant to emit.</param>
         /// <param name="constant">The constant value to emit.</param>
-        private void EmitConstant(BinaryWriter writer, DataSize size, long constant)
+        void EmitConstant(BinaryWriter writer, DataSize size, long constant)
         {
             try
             {

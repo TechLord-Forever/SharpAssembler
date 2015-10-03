@@ -19,12 +19,12 @@ namespace OpcodeWriter
         /// <summary>
         /// The tokens that should be used by themselves, when not used in strings.
         /// </summary>
-        private static readonly char[] SpecialTokens = new char[] { '{', '}', '[', ']', '(', ')', '<', '>', ';', ',', '=' };
+        static readonly char[] SpecialTokens = new char[] { '{', '}', '[', ']', '(', ')', '<', '>', ';', ',', '=' };
 
         /// <summary>
         /// Literal delimiters.
         /// </summary>
-        private static readonly char[] LiteralDelimiters = new char[]{'"', '\'', '`'};
+        static readonly char[] LiteralDelimiters = new char[] { '"', '\'', '`' };
 
         /// <summary>
         /// Divides the input into separate tokens, and may perform preprocessing steps before doing so
@@ -45,7 +45,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="parts">The parts.</param>
         /// <returns>The split strings.</returns>
-        private IEnumerable<string> SplitNonStringsIntoTokens(IEnumerable<string> parts)
+        IEnumerable<string> SplitNonStringsIntoTokens(IEnumerable<string> parts)
         {
             foreach (string s in parts)
             {
@@ -70,7 +70,7 @@ namespace OpcodeWriter
         /// <param name="str">The string to split.</param>
         /// <param name="tokens">The characters to split on.</param>
         /// <returns>The split string.</returns>
-        private IEnumerable<string> SplitOnTokens(string str, char[] tokens)
+        IEnumerable<string> SplitOnTokens(string str, char[] tokens)
         {
             int position = 0;
             int index = 0;
@@ -93,7 +93,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="input">The input string.</param>
         /// <returns>The splitted strings.</returns>
-        private IEnumerable<string> SplitInSubparts(string input)
+        IEnumerable<string> SplitInSubparts(string input)
         {
             SortedSet<int> splits = new SortedSet<int>();
             State state = State.Normal;
@@ -144,7 +144,7 @@ namespace OpcodeWriter
         /// <param name="splits">A set of indices of characters before which the input string will be split.</param>
         /// <param name="literalDelimiter">Stores the delimiter for a newly entered literal.</param>
         /// <returns>The new state.</returns>
-        private State ToNextSubpartStart(string input, ref int position, SortedSet<int> splits, ref char literalDelimiter)
+        State ToNextSubpartStart(string input, ref int position, SortedSet<int> splits, ref char literalDelimiter)
         {
             int next = input.IndexOfAny(LiteralDelimiters.Concat(new char[] { '/' }).ToArray(), position);
 
@@ -201,7 +201,7 @@ namespace OpcodeWriter
         /// <param name="splits">A set of indices of characters before which the input string will be split.</param>
         /// <param name="literalDelimiter">Thw character that ends the literal.</param>
         /// <returns>The new state.</returns>
-        private State ToEndOfLiteral(string input, ref int position, SortedSet<int> splits, char literalDelimiter)
+        State ToEndOfLiteral(string input, ref int position, SortedSet<int> splits, char literalDelimiter)
         {
             int next = input.IndexOf(literalDelimiter, position);
             if (next < 0)
@@ -219,7 +219,7 @@ namespace OpcodeWriter
         /// <param name="position">The current zero-based character position within <paramref name="input"/>.</param>
         /// <param name="splits">A set of indices of characters before which the input string will be split.</param>
         /// <returns>The new state.</returns>
-        private State ToEndOfSingleLineComment(string input, ref int position, SortedSet<int> splits)
+        State ToEndOfSingleLineComment(string input, ref int position, SortedSet<int> splits)
         {
             int next = input.IndexOfAny(new char[] { '\r', '\n' }, position);
             if (next >= 0)
@@ -240,7 +240,7 @@ namespace OpcodeWriter
         /// <param name="position">The current zero-based character position within <paramref name="input"/>.</param>
         /// <param name="splits">A set of indices of characters before which the input string will be split.</param>
         /// <returns>The new state.</returns>
-        private State ToEndOfMultiLineComment(string input, ref int position, SortedSet<int> splits)
+        State ToEndOfMultiLineComment(string input, ref int position, SortedSet<int> splits)
         {
             int next = input.IndexOf("*/", position);
             if (next < 0)
@@ -255,7 +255,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Specifies the state of the tokenizer.
         /// </summary>
-        private enum State
+        enum State
         {
             /// <summary>
             /// Normal and initial state.

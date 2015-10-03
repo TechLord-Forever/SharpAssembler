@@ -24,7 +24,7 @@ namespace OpcodeWriter
         /// The default is <see langword="null"/>.</value>
         public string Mnemonic { get; set; }
 
-        private string name;
+        string name;
         /// <summary>
         /// Gets or sets the name of the opcode as used in classes and identifiers in the code.
         /// </summary>

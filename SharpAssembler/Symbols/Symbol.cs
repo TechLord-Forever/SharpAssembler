@@ -31,7 +31,7 @@ namespace SharpAssembler.Symbols
         }
 
         #region Properties
-        private string identifier;
+        string identifier;
         /// <summary>
         /// Gets or sets the identifier of the symbol.
         /// </summary>

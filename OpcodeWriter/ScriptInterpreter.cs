@@ -79,53 +79,53 @@ namespace OpcodeWriter
         /// <summary>
         /// The base path to the script, never <see langword="null"/>.
         /// </summary>
-        private string basePath;
+        string basePath;
 
         /// <summary>
         /// The tokenizer to use.
         /// </summary>
-        private ScriptTokenizer tokenizer;
+        ScriptTokenizer tokenizer;
 
         /// <summary>
         /// A list to which all read <see cref="OpcodeSpec"/> objects are added.
         /// </summary>
-        private List<OpcodeSpec> opcodespecs;
+        List<OpcodeSpec> opcodespecs;
 
         /// <summary>
         /// A script reader.
         /// </summary>
-        private ScriptReader reader;
+        ScriptReader reader;
 
         /// <summary>
         /// The <see cref="SpecFactoryDispenser"/>.
         /// </summary>
-        private readonly SpecFactoryDispenser factoryDispenser;
+        readonly SpecFactoryDispenser factoryDispenser;
 
         /// <summary>
         /// The current <see cref="SpecFactory"/>.
         /// </summary>
-        private SpecFactory factory;
+        SpecFactory factory;
 
         /// <summary>
         /// Aliases.
         /// </summary>
-        private Dictionary<string, string> aliases = new Dictionary<string, string>();
+        Dictionary<string, string> aliases = new Dictionary<string, string>();
 
         /// <summary>
         /// Annotations applied to a specific object.
         /// </summary>
-        private Dictionary<object, IList<Annotation>> annotationAssociations = new Dictionary<object, IList<Annotation>>();
+        Dictionary<object, IList<Annotation>> annotationAssociations = new Dictionary<object, IList<Annotation>>();
 
         /// <summary>
         /// Annotations that were read, but not yet applied to an object.
         /// </summary>
-        private IList<Annotation> readAnnotations =  new List<Annotation>();
+        IList<Annotation> readAnnotations = new List<Annotation>();
 
 
         /// <summary>
         /// Executes the state machine.
         /// </summary>
-        private void Execute()
+        void Execute()
         {
             aliases = new Dictionary<string, string>();
             annotationAssociations = new Dictionary<object, IList<Annotation>>();
@@ -159,7 +159,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Reads an include.
         /// </summary>
-        private void ReadInclude()
+        void ReadInclude()
         {
             ExpectRead("include");
 
@@ -183,7 +183,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Reads an alias.
         /// </summary>
-        private void ReadAlias()
+        void ReadAlias()
         {
             ExpectRead("alias");
 
@@ -203,7 +203,7 @@ namespace OpcodeWriter
         /// Reads an identifier, and applies the alias if possible.
         /// </summary>
         /// <returns>The identifier.</returns>
-        private string ReadIdentifier()
+        string ReadIdentifier()
         {
             string oldIdentifier = reader.ReadIdentifier();
             string newIdentifier;
@@ -217,7 +217,7 @@ namespace OpcodeWriter
         /// based on the platform ID.
         /// </summary>
         /// <param name="platform">The platform ID.</param>
-        private void SetFactoryForPlatform(string platform)
+        void SetFactoryForPlatform(string platform)
         {
             factory = factoryDispenser.Get(platform);
         }
@@ -225,7 +225,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Reads an opcode definition from the file.
         /// </summary>
-        private void ReadOpcodeDefinition()
+        void ReadOpcodeDefinition()
         {
             reader.Read();
 
@@ -279,7 +279,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Reads an annotation.
         /// </summary>
-        private Annotation ReadAnnotation()
+        Annotation ReadAnnotation()
         {
             string name = ReadIdentifier();
             ExpectRead("=");
@@ -291,7 +291,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Reads annotations, if they are specified.
         /// </summary>
-        private void ReadAnnotations()
+        void ReadAnnotations()
         {
             if (reader.Peek() == "[")
             {
@@ -306,7 +306,7 @@ namespace OpcodeWriter
         /// Adds the annotations to the specified object.
         /// </summary>
         /// <param name="target">The target object.</param>
-        private void ApplyAnnotations(object target)
+        void ApplyAnnotations(object target)
         {
             var annotations = readAnnotations;
             readAnnotations = new List<Annotation>();
@@ -324,7 +324,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Applies all annotations.
         /// </summary>
-        private void ApplyAllAnnotations()
+        void ApplyAllAnnotations()
         {
             foreach (var annotationAssociation in annotationAssociations)
             {
@@ -339,7 +339,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Reads an opcode variant.
         /// </summary>
-        private void ReadOpcodeVariant(OpcodeSpec opcodeSpec)
+        void ReadOpcodeVariant(OpcodeSpec opcodeSpec)
         {
             ExpectRead("var");
 
@@ -380,7 +380,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="str">The input string.</param>
         /// <returns>The array of bytes.</returns>
-        private static byte[] ReadByteArray(string str)
+        static byte[] ReadByteArray(string str)
         {
             var byteStrings = str.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
             byte[] bytes = new byte[byteStrings.Length];
@@ -402,7 +402,7 @@ namespace OpcodeWriter
         /// Expects a particular value.
         /// </summary>
         /// <param name="expected">The value that is expected.</param>
-        private void ExpectRead(string expected)
+        void ExpectRead(string expected)
         {
             string actual = reader.Read();
             if (actual != expected)
@@ -413,10 +413,10 @@ namespace OpcodeWriter
         /// Reads a value of any type.
         /// </summary>
         /// <returns>The read value.</returns>
-        private object ReadAnyValue()
+        object ReadAnyValue()
         {
             string keyword = reader.Peek();
-            switch(keyword)
+            switch (keyword)
             {
                 case "true": reader.Read(); return true;
                 case "false": reader.Read(); return false;

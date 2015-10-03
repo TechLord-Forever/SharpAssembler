@@ -60,7 +60,7 @@ namespace SharpAssembler.Instructions
             DefinedSymbol = symbol;
         }
 
-        private Symbol definedSymbol;
+        Symbol definedSymbol;
         /// <summary>
         /// Gets or sets the symbol that is defined by this instruction.
         /// </summary>

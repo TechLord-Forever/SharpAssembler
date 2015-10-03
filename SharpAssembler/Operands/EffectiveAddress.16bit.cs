@@ -6,7 +6,7 @@
         /// Encodes a 16-bit effective address.
         /// </summary>
         /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        private void Encode16BitEffectiveAddress(EncodedInstruction instr)
+        void Encode16BitEffectiveAddress(EncodedInstruction instr)
         {
             instr.SetModRMByte();
 
@@ -61,7 +61,7 @@
                 else
                     throw new AssemblerException("The effective address cannot be encoded");
 
-                switch(instr.DisplacementSize)
+                switch (instr.DisplacementSize)
                 {
                     case DataSize.None:
                         instr.ModRM.Mod = 0x00;

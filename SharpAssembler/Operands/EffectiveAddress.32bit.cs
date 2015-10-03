@@ -8,7 +8,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Encodes a 32-bit effective address.
         /// </summary>
         /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        private void Encode32BitEffectiveAddress(EncodedInstruction instr)
+        void Encode32BitEffectiveAddress(EncodedInstruction instr)
         {
             instr.SetModRMByte();
 

@@ -14,7 +14,7 @@ namespace OpcodeWriter
         /// The main entry point.
         /// </summary>
         /// <param name="args">Program arguments.</param>
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             // Input folder                // ..\..\..\..\..\Input
             string codeDirectory;
@@ -39,7 +39,7 @@ namespace OpcodeWriter
             //Console.ReadLine();
         }
 
-        private static IList<string> ReadArguments(string[] args, out string codeDirectory, out string testDirectory, out string yasmPath)
+        static IList<string> ReadArguments(string[] args, out string codeDirectory, out string testDirectory, out string yasmPath)
         {
             //Console.WriteLine("Working directory: " + Directory.GetCurrentDirectory());
             List<string> files = new List<string>();
@@ -166,7 +166,7 @@ namespace OpcodeWriter
         /// <summary>
         /// Prints the help.
         /// </summary>
-        private static void PrintHelp()
+        static void PrintHelp()
         {
             Console.WriteLine(@"
 OpcodeWriter
@@ -189,11 +189,11 @@ Options:
         /// <summary>
         /// The script interpreter to use.
         /// </summary>
-        private static ScriptInterpreter interpreter;
+        static ScriptInterpreter interpreter;
         /// <summary>
         /// Dispenses <see cref="SpecWriter"/> objects.
         /// </summary>
-        private static SpecWriterDispenser writerDispenser;
+        static SpecWriterDispenser writerDispenser;
 
         /// <summary>
         /// Reads the specified script and executes the program.
@@ -203,7 +203,7 @@ Options:
         /// <param name="codeOutputDirectory">The path to the directory in which to create the test code file.</param>
         /// <returns><see langword="true"/> when execution went well;
         /// otherwise, <see langword="false"/> when an error occurred.</returns>
-        private static bool Execute(string filepath, string codeOutputDirectory, string testOutputDirectory)
+        static bool Execute(string filepath, string codeOutputDirectory, string testOutputDirectory)
         {
             Console.Write("{0,17}: ", Path.GetFileName(filepath));
 
@@ -242,7 +242,7 @@ Options:
         /// </summary>
         /// <param name="opcodeSpec">The opcode specification.</param>
         /// <returns>A filename.</returns>
-        private static string GetCodeFilename(OpcodeSpec opcodeSpec)
+        static string GetCodeFilename(OpcodeSpec opcodeSpec)
         {
             return SpecWriter.AsValidIdentifier(opcodeSpec.Name + "Opcode") + ".generated.cs";
         }
@@ -252,7 +252,7 @@ Options:
         /// </summary>
         /// <param name="opcodeSpec">The opcode specification.</param>
         /// <returns>A filename.</returns>
-        private static string GetTestFilename(OpcodeSpec opcodeSpec)
+        static string GetTestFilename(OpcodeSpec opcodeSpec)
         {
             return SpecWriter.AsValidIdentifier(opcodeSpec.Name + "Tests") + ".generated.cs";
         }

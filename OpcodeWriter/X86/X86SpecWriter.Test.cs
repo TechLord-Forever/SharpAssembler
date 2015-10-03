@@ -12,7 +12,7 @@ namespace OpcodeWriter.X86
         /// <summary>
         /// The path to the YASM executable.
         /// </summary>
-        private string yasmExecutablePath;
+        string yasmExecutablePath;
 
         /// <inheritdoc />
         protected override void WriteTestUsingDirectives(TextWriter writer)
@@ -42,7 +42,7 @@ namespace OpcodeWriter.X86
         /// <param name="spec">The opcode spec.</param>
         /// <param name="variant">The opcode variant.</param>
         /// <param name="writer">The text writer to write to.</param>
-        private void WriteTest(X86OpcodeSpec spec, X86OpcodeVariantSpec variant, TextWriter writer)
+        void WriteTest(X86OpcodeSpec spec, X86OpcodeVariantSpec variant, TextWriter writer)
         {
             var operandStrings = from o in variant.Operands.Cast<X86OperandSpec>()
                                  select GetOperandStrings(o.Type, o.Size, o.FixedRegister, GetRandom(variant));
@@ -104,7 +104,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="fb"></param>
         /// <returns></returns>
-        private string ProcessFeedback(string fb)
+        string ProcessFeedback(string fb)
         {
             string errString = "error: ";
             int from = fb.IndexOf(errString);
@@ -121,7 +121,7 @@ namespace OpcodeWriter.X86
         /// <param name="variant">The opcode variant.</param>
         /// <param name="operand">The operand.</param>
         /// <returns>A tuple with the C# code for the operand, followed by the YASM assembler code.</returns>
-        private Tuple<string, string> GetOperandStrings(X86OperandType operandType, DataSize operandSize, Register fixedRegister, Random rand)
+        Tuple<string, string> GetOperandStrings(X86OperandType operandType, DataSize operandSize, Register fixedRegister, Random rand)
         {
             switch (operandType)
             {
@@ -238,7 +238,7 @@ namespace OpcodeWriter.X86
             }
         }
 
-        private static readonly string[] Registers = new[] { "AX", "CX", "DX", "BX", "SP", "BP", "SI", "DI", "8", "9", "10", "11", "12", "13", "14", "15" };
+        static readonly string[] Registers = new[] { "AX", "CX", "DX", "BX", "SP", "BP", "SI", "DI", "8", "9", "10", "11", "12", "13", "14", "15" };
 
         /// <summary>
         /// Returns a random general purpose register.
@@ -246,7 +246,7 @@ namespace OpcodeWriter.X86
         /// <param name="size">The size of the register.</param>
         /// <param name="rand">The random number generator.</param>
         /// <returns>A tuple with the full name as used in C#, and the register name as used by NASM.</returns>
-        private Tuple<string, string> RandomGPRegister(DataSize size, Random rand)
+        Tuple<string, string> RandomGPRegister(DataSize size, Random rand)
         {
             // NOTE: The minimum is 1, so that AX, EAX and RAX are never possible registers.
             // This is to prevent accidently testing a fixed register.
@@ -279,7 +279,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="size"></param>
         /// <returns></returns>
-        private string GetNasmSizeSpecifier(DataSize size)
+        string GetNasmSizeSpecifier(DataSize size)
         {
             switch (size)
             {
@@ -306,7 +306,7 @@ namespace OpcodeWriter.X86
         /// The seed of the RNG depends on the operands used by the opcode variant,
         /// but is constant across uses.
         /// </remarks>
-        private Random GetRandom(X86OpcodeVariantSpec variant)
+        Random GetRandom(X86OpcodeVariantSpec variant)
         {
             string name = string.Join("_", from o in variant.Operands.Cast<X86OperandSpec>()
                                            select GetOperandManualName(o));
@@ -320,7 +320,7 @@ namespace OpcodeWriter.X86
         /// <param name="instruction">The instruction string.</param>
         /// <param name="feedback">The feedback.</param>
         /// <returns>The bytes; or <see langword="null"/> when it failed.</returns>
-        private byte[] GetEncodedInstruction(DataSize mode, string instruction, out string feedback)
+        byte[] GetEncodedInstruction(DataSize mode, string instruction, out string feedback)
         {
             // Assemble the NASM instruction.
             byte[] expected = null;
@@ -351,7 +351,7 @@ namespace OpcodeWriter.X86
         /// <param name="feedback">The feedback from the assembler.</param>
         /// <returns>The binary data resulting from the assembling; or <see langword="null"/> when an error
         /// occurred.</returns>
-        private byte[] RunAssembler(string data, out string feedback)
+        byte[] RunAssembler(string data, out string feedback)
         {
             byte[] encodedData = Encoding.UTF8.GetBytes(data);
             string tempAsmFile = Path.GetTempFileName();

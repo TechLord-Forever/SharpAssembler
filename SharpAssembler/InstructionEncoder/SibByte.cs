@@ -30,7 +30,7 @@ namespace SharpAssembler.Architectures.X86
             this.scale = (byte)(scale & 0x03);
         }
 
-        private byte @base;
+        byte @base;
         /// <summary>
         /// Gets or sets the value of the BASE part of the SIB byte.
         /// </summary>
@@ -49,7 +49,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private byte index;
+        byte index;
         /// <summary>
         /// Gets or sets the value of the INDEX part of the SIB byte.
         /// </summary>
@@ -68,7 +68,7 @@ namespace SharpAssembler.Architectures.X86
             }
         }
 
-        private byte scale;
+        byte scale;
         /// <summary>
         /// Gets or sets the value of the SCALE part of the SIB byte.
         /// </summary>

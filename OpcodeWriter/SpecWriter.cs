@@ -128,7 +128,7 @@ namespace OpcodeWriter
 
         protected static readonly Regex IdentifierValidation = new Regex(@"[^\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Nd}\p{Nl}\p{Mn}\p{Mc}\p{Cf}\p{Pc}\p{Lm}]", RegexOptions.Compiled);
 
-        private static readonly System.CodeDom.Compiler.CodeDomProvider CSharpCodeCompiler = System.CodeDom.Compiler.CodeDomProvider.CreateProvider("C#");
+        static readonly System.CodeDom.Compiler.CodeDomProvider CSharpCodeCompiler = System.CodeDom.Compiler.CodeDomProvider.CreateProvider("C#");
 
         /// <summary>
         /// Returns the given identifier as a valid C# identifier.

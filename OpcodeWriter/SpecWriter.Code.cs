@@ -45,7 +45,7 @@ namespace OpcodeWriter
         /// Writes the start of the namespace defined at the bottom of the code file.
         /// </summary>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteCodeSubnamespaceStart(TextWriter writer)
+        void WriteCodeSubnamespaceStart(TextWriter writer)
         {
             writer.WriteLine("namespace {0}", BaseNamespace);
             writer.WriteLine("{");
@@ -55,7 +55,7 @@ namespace OpcodeWriter
         /// Writes the end of the namespace defined at the bottom of the code file.
         /// </summary>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteCodeSubnamespaceEnd(TextWriter writer)
+        void WriteCodeSubnamespaceEnd(TextWriter writer)
         {
             writer.WriteLine("}");
             writer.WriteLine();
@@ -66,7 +66,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="spec">The opcode specification.</param>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteCodeOpcodeClassField(OpcodeSpec spec, TextWriter writer)
+        void WriteCodeOpcodeClassField(OpcodeSpec spec, TextWriter writer)
         {
             writer.WriteLine(T + "partial class {0}", GetOpcodeStaticClassName());
             writer.WriteLine(T + "{");

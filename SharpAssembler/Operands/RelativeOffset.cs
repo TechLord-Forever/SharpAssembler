@@ -37,7 +37,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <value>A function taking a <see cref="Context"/> and returning a <see cref="ReferenceOffset"/>.</value>
         public Expression<Func<Context, ReferenceOffset>> Expression { get; set; }
 
-        private DataSize operandSize = DataSize.None;
+        DataSize operandSize = DataSize.None;
         /// <summary>
         /// Gets the actual size of the relative offset value.
         /// </summary>

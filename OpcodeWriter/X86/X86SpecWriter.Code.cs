@@ -108,7 +108,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="operand">The operand specification.</param>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteOperandDescriptor(X86OperandSpec operand, TextWriter writer)
+        void WriteOperandDescriptor(X86OperandSpec operand, TextWriter writer)
         {
             string encodingStr = string.Empty;
             if (operand.Encoding != X86OperandEncoding.Default)
@@ -205,7 +205,7 @@ namespace OpcodeWriter.X86
         /// <param name="mnemonic">The mnemonic to use.</param>
         /// <param name="operands">The operands.</param>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteCodeInstrOpcodeVariantMethod(X86OpcodeSpec spec,
+        void WriteCodeInstrOpcodeVariantMethod(X86OpcodeSpec spec,
             string mnemonic,
             IEnumerable<Tuple<X86OperandSpec, string, string>> operands, TextWriter writer)
         {
@@ -215,7 +215,7 @@ namespace OpcodeWriter.X86
             var operandsString = string.Join(", ", operands.Select(o => o.Item2 + " " + AsValidIdentifier(o.Item1.Name)));
             writer.WriteLine(T + T + "public static X86Instruction {0}({1})", AsValidIdentifier(mnemonic), operandsString);
 
-            var argumentsString = string.Join(", ", operands.Select(o=> string.Format(o.Item3, AsValidIdentifier(o.Item1.Name))));
+            var argumentsString = string.Join(", ", operands.Select(o => string.Format(o.Item3, AsValidIdentifier(o.Item1.Name))));
             writer.WriteLine(T + T + "{");
             writer.WriteLine(T + T + T + "return X86Opcode.{0}.CreateInstruction({1});", AsValidIdentifier(spec.Name), argumentsString);
             writer.WriteLine(T + T + "}");
@@ -226,7 +226,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="operands">The method's operands.</param>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteCodeCLSCompliance(IEnumerable<Tuple<X86OperandSpec, string, string>> operands, TextWriter writer)
+        void WriteCodeCLSCompliance(IEnumerable<Tuple<X86OperandSpec, string, string>> operands, TextWriter writer)
         {
             if (operands.Any(t => !IsCLSCompliantType(t.Item2)))
             {
@@ -240,9 +240,9 @@ namespace OpcodeWriter.X86
         /// <param name="typeName">The name of the type.</param>
         /// <returns><see langword="true"/> when the type is CLS compliant;
         /// otherwise, <see langword="false"/>.</returns>
-        private bool IsCLSCompliantType(string typeName)
+        bool IsCLSCompliantType(string typeName)
         {
-            switch(typeName)
+            switch (typeName)
             {
                 case "sbyte":
                 case "ushort":
@@ -260,7 +260,7 @@ namespace OpcodeWriter.X86
         /// <typeparam name="T">The type of object in the sequences.</typeparam>
         /// <param name="sequences">The sequences.</param>
         /// <returns>The cartesian product of the sequences.</returns>
-        private static IEnumerable<IEnumerable<T>> CartesianProduct<T>(IEnumerable<IEnumerable<T>> sequences)
+        static IEnumerable<IEnumerable<T>> CartesianProduct<T>(IEnumerable<IEnumerable<T>> sequences)
         {
             // This implementation is based on the code published by Eric Lippert on his blog at:
             // https://blogs.msdn.com/b/ericlippert/archive/2010/06/28/computing-a-cartesian-product-with-linq.aspx
@@ -281,7 +281,7 @@ namespace OpcodeWriter.X86
         /// <param name="clsCompliant">Whether the resulting method is CLS compliant.</param>
         /// <returns>An array of tuples. Each tuple specifies the type of the argument and the
         /// implementation as an operand. The latter uses <c>{0}</c> in place of the argument name.</returns>
-        private IEnumerable<Tuple<X86OperandSpec, string, string>> GetOperandArguments(X86OperandSpec operand)
+        IEnumerable<Tuple<X86OperandSpec, string, string>> GetOperandArguments(X86OperandSpec operand)
         {
             switch (operand.Type)
             {
@@ -346,7 +346,7 @@ namespace OpcodeWriter.X86
                     return new Tuple<X86OperandSpec, string, string>[]{
                         new Tuple<X86OperandSpec, string, string>(operand, "Register", "new RegisterOperand({0})"),
                     };
-                    //return Enumerable.Empty<Tuple<X86OperandSpec, String, String>>();
+                //return Enumerable.Empty<Tuple<X86OperandSpec, String, String>>();
                 default:
                     throw new NotSupportedException("The operand type is not supported.");
             }
@@ -357,7 +357,7 @@ namespace OpcodeWriter.X86
         /// </summary>
         /// <param name="operand">The operand.</param>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        private void WriteOperandDocumentation(Tuple<X86OperandSpec, string, string> operand, TextWriter writer)
+        void WriteOperandDocumentation(Tuple<X86OperandSpec, string, string> operand, TextWriter writer)
         {
             switch (operand.Item1.Type)
             {
@@ -416,7 +416,7 @@ namespace OpcodeWriter.X86
             }
         }
 
-        private class OperandEqualityComparer : IEqualityComparer<Tuple<X86OperandSpec, string, string>>
+        class OperandEqualityComparer : IEqualityComparer<Tuple<X86OperandSpec, string, string>>
         {
 
             public bool Equals(Tuple<X86OperandSpec, string, string> x, Tuple<X86OperandSpec, string, string> y)

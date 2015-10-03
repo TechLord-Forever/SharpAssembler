@@ -170,7 +170,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the register width is determined.</param>
         /// <returns>The width of the registers as a <see cref="DataSize"/>.</returns>
-        private DataSize GetAddressSize(Context context)
+        DataSize GetAddressSize(Context context)
         {
             DataSize addressSize = AddressSize;
             DataSize baseWidth = BaseRegister.GetSize();
@@ -222,7 +222,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
         /// <param name="addressSize">The address size used by the effective address.</param>
-        private void EncodeDisplacement(Context context, EncodedInstruction instr, DataSize addressSize)
+        void EncodeDisplacement(Context context, EncodedInstruction instr, DataSize addressSize)
         {
             DataSize displacementSize = DataSize.None;
             ReferenceOffset displacementExpression = null;
@@ -261,7 +261,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// When <paramref name="registerWidth"/> equals <see cref="DataSize.None"/>, this method returns
         /// <see langword="true"/>. A register with no size is valid for any mode.
         /// </remarks>
-        private static bool IsValidRegisterWidthForMode(DataSize registerWidth, DataSize mode)
+        static bool IsValidRegisterWidthForMode(DataSize registerWidth, DataSize mode)
         {
             switch (mode)
             {

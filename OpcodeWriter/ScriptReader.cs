@@ -14,7 +14,7 @@ namespace OpcodeWriter
         /// <summary>
         /// A stack of tokens.
         /// </summary>
-        private readonly Stack<string> tokens;
+        readonly Stack<string> tokens;
 
         //private readonly IEnumerator<string> tokenEnumerator;
 
@@ -95,7 +95,7 @@ namespace OpcodeWriter
         /// <summary>
         /// The regular expression to which identifiers must adhere.
         /// </summary>
-        private static readonly Regex IdentifierRegex = new Regex("^[a-zA-Z_%][a-zA-Z0-9_%:&/\\\\+*#\\-.]*$", RegexOptions.Compiled);
+        static readonly Regex IdentifierRegex = new Regex("^[a-zA-Z_%][a-zA-Z0-9_%:&/\\\\+*#\\-.]*$", RegexOptions.Compiled);
 
         /// <summary>
         /// Reads an identifier.
@@ -139,7 +139,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="token">The token to convert.</param>
         /// <returns>The actual identifier; or <see langword="null"/> when it fails.</returns>
-        private string ToIdentifier(string token)
+        string ToIdentifier(string token)
         {
             if (token == null)
                 return null;
@@ -194,7 +194,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="token">The token to convert.</param>
         /// <returns>The actual string; or <see langword="null"/> when it fails.</returns>
-        private string ToString(string token)
+        string ToString(string token)
         {
             if (token == null)
                 return null;
@@ -247,7 +247,7 @@ namespace OpcodeWriter
         /// </summary>
         /// <param name="token">The token to convert.</param>
         /// <returns>The actual integer; or <see langword="null"/> when it fails.</returns>
-        private int? ToInteger(string token)
+        int? ToInteger(string token)
         {
             if (token == null)
                 return null;
@@ -300,17 +300,17 @@ namespace OpcodeWriter
         /// <summary>
         /// Specifies the character that starts the region.
         /// </summary>
-        private static readonly char[] RegionStart = new char[] { '(', '{', '[', '<' };
+        static readonly char[] RegionStart = new char[] { '(', '{', '[', '<' };
 
         /// <summary>
         /// Specifies the character that ends the region.
         /// </summary>
-        private static readonly char[] RegionEnd = new char[] { ')', '}', ']', '>' };
+        static readonly char[] RegionEnd = new char[] { ')', '}', ']', '>' };
 
         /// <summary>
         /// For each region that is entered, this stack tracks the type of region.
         /// </summary>
-        private Stack<RegionType> regions = new Stack<RegionType>();
+        Stack<RegionType> regions = new Stack<RegionType>();
 
         /// <summary>
         /// Reads the start of the specified type of region.

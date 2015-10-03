@@ -12,7 +12,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// </remarks>
     public class MemoryOffset : Operand
     {
-        private MemoryOffset()
+        MemoryOffset()
             : base(DataSize.None)
         {
         }
