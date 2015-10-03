@@ -6,7 +6,7 @@ namespace SharpAssembler.Architectures.X86
     /// Specifies features which may or may not be used by the assembler.
     /// </summary>
     [Flags]
-    public enum CpuFeatures : int
+    public enum CpuFeatures
     {
         /// <summary>
         /// No features specified.

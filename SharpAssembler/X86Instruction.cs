@@ -82,7 +82,6 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="opcode">The opcode of this instruction.</param>
         /// <param name="operands">The operands to the instruction.</param>
         public X86Instruction(X86Opcode opcode, IList<Operand> operands)
-            : base()
         {
             Opcode = opcode;
             Operands = new ReadOnlyCollection<Operand>(operands);

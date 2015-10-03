@@ -30,7 +30,6 @@ namespace SharpAssembler.Symbols
             Identifier = identifier;
         }
 
-        #region Properties
         string identifier;
         /// <summary>
         /// Gets or sets the identifier of the symbol.
@@ -94,9 +93,7 @@ namespace SharpAssembler.Symbols
 
         /// <inheritdoc />
         public IDictionary Annotations { get; set; } = new Hashtable();
-        #endregion
 
-        #region Methods
         /// <summary>
         /// Defines the symbol by setting its value and adding it to the symbol table.
         /// </summary>
@@ -180,11 +177,7 @@ namespace SharpAssembler.Symbols
         /// </returns>
         public override string ToString()
         {
-            if (identifier != null)
-                return string.Format(CultureInfo.InvariantCulture, "<Symbol id=\"{0}\">", identifier);
-            else
-                return string.Format(CultureInfo.InvariantCulture, "<Symbol>");
+            return $"<Symbol id=\"{identifier ?? "<none>"}\">";
         }
-        #endregion
     }
 }

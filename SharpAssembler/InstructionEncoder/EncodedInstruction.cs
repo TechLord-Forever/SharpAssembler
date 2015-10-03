@@ -13,8 +13,11 @@ namespace SharpAssembler.Architectures.X86
         /// <summary>
         /// Initializes a new instance of the <see cref="EncodedInstruction"/> class.
         /// </summary>
-        public EncodedInstruction()
+        public EncodedInstruction(byte[] opcode, byte fixedReg, bool lockPrefix)
         {
+            Opcode   = opcode;
+            FixedReg = fixedReg;
+            Prefix1  = lockPrefix ? PrefixLockRepeat.Lock : PrefixLockRepeat.None;
         }
 
         /// <summary>
@@ -61,7 +64,7 @@ namespace SharpAssembler.Architectures.X86
         /// </summary>
         /// <value>The opcode bytes of the instruction. The default is an empty array.</value>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        public byte[] Opcode { get; set; } = new byte[0];
+        public byte[] Opcode { get; private set; } = new byte[0];
 
         byte opcodeReg = 0;
         /// <summary>
@@ -387,7 +390,7 @@ namespace SharpAssembler.Architectures.X86
                 return;
 
             // Number of bytes before the expression.
-            ulong relocationDiff = (ulong)(writer.BaseStream.Position - instructionOffset);
+            var relocationDiff = (ulong)(writer.BaseStream.Position - instructionOffset);
             Relocation relocation = null;
 
             var actualValue = expression.Evaluate(context);
@@ -436,10 +439,6 @@ namespace SharpAssembler.Architectures.X86
                     case DataSize.Bit64:
                         writer.Write(checked((ulong)constant));
                         break;
-                    //case DataSize.Bit128:
-                    //    writer.Write(checked(constant));
-                    //    break;
-                    case DataSize.None:
                     default:
                         throw new InvalidOperationException();
                 }
@@ -467,19 +466,6 @@ namespace SharpAssembler.Architectures.X86
         {
             if (Sib == null)
                 Sib = new SibByte();
-        }
-
-        /// <summary>
-        /// Sets the correct lock prefix.
-        /// </summary>
-        /// <param name="doLock"><see langword="true"/> to add a lock prefix;
-        /// otherwise, <see langword="false"/>.</param>
-        public void SetLock(bool doLock)
-        {
-            if (doLock)
-                Prefix1 = PrefixLockRepeat.Lock;
-            else
-                Prefix1 = PrefixLockRepeat.None;
         }
 
         /// <summary>

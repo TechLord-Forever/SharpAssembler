@@ -12,7 +12,7 @@ namespace SharpAssembler.Architectures.X86
     /// </summary>
     public sealed class X86OpcodeVariant
     {
-        byte[] opcodeBytes;
+        readonly byte[] opcodeBytes;
 
         /// <summary>
         /// Gets or sets the fixed value of the REG part of the ModR/M byte.
@@ -143,16 +143,7 @@ namespace SharpAssembler.Architectures.X86
         /// <returns>The encoded instruction.</returns>
         public EncodedInstruction Construct(Context context, IEnumerable<IConstructableOperand> operands, bool lockPrefix)
         {
-            EncodedInstruction instr = new EncodedInstruction();
-
-            // Set the lock prefix.
-            instr.SetLock(lockPrefix);
-
-            // Set the opcode.
-            instr.Opcode = opcodeBytes;
-
-            // Set the fixed REG value, if any.
-            instr.FixedReg = FixedReg;
+            var instr = new EncodedInstruction(opcodeBytes, FixedReg, lockPrefix);
 
             int i = 0;
             foreach (var operand in operands)

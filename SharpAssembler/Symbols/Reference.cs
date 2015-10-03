@@ -1,4 +1,6 @@
-﻿namespace SharpAssembler.Symbols
+﻿using System;
+
+namespace SharpAssembler.Symbols
 {
     /// <summary>
     /// A reference to a symbol.
@@ -25,6 +27,8 @@
         /// <param name="symbol">The <see cref="Symbol"/> being referenced.</param>
         public Reference(Symbol symbol)
         {
+            if (symbol == null)
+                throw new ArgumentNullException(nameof(symbol));
             Symbol = symbol;
         }
 
@@ -37,7 +41,6 @@
             this.symbolIdentifier = symbolIdentifier;
         }
 
-        #region Properties
         string symbolIdentifier;
         /// <summary>
         /// Gets the identifier of the referenced symbol.
@@ -45,13 +48,7 @@
         /// <value>An identifier.</value>
         public string SymbolIdentifier
         {
-            get
-            {
-                if (Symbol != null)
-                    return Symbol.Identifier;
-                else
-                    return symbolIdentifier;
-            }
+            get { return Symbol.Identifier; }
         }
 
         /// <summary>
@@ -76,7 +73,6 @@
         {
             get { return Symbol != null ? Symbol.Association : null; }
         }
-        #endregion
 
         /// <summary>
         /// Attempts to resolve the reference.
@@ -90,16 +86,7 @@
             if (Resolved)
                 return true;
 
-            // Do we reference a particular symbol by instance, or by identifier?
-            if (Symbol != null)
-                // By instance. Then that symbol instance must be in the symbol table.
-                return context.SymbolTable.Contains(Symbol);
-            else
-            {
-                // By identifier. Then a symbol with that identifier must be in the symbol table.
-                Symbol = context.SymbolTable[symbolIdentifier];
-                return Symbol != null;
-            }
+            return context.SymbolTable.Contains(Symbol);
         }
 
         /// <summary>

@@ -1,8 +1,11 @@
-﻿namespace SharpAssembler.Architectures.X86
+﻿using System;
+
+namespace SharpAssembler.Architectures.X86
 {
     /// <summary>
     /// An x86-64 register.
     /// </summary>
+    [Flags]
     public enum Register
     {
         /// <summary>

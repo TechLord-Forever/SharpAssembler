@@ -66,7 +66,7 @@ namespace SharpAssembler.Instructions
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)
         {
-            int padding = (int)Extensions.CalculatePadding(context.Address, Boundary);
+            var padding = (int)Extensions.CalculatePadding(context.Address, Boundary);
             return new IEmittable[]{ new RawEmittable(GeneratePadding(context, padding)) };
         }
     }

@@ -78,7 +78,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <value>A function taking a <see cref="Context"/> and returning a <see cref="ReferenceOffset"/>.</value>
         public Expression<Func<Context, ReferenceOffset>> Expression { get; set; }
 
-        #region Methods
         /// <summary>
         /// Constructs the operand's representation.
         /// </summary>
@@ -153,19 +152,16 @@ namespace SharpAssembler.Architectures.X86.Operands
         }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// Returns a <see cref="string"/> that represents this instance.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents this instance.
+        /// A <see cref="string"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
             // TODO: Implement.
             return base.ToString();
         }
-        #endregion
-
-        #region Conversions
 
         /// <summary>
         /// Converts a 64-bit signed integer to an <see cref="Immediate"/> value.
@@ -260,6 +256,5 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             return new Immediate(reference);
         }
-        #endregion
     }
 }

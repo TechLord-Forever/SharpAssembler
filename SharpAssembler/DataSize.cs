@@ -1,8 +1,11 @@
-﻿namespace SharpAssembler
+﻿using System;
+
+namespace SharpAssembler
 {
     /// <summary>
     /// Specifies the size of the a data unit.
     /// </summary>
+    [Flags]
     public enum DataSize
     {
         /// <summary>

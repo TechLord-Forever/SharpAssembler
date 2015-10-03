@@ -170,9 +170,6 @@ namespace SharpAssembler.Architectures.X86
         /// otherwise, <see langword="false"/>.</returns>
         public bool Equals(OperandDescriptor other)
         {
-            if (other == null)
-                return false;
-
             return other.operandType == operandType
                 && other.registerType == registerType
                 && other.size == size
@@ -416,11 +413,11 @@ namespace SharpAssembler.Architectures.X86
                             return "cReg";
                         case RegisterType.Debug:
                             return "dReg";
-                        case RegisterType.GeneralPurpose8Bit:
-                        case RegisterType.GeneralPurpose16Bit:
-                        case RegisterType.GeneralPurpose32Bit:
-                        case RegisterType.GeneralPurpose64Bit:
-                        case RegisterType.None:
+                        //case RegisterType.GeneralPurpose8Bit:
+                        //case RegisterType.GeneralPurpose16Bit:
+                        //case RegisterType.GeneralPurpose32Bit:
+                        //case RegisterType.GeneralPurpose64Bit:
+                        //case RegisterType.None:
                         default:
                             return "reg" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                     }
@@ -439,11 +436,11 @@ namespace SharpAssembler.Architectures.X86
                             return "cReg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                         case RegisterType.Debug:
                             return "dReg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
-                        case RegisterType.GeneralPurpose8Bit:
-                        case RegisterType.GeneralPurpose16Bit:
-                        case RegisterType.GeneralPurpose32Bit:
-                        case RegisterType.GeneralPurpose64Bit:
-                        case RegisterType.None:
+                        //case RegisterType.GeneralPurpose8Bit:
+                        //case RegisterType.GeneralPurpose16Bit:
+                        //case RegisterType.GeneralPurpose32Bit:
+                        //case RegisterType.GeneralPurpose64Bit:
+                        //case RegisterType.None:
                         default:
                             return "reg/mem" + (size != DataSize.None ? ((int)size * 8).ToString(CultureInfo.InvariantCulture) : "?");
                     }

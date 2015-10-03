@@ -43,8 +43,8 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Constructs the operand's representation.
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
-        /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instr)
+        /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
+        internal override void Construct(Context context, EncodedInstruction instruction)
         {
             ReferenceOffset offsetResult = Offset.Compile()(context);
             ReferenceOffset selectorResult = Selector?.Compile()(context);
@@ -72,11 +72,11 @@ namespace SharpAssembler.Architectures.X86.Operands
 
 
             // Set the parameters.
-            instr.Immediate = offsetResult;
-            instr.ImmediateSize = size;
-            instr.ExtraImmediate = selectorResult;
-            instr.ExtraImmediateSize = (DataSize)2;
-            instr.SetOperandSize(context.Architecture.OperandSize, size);
+            instruction.Immediate = offsetResult;
+            instruction.ImmediateSize = size;
+            instruction.ExtraImmediate = selectorResult;
+            instruction.ExtraImmediateSize = (DataSize)2;
+            instruction.SetOperandSize(context.Architecture.OperandSize, size);
         }
 
         /// <summary>

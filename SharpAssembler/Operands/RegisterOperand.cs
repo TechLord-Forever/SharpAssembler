@@ -61,8 +61,8 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Constructs the operand's representation.
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
-        /// <param name="instr">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instr)
+        /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
+        internal override void Construct(Context context, EncodedInstruction instruction)
         {
             if (context.Architecture.OperandSize != DataSize.Bit64 &&
                 Register.GetSize() == DataSize.Bit64)
@@ -76,16 +76,16 @@ namespace SharpAssembler.Architectures.X86.Operands
             switch (Encoding)
             {
                 case OperandEncoding.Default:
-                    instr.SetModRMByte();
-                    instr.ModRM.Reg = Register.GetValue();
+                    instruction.SetModRMByte();
+                    instruction.ModRM.Reg = Register.GetValue();
                     break;
                 case OperandEncoding.AddToOpcode:
-                    instr.OpcodeReg = Register.GetValue();
+                    instruction.OpcodeReg = Register.GetValue();
                     break;
                 case OperandEncoding.ModRm:
-                    instr.SetModRMByte();
-                    instr.ModRM.Mod = 0x03;
-                    instr.ModRM.RM = Register.GetValue();
+                    instruction.SetModRMByte();
+                    instruction.ModRM.Mod = 0x03;
+                    instruction.ModRM.RM = Register.GetValue();
                     break;
                 case OperandEncoding.Ignore:
                     // The operand is ignored.
@@ -93,7 +93,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             }
 
             // Set the operand size to the size of the register.
-            instr.SetOperandSize(context.Architecture.OperandSize, Register.GetSize());
+            instruction.SetOperandSize(context.Architecture.OperandSize, Register.GetSize());
         }
 
         /// <summary>
