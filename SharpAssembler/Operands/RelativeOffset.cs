@@ -56,16 +56,19 @@ namespace SharpAssembler.Architectures.X86.Operands
             if (size == DataSize.None)
                 size = context.AddressingMode;
             if (size >= DataSize.Bit64)
-                throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
-                    "{0}-bit operands cannot be encoded.",
-                    ((int)size) << 3));
+            {
+                var bit = ((int)size) << 3;
+                throw new AssemblerException($"{bit}-bit operands cannot be encoded.");
+            }
+
             else if (size == DataSize.None)
                 throw new AssemblerException("The operand size is not specified.");
+
             instruction.SetOperandSize(context.AddressingMode, size);
             instruction.ImmediateSize = size;
 
             // Let's evaluate the expression.
-            ReferenceOffset result = Expression?.Compile()(context);
+            var result = Expression?.Compile()(context);
             result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instruction.GetLength()));
             instruction.Immediate = result;
 
