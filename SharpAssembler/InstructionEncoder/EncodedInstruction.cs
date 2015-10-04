@@ -15,6 +15,8 @@ namespace SharpAssembler.Architectures.X86
         /// </summary>
         public EncodedInstruction(byte[] opcode, byte fixedReg, bool lockPrefix)
         {
+            if (fixedReg > 0x7)
+                throw new ArgumentOutOfRangeException(nameof(fixedReg), "Only the first 3 bits may be set.");
             Opcode   = opcode;
             FixedReg = fixedReg;
             Prefix1  = lockPrefix ? PrefixLockRepeat.Lock : PrefixLockRepeat.None;
@@ -66,7 +68,6 @@ namespace SharpAssembler.Architectures.X86
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
         public byte[] Opcode { get; private set; } = new byte[0];
 
-        byte opcodeReg = 0;
         /// <summary>
         /// Gets or sets a value which is added to the opcode byte.
         /// </summary>
@@ -75,16 +76,7 @@ namespace SharpAssembler.Architectures.X86
         /// The least significant three bits are encoded by OR-ing them with the last opcode byte, while the fourth bit
         /// is encoded in the REX.B bit.
         /// </remarks>
-        public byte OpcodeReg
-        {
-            get { return opcodeReg; }
-            set
-            {
-                if (value > 0xf)
-                    throw new Exception("Only the first 4 bits may be set.");
-                opcodeReg = value;
-            }
-        }
+        public byte OpcodeReg { get; set; }
 
         /// <summary>
         /// Gets the ModR/M byte to encode.
@@ -108,7 +100,6 @@ namespace SharpAssembler.Architectures.X86
         /// </remarks>
         public SibByte Sib { get; private set; }
 
-        byte fixedReg;
         /// <summary>
         /// Gets or sets the fixed value of the REG part of the ModR/M byte, when a ModR/M is used.
         /// </summary>
@@ -119,16 +110,7 @@ namespace SharpAssembler.Architectures.X86
         /// <para>Specify this value before the first call to <see cref="SetModRMByte"/>; otherwise the REG field is
         /// not set.</para>
         /// </remarks>
-        public byte FixedReg
-        {
-            get { return fixedReg; }
-            set
-            {
-                if (value > 0x7)
-                    throw new Exception("Only the first 3 bits may be set.");
-                fixedReg = value;
-            }
-        }
+        public byte FixedReg { get; private set; }
 
         /// <summary>
         /// Gets or sets whether 64-bit operands are used, and whether a REX prefix is used.
@@ -247,7 +229,7 @@ namespace SharpAssembler.Architectures.X86
         /// <returns>The number of emitted bytes.</returns>
         public int Emit(BinaryWriter writer, Context context)
         {
-            long instructionOffset = writer.BaseStream.Position;
+            var instructionOffset = writer.BaseStream.Position;
 
             EmitLegacyPrefixes(writer);
             EmitMandatoryPrefix(writer);
@@ -302,21 +284,22 @@ namespace SharpAssembler.Architectures.X86
             byte rex = 0x40;
             if (Use64BitOperands.Value)
                 rex |= 0x08;
+
             if (ModRM != null && Sib != null)
             {
-                rex |= (byte)((Sib.Base & 0x08) >> 3);        // REX.B
+                rex |= (byte)((Sib.Base  & 0x08) >> 3);        // REX.B
                 rex |= (byte)((Sib.Index & 0x08) >> 2);        // REX.X
                 rex |= (byte)((ModRM.Reg & 0x08) >> 1);        // REX.R
             }
             else if (ModRM != null)
             {
-                rex |= (byte)((ModRM.RM & 0x08) >> 3);        // REX.B
+                rex |= (byte)((ModRM.RM  & 0x08) >> 3);        // REX.B
                 rex |= (byte)((ModRM.Reg & 0x08) >> 1);        // REX.R
             }
             else
             {
                 // No ModR/M or SIB bytes, but a reg-value anyway.
-                rex |= (byte)((opcodeReg & 0x08) >> 3);        // REX.B
+                rex |= (byte)((OpcodeReg & 0x08) >> 3);        // REX.B
             }
 
             writer.Write(rex);
@@ -329,16 +312,14 @@ namespace SharpAssembler.Architectures.X86
         void EmitOpcode(BinaryWriter writer)
         {
             // We OR the least siginificant 3 bits of the opcode REG with the last byte of the opcode, if necessary.
-            byte[] actualOpcode;
-            if (opcodeReg > 0)
+            if (OpcodeReg > 0)
             {
-                actualOpcode = (byte[])Opcode.Clone();
-                actualOpcode[actualOpcode.Length - 1] |= (byte)(opcodeReg & 0x7);
+                var actualOpcode = (byte[])Opcode.Clone();
+                actualOpcode[actualOpcode.Length - 1] |= (byte)(OpcodeReg & 0x7);
+                writer.Write(actualOpcode);
             }
             else
-                actualOpcode = Opcode;
-
-            writer.Write(actualOpcode);
+                writer.Write(Opcode);
         }
 
         /// <summary>
@@ -395,14 +376,7 @@ namespace SharpAssembler.Architectures.X86
 
             var actualValue = expression.Evaluate(context);
             if (expression.Reference != null)
-            {
-                relocation = new Relocation(
-                    expression.Reference.Symbol,
-                    //context.Section,
-                    (long)context.Address,
-                    actualValue,
-                    RelocationType.Default32);
-            }
+                relocation = new Relocation(expression.Reference.Symbol, (long)context.Address, actualValue, RelocationType.Default32);
 
             // Emit the expression's value.
             EmitConstant(writer, size, actualValue);
@@ -456,7 +430,7 @@ namespace SharpAssembler.Architectures.X86
         public void SetModRMByte()
         {
             if (ModRM == null)
-                ModRM = new ModRMByte(0, fixedReg, 0);
+                ModRM = new ModRMByte(0, FixedReg, 0);
         }
 
         /// <summary>
@@ -548,16 +522,12 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="operandSize">The operand size.</param>
         public void SetOperandSize(DataSize assemblerMode, DataSize operandSize)
         {
-            if (assemblerMode == DataSize.Bit16 &&
-                operandSize == DataSize.Bit32)
+            if (assemblerMode == DataSize.Bit16 && operandSize == DataSize.Bit32)
                 Prefix4 = PrefixOperandSizeOverride.OperandSizeOverride;
-            else if ((assemblerMode == DataSize.Bit32 ||
-                assemblerMode == DataSize.Bit64) &&
-                operandSize == DataSize.Bit16)
+            else if ((assemblerMode == DataSize.Bit32 || assemblerMode == DataSize.Bit64) && operandSize == DataSize.Bit16)
                 Prefix4 = PrefixOperandSizeOverride.OperandSizeOverride;
 
-            if (assemblerMode == DataSize.Bit64 &&
-                operandSize == DataSize.Bit64)
+            if (assemblerMode == DataSize.Bit64 && operandSize == DataSize.Bit64)
             {
                 // Setting this to anything other than null causes a REX prefix to be encoded.
                 Use64BitOperands = true;

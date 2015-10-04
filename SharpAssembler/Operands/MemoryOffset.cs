@@ -22,7 +22,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instruction)
+        public override void Construct(Context context, EncodedInstruction instruction)
         {
             throw new NotImplementedException();
         }
@@ -135,12 +135,12 @@ namespace SharpAssembler.Architectures.X86.Operands
         #endregion
 #endif
 
-        internal override bool IsMatch(OperandDescriptor descriptor)
+        public override bool IsMatch(OperandDescriptor descriptor)
         {
             throw new NotImplementedException();
         }
 
-        internal override void Adjust(OperandDescriptor descriptor)
+        public override void Adjust(OperandDescriptor descriptor)
         {
             throw new NotImplementedException();
         }

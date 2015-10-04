@@ -210,10 +210,8 @@ namespace SharpAssembler
 
             if (left.Reference != null && right.Reference != null)
             {
-                return new ReferenceOffset(
-                    null,
-                    left.Reference.Symbol.Value - right.Reference.Symbol.Value +
-                    left.Constant - right.Constant);
+                var value = left.Reference.Symbol.Value - right.Reference.Symbol.Value + left.Constant - right.Constant;
+                return new ReferenceOffset(null, value);
             }
             throw new NotImplementedException();
         }

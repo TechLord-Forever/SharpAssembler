@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq.Expressions;
 
 namespace SharpAssembler.Architectures.X86.Operands
@@ -22,8 +21,8 @@ namespace SharpAssembler.Architectures.X86.Operands
         public FarPointer(Expression<Func<Context, ReferenceOffset>> selector, Expression<Func<Context, ReferenceOffset>> offset, DataSize size)
             : base(size)
         {
-            Selector = selector;
-            Offset = offset;
+            Selector      = selector;
+            Offset        = offset;
             PreferredSize = size;
         }
 
@@ -44,7 +43,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instruction)
+        public override void Construct(Context context, EncodedInstruction instruction)
         {
             ReferenceOffset offsetResult = Offset.Compile()(context);
             ReferenceOffset selectorResult = Selector?.Compile()(context);
@@ -66,10 +65,6 @@ namespace SharpAssembler.Architectures.X86.Operands
 
             if (size > DataSize.Bit64)
                 throw new AssemblerException("The operand cannot be encoded.");
-            else if (size == DataSize.None)
-                throw new AssemblerException("The operand size is not specified.");
-
-
 
             // Set the parameters.
             instruction.Immediate = offsetResult;
@@ -86,27 +81,11 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="descriptor">The <see cref="OperandDescriptor"/> to match.</param>
         /// <returns><see langword="true"/> when the specified descriptor matches this operand;
         /// otherwise, <see langword="false"/>.</returns>
-        internal override bool IsMatch(OperandDescriptor descriptor)
+        public override bool IsMatch(OperandDescriptor descriptor)
         {
-            switch (descriptor.OperandType)
-            {
-                case OperandType.FarPointer:
-                    return Size == descriptor.Size;
-                default:
-                    return false;
-            }
-        }
-
-        /// <summary>
-        /// Adjusts this <see cref="Operand"/> based on the specified <see cref="OperandDescriptor"/>.
-        /// </summary>
-        /// <param name="descriptor">The <see cref="OperandDescriptor"/> used to adjust.</param>
-        /// <remarks>
-        /// Only <see cref="OperandDescriptor"/> instances for which <see cref="IsMatch"/> returns
-        /// <see langword="true"/> may be used as a parameter to this method.
-        /// </remarks>
-        internal override void Adjust(OperandDescriptor descriptor)
-        {
+            if (descriptor.OperandType == OperandType.FarPointer)
+                return Size == descriptor.Size;
+            return false;
         }
 
         /// <summary>
@@ -117,7 +96,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}:{1}", Selector, Offset);
+            return $"{Selector}:{Offset}";
         }
     }
 }

@@ -296,15 +296,12 @@
     <Compile Include="Operands\EffectiveAddress.64bit.cs" />
     <Compile Include="Operands\EffectiveAddress.cs" />
     <Compile Include="Operands\FarPointer.cs" />
-    <Compile Include="Operands\IConstructableOperand.cs" />
     <Compile Include="Operands\Immediate.cs" />
-    <Compile Include="Operands\IOperand.cs" />
     <Compile Include="Operands\MemoryOffset.cs" />
     <Compile Include="Operands\Operand.cs" />
     <Compile Include="Operands\RegisterOperand.cs" />
     <Compile Include="Operands\RegisterOperand.OperandEncoding.cs" />
     <Compile Include="Operands\RelativeOffset.cs" />
-    <Compile Include="Instructions\CustomConstructable.cs" />
     <Compile Include="Instructions\DeclareString.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Instructions\Align.cs" />

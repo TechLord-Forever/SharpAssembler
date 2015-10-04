@@ -44,13 +44,12 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <value>A member of the <see cref="DataSize"/> enumeration; or <see cref="DataSize.None"/>.</value>
         public override DataSize Size { get { return operandSize; } }
 
-        #region Methods
         /// <summary>
         /// Constructs the operand's representation.
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instruction)
+        public override void Construct(Context context, EncodedInstruction instruction)
         {
             // Determine the size of the immediate operand. Otherwise the length is not calculated correctly.
             DataSize size = PreferredSize;
@@ -100,7 +99,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="descriptor">The <see cref="OperandDescriptor"/> to match.</param>
         /// <returns><see langword="true"/> when the specified descriptor matches this operand;
         /// otherwise, <see langword="false"/>.</returns>
-        internal override bool IsMatch(OperandDescriptor descriptor)
+        public override bool IsMatch(OperandDescriptor descriptor)
         {
             switch (descriptor.OperandType)
             {
@@ -119,7 +118,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Only <see cref="OperandDescriptor"/> instances for which <see cref="IsMatch"/> returns
         /// <see langword="true"/> may be used as a parameter to this method.
         /// </remarks>
-        internal override void Adjust(OperandDescriptor descriptor)
+        public override void Adjust(OperandDescriptor descriptor)
         {
             // Nothing to do.
         }
@@ -134,6 +133,5 @@ namespace SharpAssembler.Architectures.X86.Operands
         {
             return Expression?.ToString();
         }
-        #endregion
     }
 }

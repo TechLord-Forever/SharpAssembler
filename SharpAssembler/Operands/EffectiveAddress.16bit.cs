@@ -13,10 +13,10 @@
             // We order the registers in such way that reg1 has the register with the highest number,
             // and reg2 has the register with the lowest number. When a register is not provided, it is put in reg2.
             // This simplifies the following tests, for which the order does not matter.
-            var baseReg = BaseRegister;
+            var baseReg  = BaseRegister;
             var indexReg = (Scale == 1 ? IndexRegister : Register.None);
-            Register reg1 = (baseReg.Value >= indexReg.Value ? baseReg : indexReg);
-            Register reg2 = (baseReg.Value < indexReg.Value ? baseReg : indexReg);
+            var reg1     = (baseReg.Value >= indexReg.Value ? baseReg : indexReg);
+            var reg2     = (baseReg.Value < indexReg.Value ? baseReg : indexReg);
 
             if (Scale != 1 && Scale != 0)
                 throw new AssemblerException("The specified scaling factor is not supported in a 16-bit effective address.");

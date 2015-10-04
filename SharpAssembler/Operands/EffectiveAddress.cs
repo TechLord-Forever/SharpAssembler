@@ -7,8 +7,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// <summary>
     /// An effective address.
     /// </summary>
-    public partial class EffectiveAddress : Operand,
-        IOperand
+    public partial class EffectiveAddress : Operand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EffectiveAddress"/> class.
@@ -108,17 +107,16 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instruction)
+        public override void Construct(Context context, EncodedInstruction instruction)
         {
             DataSize addressSize = GetAddressSize(context);
 
             instruction.SetOperandSize(context.AddressingMode, Size);
 
-            if (context.AddressingMode != DataSize.Bit64 &&
-                Size == DataSize.Bit64)
+            if (context.AddressingMode != DataSize.Bit64 && Size == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit operand cannot be used with non-64-bit operand sizes.");
-            if (context.AddressingMode != DataSize.Bit64 &&
-                addressSize == DataSize.Bit64)
+
+            if (context.AddressingMode != DataSize.Bit64 && addressSize == DataSize.Bit64)
                 throw new AssemblerException("A 64-bit effective address cannot be used with non-64-bit address sizes.");
 
             EncodeDisplacement(context, instruction, addressSize);
@@ -266,7 +264,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="descriptor">The <see cref="OperandDescriptor"/> to match.</param>
         /// <returns><see langword="true"/> when the specified descriptor matches this operand;
         /// otherwise, <see langword="false"/>.</returns>
-        internal override bool IsMatch(OperandDescriptor descriptor)
+        public override bool IsMatch(OperandDescriptor descriptor)
         {
             switch (descriptor.OperandType)
             {
@@ -277,20 +275,6 @@ namespace SharpAssembler.Architectures.X86.Operands
                 default:
                     return false;
             }
-        }
-
-        /// <summary>
-        /// Adjusts this <see cref="Operand"/> based on the specified
-        /// <see cref="OperandDescriptor"/>.
-        /// </summary>
-        /// <param name="descriptor">The <see cref="OperandDescriptor"/> used to
-        /// adjust.</param>
-        /// <remarks>
-        /// Only <see cref="OperandDescriptor"/> instances for which <see cref="IsMatch"/>
-        /// returns <see langword="true"/> may be used as a parameter to this method.
-        /// </remarks>
-        internal override void Adjust(OperandDescriptor descriptor)
-        {
         }
     }
 }

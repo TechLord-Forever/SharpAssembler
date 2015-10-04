@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Globalization;
 using System.Collections.ObjectModel;
 using SharpAssembler.Architectures.X86.Operands;
 
@@ -135,7 +134,7 @@ namespace SharpAssembler.Architectures.X86
         /// <param name="operands">The <see cref="Operand"/> objects to encode.</param>
         /// <param name="lockPrefix">Whether to use a lock prefix.</param>
         /// <returns>The encoded instruction.</returns>
-        public EncodedInstruction Construct(Context context, IEnumerable<IConstructableOperand> operands, bool lockPrefix)
+        public EncodedInstruction Construct(Context context, IEnumerable<Operand> operands, bool lockPrefix)
         {
             var instr = new EncodedInstruction(opcodeBytes, FixedReg, lockPrefix);
 

@@ -7,7 +7,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// <summary>
     /// An immediate value.
     /// </summary>
-    public class Immediate : Operand, IOperand
+    public class Immediate : Operand
     {
         /// <summary>
         /// Whether this <see cref="Immediate"/> is encoded as the 'extra' immediate value.
@@ -83,7 +83,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instruction)
+        public override void Construct(Context context, EncodedInstruction instruction)
         {
             // Let's evaluate the expression.
             var result = Expression?.Compile()(context);
@@ -126,7 +126,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="descriptor">The <see cref="OperandDescriptor"/> to match.</param>
         /// <returns><see langword="true"/> when the specified descriptor matches this operand;
         /// otherwise, <see langword="false"/>.</returns>
-        internal override bool IsMatch(OperandDescriptor descriptor)
+        public override bool IsMatch(OperandDescriptor descriptor)
         {
             switch (descriptor.OperandType)
             {
@@ -145,7 +145,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Only <see cref="OperandDescriptor"/> instances for which <see cref="IsMatch"/> returns
         /// <see langword="true"/> may be used as a parameter to this method.
         /// </remarks>
-        internal override void Adjust(OperandDescriptor descriptor)
+        public override void Adjust(OperandDescriptor descriptor)
         {
             asExtraImmediate = (descriptor.OperandEncoding == OperandEncoding.ExtraImmediate);
             PreferredSize = descriptor.Size;

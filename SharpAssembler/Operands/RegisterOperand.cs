@@ -8,7 +8,7 @@ namespace SharpAssembler.Architectures.X86.Operands
     /// <remarks>
     /// In the Intel manuals, a register operand is denoted as <c>r8</c>, <c>r16</c>, <c>r32</c> or <c>r64</c>.
     /// </remarks>
-    public partial class RegisterOperand : Operand, IOperand
+    public partial class RegisterOperand : Operand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RegisterOperand"/> class.
@@ -53,7 +53,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Gets or sets how the operand is to be encoded.
         /// </summary>
         /// <value>A member of the <see cref="OperandEncoding"/> enumeration.
-        /// The default is <see cref="RegisterOperand.OperandEncoding.Default"/>.</value>
+        /// The default is <see cref="OperandEncoding.Default"/>.</value>
         internal OperandEncoding Encoding { get; set; } = OperandEncoding.Default;
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="context">The <see cref="Context"/> in which the operand is used.</param>
         /// <param name="instruction">The <see cref="EncodedInstruction"/> encoding the operand.</param>
-        internal override void Construct(Context context, EncodedInstruction instruction)
+        public override void Construct(Context context, EncodedInstruction instruction)
         {
             if (context.AddressingMode != DataSize.Bit64 && Register.Size == DataSize.Bit64)
                 throw new AssemblerException($"The 64-bit register {Register} cannot be used with non-64-bit operand sizes.");
@@ -74,7 +74,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                     instruction.ModRM.Reg = Register.Value;
                     break;
                 case OperandEncoding.AddToOpcode:
-                    instruction.OpcodeReg = Register.Value;
+                    instruction.OpcodeReg = (byte)(Register.Value & 0xF);
                     break;
                 case OperandEncoding.ModRm:
                     instruction.SetModRMByte();
@@ -97,7 +97,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <param name="descriptor">The <see cref="OperandDescriptor"/> to match.</param>
         /// <returns><see langword="true"/> when the specified descriptor matches this operand;
         /// otherwise, <see langword="false"/>.</returns>
-        internal override bool IsMatch(OperandDescriptor descriptor)
+        public override bool IsMatch(OperandDescriptor descriptor)
         {
             switch (descriptor.OperandType)
             {
@@ -121,7 +121,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Only <see cref="OperandDescriptor"/> instances for which <see cref="IsMatch"/>
         /// returns <see langword="true"/> may be used as a parameter to this method.
         /// </remarks>
-        internal override void Adjust(OperandDescriptor descriptor)
+        public override void Adjust(OperandDescriptor descriptor)
         {
             // When the operand needs to be added to the opcode, set it as such.
             if (descriptor.OperandEncoding == X86.OperandEncoding.OpcodeAdd)
@@ -142,7 +142,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </returns>
         public override string ToString()
         {
-            return Enum.GetName(typeof(Register), Register);
+            return Register.Name;
         }
 
         /// <summary>
