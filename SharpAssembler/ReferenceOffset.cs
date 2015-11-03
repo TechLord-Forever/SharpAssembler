@@ -99,7 +99,6 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator ReferenceOffset(sbyte value)
         {
             return new ReferenceOffset(value);
@@ -130,7 +129,6 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator ReferenceOffset(ushort value)
         {
             return new ReferenceOffset(value);
@@ -151,7 +149,6 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator ReferenceOffset(uint value)
         {
             return new ReferenceOffset(value);
@@ -172,7 +169,6 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="ReferenceOffset"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator ReferenceOffset(ulong value)
         {
             return new ReferenceOffset((long)value);

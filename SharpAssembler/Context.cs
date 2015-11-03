@@ -24,7 +24,7 @@ namespace SharpAssembler
         public bool UseRIPRelativeAddressing { get; private set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public DataSize AddressingMode { get; set; }
 
@@ -32,7 +32,6 @@ namespace SharpAssembler
         /// Gets or sets the current virtual address.
         /// </summary>
         /// <value>The current virtual address.</value>
-        [CLSCompliant(false)]
         public ulong Address { get; set; }
 
         /// <summary>
@@ -48,9 +47,8 @@ namespace SharpAssembler
         public SymbolTable SymbolTable { get; private set; } = new SymbolTable();
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        [CLSCompliant(false)]
         public Context(DataSize addressingMode, ulong address, bool useRIPRelativeAddressing)
         {
             AddressingMode = addressingMode;

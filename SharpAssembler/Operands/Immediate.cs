@@ -178,7 +178,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The resulting <see cref="Immediate"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator Immediate(ulong value)
         {
             return new Immediate((long)value);
@@ -199,7 +198,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The resulting <see cref="Immediate"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator Immediate(uint value)
         {
             return new Immediate(value);
@@ -220,7 +218,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The resulting <see cref="Immediate"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator Immediate(ushort value)
         {
             return new Immediate(value);
@@ -231,7 +228,6 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <returns>The resulting <see cref="Immediate"/>.</returns>
-        [CLSCompliant(false)]
         public static implicit operator Immediate(sbyte value)
         {
             return new Immediate(value);

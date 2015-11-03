@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq.Expressions;
 
 namespace SharpAssembler.Architectures.X86.Operands
@@ -71,28 +70,6 @@ namespace SharpAssembler.Architectures.X86.Operands
             var result = Expression?.Compile()(context);
             result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instruction.GetLength()));
             instruction.Immediate = result;
-
-            // FIXME: Remove this:
-#if false
-            // Determine the size of the immediate operand.
-            DataSize size = PreferredSize;
-            if (size == DataSize.None)
-            {
-                // Does the result have a (resolved or not resolved) reference?
-                if (result.Reference != null)
-                    // When the result has a reference, use the architecture's operand size.
-                    size = context.Representation.Architecture.OperandSize;
-                else
-                    // Otherwise, use the most efficient word size.
-                    size = MathExt.GetSizeOfValue(result.Constant);
-            }
-            if (size >= DataSize.Bit64)
-                throw new AssemblerException(String.Format(CultureInfo.InvariantCulture,
-                    "{0}-bit operands cannot be encoded.",
-                    ((int)size) << 3));
-            else if (size == DataSize.None)
-                throw new AssemblerException("The operand size is not specified.");
-#endif
         }
 
         /// <summary>

@@ -69,10 +69,7 @@ namespace SharpAssembler.Architectures.X86
         public ReadOnlyCollection<Operand> Operands { get; private set; }
 
         /// <inheritdoc />
-        public override string ToString()
-        {
-            return $"{Opcode.Mnemonic}({Operands})";
-        }
+        public override string ToString() => $"{Opcode.Mnemonic}({Operands})";
 
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)

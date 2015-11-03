@@ -205,12 +205,9 @@ namespace OpcodeWriter.X86
         /// <param name="mnemonic">The mnemonic to use.</param>
         /// <param name="operands">The operands.</param>
         /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        void WriteCodeInstrOpcodeVariantMethod(X86OpcodeSpec spec,
-            string mnemonic,
-            IEnumerable<Tuple<X86OperandSpec, string, string>> operands, TextWriter writer)
+        void WriteCodeInstrOpcodeVariantMethod(X86OpcodeSpec spec, string mnemonic, IEnumerable<Tuple<X86OperandSpec, string, string>> operands, TextWriter writer)
         {
             WriteCodeInstrOpcodeVariantMethodDocumentation(spec, operands, writer);
-            WriteCodeCLSCompliance(operands, writer);
 
             var operandsString = string.Join(", ", operands.Select(o => o.Item2 + " " + AsValidIdentifier(o.Item1.Name)));
             writer.WriteLine(T + T + "public static X86Instruction {0}({1})", AsValidIdentifier(mnemonic), operandsString);
@@ -219,39 +216,6 @@ namespace OpcodeWriter.X86
             writer.WriteLine(T + T + "{");
             writer.WriteLine(T + T + T + "return X86Opcode.{0}.CreateInstruction({1});", AsValidIdentifier(spec.Name), argumentsString);
             writer.WriteLine(T + T + "}");
-        }
-
-        /// <summary>
-        /// Writes whether the variant method is CLS compliant.
-        /// </summary>
-        /// <param name="operands">The method's operands.</param>
-        /// <param name="writer">The <see cref="TextWriter"/> to write to.</param>
-        void WriteCodeCLSCompliance(IEnumerable<Tuple<X86OperandSpec, string, string>> operands, TextWriter writer)
-        {
-            if (operands.Any(t => !IsCLSCompliantType(t.Item2)))
-            {
-                writer.WriteLine(T + T + "[CLSCompliant(false)]");
-            }
-        }
-
-        /// <summary>
-        /// Returns whether the specified type name is CLS compliant.
-        /// </summary>
-        /// <param name="typeName">The name of the type.</param>
-        /// <returns><see langword="true"/> when the type is CLS compliant;
-        /// otherwise, <see langword="false"/>.</returns>
-        bool IsCLSCompliantType(string typeName)
-        {
-            switch (typeName)
-            {
-                case "sbyte":
-                case "ushort":
-                case "uint":
-                case "ulong":
-                    return false;
-                default:
-                    return true;
-            }
         }
 
         /// <summary>

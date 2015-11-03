@@ -78,10 +78,7 @@ namespace SharpAssembler.Instructions
         }
 
         /// <inheritdoc />
-        Symbol IAssociatable.AssociatedSymbol
-        {
-            get { return DefinedSymbol; }
-        }
+        Symbol IAssociatable.AssociatedSymbol => DefinedSymbol;
 
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)

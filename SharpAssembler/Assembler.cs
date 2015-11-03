@@ -34,7 +34,6 @@ namespace SharpAssembler
         /// </summary>
         /// <param name="addressingMode"></param>
         /// <param name="offset"></param>
-        [CLSCompliant(false)]
         public Assembler(DataSize addressingMode, ulong offset)
             : this(addressingMode, offset, false)
         {
@@ -46,7 +45,6 @@ namespace SharpAssembler
         /// <param name="addressingMode"></param>
         /// <param name="offset"></param>
         /// <param name="useRipRelative"></param>
-        [CLSCompliant(false)]
         public Assembler(DataSize addressingMode, ulong offset, bool useRipRelative)
         {
             Context = new Context(addressingMode, offset, useRipRelative);

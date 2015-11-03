@@ -112,7 +112,6 @@ namespace SharpAssembler.Symbols
         /// </summary>
         /// <param name="context">The current <see cref="Context"/>.</param>
         /// <param name="value">The value of the symbol.</param>
-        [CLSCompliant(false)]
         public void Define(Context context, ulong value)
         {
             Define(context, (long)value);

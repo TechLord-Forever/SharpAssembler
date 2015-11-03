@@ -14,7 +14,6 @@ namespace SharpAssembler
         /// <param name="value">The value from which to calculate the padding.</param>
         /// <param name="boundary">The boundary, which is a power of two.</param>
         /// <returns>The padding from the value to the next boundary.</returns>
-        [CLSCompliant(false)]
         public static ulong CalculatePadding(ulong value, int boundary)
         {
             return Align(value, boundary) - value;
@@ -26,7 +25,6 @@ namespace SharpAssembler
         /// <param name="value">The value to align.</param>
         /// <param name="boundary">The boundary, which is a power of two.</param>
         /// <returns>The aligned value.</returns>
-        [CLSCompliant(false)]
         public static ulong Align(ulong value, int boundary)
         {
             return ((ulong)boundary + ((value - 1) & ~((ulong)boundary - 1)));

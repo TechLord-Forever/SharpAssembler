@@ -24,5 +24,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("0.7.2.1")]
 
 [assembly: InternalsVisibleTo("SharpAssembler.Tests")]
-[assembly: NeutralResourcesLanguageAttribute("en")]
-[assembly: CLSCompliant(true)]
+[assembly: NeutralResourcesLanguage("en")]
+[assembly: CLSCompliant(false)]

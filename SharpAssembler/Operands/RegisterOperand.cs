@@ -44,10 +44,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Gets the actual size of the relative offset value.
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration; or <see cref="DataSize.None"/>.</value>
-        public override DataSize Size
-        {
-            get { return Register.Size; }
-        }
+        public override DataSize Size => Register.Size;
 
         /// <summary>
         /// Gets or sets how the operand is to be encoded.
