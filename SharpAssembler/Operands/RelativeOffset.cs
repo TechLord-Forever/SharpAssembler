@@ -41,7 +41,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// Gets the actual size of the relative offset value.
         /// </summary>
         /// <value>A member of the <see cref="DataSize"/> enumeration; or <see cref="DataSize.None"/>.</value>
-        public override DataSize Size { get { return operandSize; } }
+        public override DataSize Size => operandSize;
 
         /// <summary>
         /// Constructs the operand's representation.
@@ -68,7 +68,7 @@ namespace SharpAssembler.Architectures.X86.Operands
 
             // Let's evaluate the expression.
             var result = Expression?.Compile()(context);
-            result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instruction.GetLength()));
+            result = new ReferenceOffset(result.Reference, result.Constant - ((long)context.Address + instruction.Length));
             instruction.Immediate = result;
         }
 

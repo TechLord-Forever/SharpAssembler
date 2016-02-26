@@ -174,50 +174,53 @@ namespace SharpAssembler.Architectures.X86
         /// Gets the length of the encoded instruction.
         /// </summary>
         /// <returns>The length of the encoded instruction, in bytes.</returns>
-        public int GetLength()
+        public int Length
         {
-            int length = 0;
+            get
+            {
+                int length = 0;
 
-            // Legacy prefixes
-            if (Prefix1 != PrefixLockRepeat.None)
-                length++;
-            if (Prefix2 != PrefixSegmentBranch.None)
-                length++;
-            if (Prefix3 != PrefixAddressSizeOverride.None)
-                length++;
-            if (Prefix4 != PrefixOperandSizeOverride.None)
-                length++;
+                // Legacy prefixes
+                if (Prefix1 != PrefixLockRepeat.None)
+                    length++;
+                if (Prefix2 != PrefixSegmentBranch.None)
+                    length++;
+                if (Prefix3 != PrefixAddressSizeOverride.None)
+                    length++;
+                if (Prefix4 != PrefixOperandSizeOverride.None)
+                    length++;
 
-            // Mandatory prefix
-            if (MandatoryPrefix != null)
-                length += MandatoryPrefix.Length;
+                // Mandatory prefix
+                if (MandatoryPrefix != null)
+                    length += MandatoryPrefix.Length;
 
-            // REX prefix
-            if (Use64BitOperands.HasValue)
-                length++;
+                // REX prefix
+                if (Use64BitOperands.HasValue)
+                    length++;
 
-            // Opcode
-            if (Opcode != null)
-                length += Opcode.Length;
+                // Opcode
+                if (Opcode != null)
+                    length += Opcode.Length;
 
-            // ModR/M byte
-            if (ModRM != null)
-                length++;
+                // ModR/M byte
+                if (ModRM != null)
+                    length++;
 
-            // SIB byte
-            if (Sib != null)
-                length++;
+                // SIB byte
+                if (Sib != null)
+                    length++;
 
-            // Displacement
-            length += (int)DisplacementSize;
+                // Displacement
+                length += (int)DisplacementSize;
 
-            // Immediate
-            length += (int)ImmediateSize;
+                // Immediate
+                length += (int)ImmediateSize;
 
-            // Extra Immediate
-            length += (int)ExtraImmediateSize;
+                // Extra Immediate
+                length += (int)ExtraImmediateSize;
 
-            return length;
+                return length;
+            }
         }
 
         #region Emitting

@@ -16,7 +16,7 @@ namespace SharpAssembler.Architectures.X86.Operands
             bool ripRelative = RelativeAddress ?? context.UseRIPRelativeAddressing;
             bool forceRipRelative = RelativeAddress.HasValue && RelativeAddress == true;
 
-            if (BaseRegister == Register.None && IndexRegister == Register.None)
+            if (BaseRegister.IsNone && IndexRegister.IsNone)
             {
                 if (ripRelative)
                 {
@@ -48,7 +48,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                 if (forceRipRelative)
                     throw new AssemblerException("The effective address cannot be encoded with RIP-relative addressing.");
 
-                if (BaseRegister != Register.RSP && IndexRegister == Register.None)
+                if (BaseRegister != Register.RSP && IndexRegister.IsNone)
                 {
                     // [REG+...]
 
@@ -65,13 +65,13 @@ namespace SharpAssembler.Architectures.X86.Operands
                     instr.ModRM.RM = 0x04;
 
                     // Base
-                    if (BaseRegister != Register.None)
+                    if (!BaseRegister.IsNone)
                         instr.Sib.Base = BaseRegister.Value;
                     else
                         instr.Sib.Base = 0x05;
 
                     // Index
-                    if (IndexRegister != Register.None)
+                    if (!IndexRegister.IsNone)
                         instr.Sib.Index = IndexRegister.Value;
                     else
                         instr.Sib.Index = 0x20;

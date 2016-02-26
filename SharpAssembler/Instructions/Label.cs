@@ -83,9 +83,7 @@ namespace SharpAssembler.Instructions
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)
         {
-            if (definedSymbol != null)
-                definedSymbol.Define(context, context.Address);
-
+            definedSymbol?.Define(context, context.Address);
             yield break;
         }
 

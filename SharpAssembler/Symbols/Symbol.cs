@@ -145,8 +145,7 @@ namespace SharpAssembler.Symbols
             }
             else if (symbol != null)
             {
-                if (symbol.Association != null)
-                    symbol.Association.SetAssociatedSymbol(null);
+                symbol.Association?.SetAssociatedSymbol(null);
                 symbol.Association = null;
             }
             else if (associatable != null)

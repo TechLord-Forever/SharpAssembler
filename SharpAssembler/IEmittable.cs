@@ -20,6 +20,6 @@ namespace SharpAssembler
         /// Gets the length of the emittable.
         /// </summary>
         /// <returns>The length of the emittable, in bytes.</returns>
-        int GetLength();
+        int Length { get; }
     }
 }

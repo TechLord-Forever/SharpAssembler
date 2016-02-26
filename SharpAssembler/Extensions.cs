@@ -31,17 +31,6 @@ namespace SharpAssembler
         }
 
         /// <summary>
-        /// Aligns the value to the next specified boundary.
-        /// </summary>
-        /// <param name="value">The value to align.</param>
-        /// <param name="boundary">The boundary, which is a power of two.</param>
-        /// <returns>The aligned value.</returns>
-        public static long Align(long value, int boundary)
-        {
-            return (boundary + ((value - 1) & ~(boundary - 1)));
-        }
-
-        /// <summary>
         /// Determines the minimum width that can fit the specified (signed or unsigned) value.
         /// </summary>
         /// <param name="value">The value to fit.</param>
@@ -56,36 +45,6 @@ namespace SharpAssembler
             if ((value & 0x00000000FFFF0000) != 0) return DataSize.Bit32;
             if ((value & 0x000000000000FF00) != 0) return DataSize.Bit16;
             return DataSize.Bit8;
-        }
-
-        /// <summary>
-        /// Writes a value to the <see cref="BinaryWriter"/> as a value with the specified size.
-        /// </summary>
-        /// <param name="writer">The <see cref="BinaryWriter"/> to write to.</param>
-        /// <param name="value">The value to write.</param>
-        /// <param name="size">The size of the value to write.</param>
-        /// <returns>The number of written bytes.</returns>
-        public static int Write(this BinaryWriter writer, long value, DataSize size)
-        {
-            switch (size)
-            {
-                case DataSize.Bit8:
-                    writer.Write((byte)value);
-                    break;
-                case DataSize.Bit16:
-                    writer.Write((ushort)value);
-                    break;
-                case DataSize.Bit32:
-                    writer.Write((uint)value);
-                    break;
-                case DataSize.Bit64:
-                    writer.Write(value);
-                    break;
-                default:
-                    throw new NotSupportedException();
-            }
-
-            return (int)size;
         }
     }
 }

@@ -34,13 +34,13 @@ namespace SharpAssembler.Instructions
         /// Gets or sets the string that will be declared.
         /// </summary>
         /// <value>A string.</value>
-        public string Data { get; private set; }
+        public string Data { get; }
 
         /// <summary>
         /// Gets or sets the encoding of the declared string.
         /// </summary>
         /// <value>An <see cref="Encoding"/>.</value>
-        public Encoding Encoding { get; private set; }
+        public Encoding Encoding { get; }
 
         /// <inheritdoc />
         public override IEnumerable<IEmittable> Construct(Context context)

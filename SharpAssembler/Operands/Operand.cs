@@ -18,7 +18,7 @@
         public virtual DataSize PreferredSize { get; set; }
 
         /// <inheritdoc />
-        public virtual DataSize Size { get { return PreferredSize; } }
+        public virtual DataSize Size => PreferredSize;
 
         /// <summary>
         /// Constructs the operand's representation.

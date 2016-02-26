@@ -19,7 +19,7 @@ namespace OpcodeGenerator
 
         StringBuilder content = new StringBuilder();
 
-        public string FileName { get { return $"{Name}_Opcode.cs"; } }
+        public string FileName => $"{Name}_Opcode.cs";
 
         public string GetContent()
         {

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SharpAssembler.Instructions
 {
@@ -39,16 +40,31 @@ namespace SharpAssembler.Instructions
         public int Emit(BinaryWriter writer, Context context)
         {
             var value = Expression.Evaluate(context);
-            return writer.Write(value, Size);
+            switch (Size)
+            {
+                case DataSize.Bit8:
+                    writer.Write((byte)value);
+                    break;
+                case DataSize.Bit16:
+                    writer.Write((ushort)value);
+                    break;
+                case DataSize.Bit32:
+                    writer.Write((uint)value);
+                    break;
+                case DataSize.Bit64:
+                    writer.Write(value);
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
+
+            return (int)Size;
         }
 
         /// <summary>
         /// Gets the length of the emittable.
         /// </summary>
         /// <returns>The length of the emittable, in bytes.</returns>
-        public int GetLength()
-        {
-            return (int)Size;
-        }
+        public int Length => (int)Size;
     }
 }

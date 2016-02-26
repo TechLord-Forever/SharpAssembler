@@ -39,18 +39,12 @@ namespace SharpAssembler.Instructions
         /// Gets the length of the emittable.
         /// </summary>
         /// <returns>The length of the emittable, in bytes.</returns>
-        public int GetLength()
-        {
-            return Content.Length;
-        }
+        public int Length => Content.Length;
 
         /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="object"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="object"/>.</returns>
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        public override string ToString() => base.ToString();
     }
 }

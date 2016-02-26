@@ -137,10 +137,7 @@ namespace SharpAssembler.Architectures.X86.Operands
         /// <returns>
         /// A <see cref="string"/> that represents this instance.
         /// </returns>
-        public override string ToString()
-        {
-            return Register.Name;
-        }
+        public override string ToString() => Register.Name;
 
         /// <summary>
         /// Converts a <see cref="Register"/> to a <see cref="RegisterOperand"/>.

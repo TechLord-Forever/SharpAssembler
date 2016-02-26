@@ -56,23 +56,20 @@ namespace SharpAssembler.Symbols
         /// </summary>
         /// <value>The referenced <see cref="Symbol"/>; or <see langword="null"/> when the referenced symbol
         /// was not found.</value>
-        public Symbol Symbol { get; private set; }
+        public Symbol Symbol { get; }
 
         /// <summary>
         /// Gets whether this reference is resolved.
         /// </summary>
         /// <value><see langword="true"/> when the reference is resolved;
         /// otherwise, <see langword="false"/>.</value>
-        public bool Resolved { get; private set; } = false;
+        public bool Resolved { get; } = false;
 
         /// <summary>
         /// Gets the object that is referenced.
         /// </summary>
         /// <value>The referenced object; or <see langword="null"/> when no specific object is referenced.</value>
-        public IAssociatable Association
-        {
-            get { return Symbol != null ? Symbol.Association : null; }
-        }
+        public IAssociatable Association => Symbol?.Association;
 
         /// <summary>
         /// Attempts to resolve the reference.
@@ -93,10 +90,7 @@ namespace SharpAssembler.Symbols
         /// Returns a <see cref="string"/> that represents the current <see cref="object"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="object"/>.</returns>
-        public override string ToString()
-        {
-            return symbolIdentifier;
-        }
+        public override string ToString() => symbolIdentifier;
 
         /// <summary>
         /// Adds a constant offset to the value of the referenced symbol.

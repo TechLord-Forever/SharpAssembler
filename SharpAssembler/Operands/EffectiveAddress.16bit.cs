@@ -22,13 +22,13 @@
                 throw new AssemblerException("The specified scaling factor is not supported in a 16-bit effective address.");
 
             // Two cases together deviate from the standard MOD encoding.
-            if (reg1 == Register.BP && reg2 == Register.None)
+            if (reg1 == Register.BP && reg2.IsNone)
             {
                 // [BP+...]
                 instr.ModRM.RM = 0x06;
                 instr.ModRM.Mod = (byte)(instr.DisplacementSize == DataSize.Bit8 ? 0x01 : 0x02);
             }
-            else if (reg1 == Register.None && reg2 == Register.None)
+            else if (reg1.IsNone && reg2.IsNone)
             {
                 // [...]
                 instr.ModRM.RM = 0x06;
@@ -43,7 +43,7 @@
                 else if (reg1 == Register.DI && reg2 == Register.BX)
                     // [BX+DI+...]
                     instr.ModRM.RM = 0x01;
-                else if (reg1 == Register.DI && reg2 == Register.None)
+                else if (reg1 == Register.DI && reg2.IsNone)
                     // [DI+...]
                     instr.ModRM.RM = 0x05;
                 else if (reg1 == Register.SI && reg2 == Register.BP)
@@ -52,10 +52,10 @@
                 else if (reg1 == Register.SI && reg2 == Register.BX)
                     // [BX+SI+...]
                     instr.ModRM.RM = 0x00;
-                else if (reg1 == Register.SI && reg2 == Register.None)
+                else if (reg1 == Register.SI && reg2.IsNone)
                     // [SI+...]
                     instr.ModRM.RM = 0x04;
-                else if (reg1 == Register.BX && reg2 == Register.None)
+                else if (reg1 == Register.BX && reg2.IsNone)
                     // [BX+...]
                     instr.ModRM.RM = 0x06;
                 else

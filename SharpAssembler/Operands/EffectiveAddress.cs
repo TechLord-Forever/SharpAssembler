@@ -164,32 +164,19 @@ namespace SharpAssembler.Architectures.X86.Operands
 
 
             if (baseWidth != DataSize.None && baseWidth != addressSize)
-                throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
-                    "BASE register {0} has a different width than the determined address size.",
-                    Enum.GetName(typeof(Register), BaseRegister)));
+                throw new AssemblerException($"BASE register {BaseRegister} has a different width than the determined address size.");
 
             if (baseWidth != DataSize.None && indexWidth != DataSize.None && baseWidth != indexWidth)
-                throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
-                    "BASE register {0} and INDEX register {1} have different widths.",
-                    Enum.GetName(typeof(Register), BaseRegister),
-                    Enum.GetName(typeof(Register), IndexRegister)));
+                throw new AssemblerException($"BASE register {BaseRegister} and INDEX register {IndexRegister} have different widths.");
 
             if (!IsValidRegisterWidthForMode(baseWidth, contextAddressSize))
-                throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
-                    "The {0} BASE register is not valid for the {1}-bit address size.",
-                    Enum.GetName(typeof(Register), BaseRegister),
-                    ((int)contextAddressSize) << 3));
+                throw new AssemblerException($"The {BaseRegister} BASE register is not valid for the {(int)contextAddressSize << 3}-bit address size.");
 
             if (!IsValidRegisterWidthForMode(indexWidth, contextAddressSize))
-                throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
-                    "The {0} INDEX register is not valid for the {1}-bit address size.",
-                    Enum.GetName(typeof(Register), IndexRegister),
-                    ((int)contextAddressSize) << 3));
+                throw new AssemblerException($"The {IndexRegister} INDEX register is not valid for the {(int)contextAddressSize << 3}-bit address size.");
 
             if (indexWidth != DataSize.None && indexWidth != addressSize)
-                throw new AssemblerException(string.Format(CultureInfo.InvariantCulture,
-                    "INDEX register {0} has a different width than the determined address size.",
-                    Enum.GetName(typeof(Register), IndexRegister)));
+                throw new AssemblerException($"INDEX register {IndexRegister} has a different width than the determined address size.");
 
             return addressSize;
         }
@@ -220,7 +207,7 @@ namespace SharpAssembler.Architectures.X86.Operands
                         displacementSize = context.AddressingMode;
                     else
                         // Otherwise, use the most efficient word size.
-                        displacementSize = Extensions.GetSizeOfValue(displacementExpression.Evaluate(context));    //.Constant);
+                        displacementSize = Extensions.GetSizeOfValue(displacementExpression.Evaluate(context));
                 }
             }
 

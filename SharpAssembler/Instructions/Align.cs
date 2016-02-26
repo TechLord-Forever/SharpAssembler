@@ -31,13 +31,13 @@ namespace SharpAssembler.Instructions
         /// Gets or sets the boundary to which is aligned.
         /// </summary>
         /// <value>The boundary to align to, which must be a power of two.</value>
-        public int Boundary { get; private set; }
+        public int Boundary { get; }
 
         /// <summary>
         /// Gets or sets the byte value used to pad.
         /// </summary>
         /// <value>A byte value. The default is 0x00.</value>
-        public byte PaddingByte { get; private set; }
+        public byte PaddingByte { get; }
 
         /// <summary>
         /// Generates an array of bytes which represent the padding bytes used for the align instruction.
